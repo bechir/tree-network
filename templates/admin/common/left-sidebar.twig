@@ -12,12 +12,6 @@
                 <li><a href="{{ path('admin_user_create') }}" {% if active == 'new-user' %} class="active" {% endif %}>
                     <i class="lnr lnr-plus-circle"></i> <span>Ajouter un utilisateur</span></a>
                 </li>
-                <li><a href="{{ path('admin_newsletter_index') }}" {% if active == 'newsletter' %} class="active" {% endif %}>
-                    <i class="lnr lnr-envelope"></i> <span>Newsletter</span></a>
-                </li>
-                <li><a href="{{ path('admin_stats') }}" {% if active == 'stats' %} class="active" {% endif %}>
-                    <i class="lnr lnr-chart-bars"></i> <span>Statistiques</span></a>
-                </li>
                 <li>
                     <a href="{{ path('admin_inbox') }}" {% if active == 'inbox' %} class="active" {% endif %}>
                         <i class="lnr lnr-inbox"></i>
@@ -27,6 +21,12 @@
                             </span>
                         </span>
                     </a>
+                </li>
+                <li><a href="{{ path('admin_newsletter_index') }}" {% if active == 'newsletter' %} class="active" {% endif %}>
+                    <i class="lnr lnr-envelope"></i> <span>Newsletter</span></a>
+                </li>
+                <li><a href="{{ path('admin_stats') }}" {% if active == 'stats' %} class="active" {% endif %}>
+                    <i class="lnr lnr-chart-bars"></i> <span>Statistiques</span></a>
                 </li>
                 <li><a href="{{ path('admin_settings') }}" {% if active == 'settings' %}class="active"{% endif %}><i class="lnr lnr-cog"></i> <span>Paramètres</span></a></li>
             </ul>

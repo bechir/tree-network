@@ -460,3 +460,7 @@ form img.img-preview{
 .f-small{
     font-size: .75rem;
 }
+
+.metric .number .f-2rem {
+    font-size: 2rem !important;
+}

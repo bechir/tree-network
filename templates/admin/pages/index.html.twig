@@ -14,39 +14,30 @@
     </div>
     <div class="panel-body">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="metric">
                     <span class="icon"><i class="lnr lnr-users"></i></span>
                     <p>
-                        <span class="number">{{ data.users }}</span>
-                        <span class="title">Utilisateurs</span>
+                        <span class="number">{{ data.users }}<small class="f-2rem text-danger"> <i class="lnr lnr-arrow-down"></i>5%</small></span>
+                        <span class="title">Utilisateurs inscrits</span>
                     </p>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="metric">
-                    <span class="icon"><i class="lnr lnr-license"></i></span>
+                    <span class="icon"><i class="lnr lnr-earth"></i></span>
                     <p>
-                        <span class="number">{{ data.resumes }}</span>
-                        <span class="title">CV Créés</span>
+                        <span class="number">{{ data.online }}</span>
+                        <span class="title">Visiteurs en lignes</span>
                     </p>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="metric">
-                    <span class="icon"><i class="lnr lnr-briefcase"></i></span>
+                    <span class="icon"><i class="lnr lnr-chart-bars"></i></span>
                     <p>
-                        <span class="number">{{ data.companies }}</span>
-                        <span class="title">Entreprises</span>
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="metric">
-                    <span class="icon"><i class="lnr lnr-bullhorn"></i></span>
-                    <p>
-                        <span class="number">{{ data.ads }}</span>
-                        <span class="title">Annonces</span>
+                        <span class="number">{{ data.online + 37 }} <small class="f-2rem text-success"> <i class="lnr lnr-arrow-up"></i>12.7%</small></span>
+                        <span class="title">Visiteurs uniques ce mois</span>
                     </p>
                 </div>
             </div>
@@ -58,14 +49,14 @@
     <div class="col-md-12">
         <div class="panel">
             <div class="panel-heading">
-                <h3 class="panel-title">Offres d'emploi récentes</h3>
+                <h3 class="panel-title">Membres en lignes</h3>
                 <div class="right">
                     <button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
                     <button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
                 </div>
             </div>
             <div class="panel-body">
-                {% include 'admin/job/table.html.twig' with {jobs: jobs} %}
+                {# {% include 'admin/job/table.html.twig' with {jobs: jobs} %} #}
             </div>
         </div>
     </div>
@@ -74,28 +65,14 @@
     <div class="col-md-12">
         <div class="panel">
             <div class="panel-heading">
-                <h3 class="panel-title">Apples d'offres récents</h3>
+                <h3 class="panel-title">inscriptions récentes</h3>
                 <div class="right">
                     <button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
                     <button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
                 </div>
             </div>
             <div class="panel-body">
-                {% include 'admin/offer/table.html.twig' with {offers: offers} %}
-            </div>
-        </div>
-    </div>
-    <div class="col-md-12">
-        <div class="panel">
-            <div class="panel-heading">
-                <h3 class="panel-title">Avis & Infos récents</h3>
-                <div class="right">
-                    <button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
-                    <button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
-                </div>
-            </div>
-            <div class="panel-body">
-                {% include 'admin/info/table.html.twig' with {infos: infos} %}
+                {# {% include 'admin/info/table.html.twig' with {infos: infos} %} #}
             </div>
         </div>
     </div>

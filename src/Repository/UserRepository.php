@@ -49,6 +49,26 @@ class UserRepository extends ServiceEntityRepository
         return $this->createPaginator($qb->getQuery(), $page);
     }
 
+    public function adminGetUsers(int $page = 1): Pagerfanta
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->where('u.username is not null')
+            ->orderBy('u.submittedAt', 'DESC')
+        ;
+
+        return $this->createPaginator($qb->getQuery(), $page, true);
+    }
+
+    public function adminGetRecents()
+    {
+        return $this->createQueryBuilder('u')
+                ->where('u.username is not null')
+                ->orderBy('u.submittedAt', 'DESC')
+                ->setMaxResults(5)
+                ->getQuery()
+                ->getResult();
+    }
+
     /**
      * @return User[]
      */
