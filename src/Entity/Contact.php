@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of the Tree Network application.
+ *
+ * (c) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -35,6 +41,8 @@ class Contact
      * @ORM\Column(type="text", length=255)
      */
     private $message;
+
+    const NUM_ITEMS = 15;
 
     public function getId(): ?int
     {

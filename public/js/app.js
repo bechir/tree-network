@@ -27,6 +27,42 @@ $(document).ready(function() {
         threshold: ratio
     };
 
+    //
+    // SEARCH USER FORM
+    //
+    const formResuslts = $('#form-resuslts');
+    const searchInput = $('input#search-user');
+    const closeBtn = $('#form-resuslts .close');
+
+    closeBtn.click(function(e){
+        formResuslts.fadeOut();
+        e.preventDefault();
+    });
+    searchInput.on('keyup', function(){
+        let value = searchInput.val();
+        
+        if(value.length >= 3) {
+            $.ajax({
+                type: "GET",
+                dataType: "html",
+                url: searchInput.data('url'),
+                data: `terms=${value}`,
+  
+                success: function(data) {
+                    formResuslts.html(data);
+                },
+  
+                error: function(data) {
+                    console.error(data)
+                }
+            });
+
+            formResuslts.fadeIn();
+        } else {
+            formResuslts.fadeOut();
+        }
+    });
+
     const handleIntersect = (entries, observer) => {
         entries.forEach(entry => {
             if(entry.intersectionRatio > ratio) {

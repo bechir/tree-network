@@ -69,3 +69,11 @@ user_gallery_show:
     _locale: '%app_locales%'
   defaults:
     _locale: '%locale%'
+
+user_search:
+  path: /{_locale}/search
+  controller: App\Controller\UserController::search
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'

@@ -1,11 +1,16 @@
 <?php
 
+/*
+ * This file is part of the Tree Network application.
+ *
+ * (c) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
 use App\Entity\Contact;
 use App\Form\ContactType;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -40,7 +45,7 @@ class DefaultController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $contact = $form->getData();
 
-            $message = (new \Swift_Message($container->getParameter('website.name').' - [Contact]'))
+            $message = (new \Swift_Message($container->getParameter('website.name') . ' - [Contact]'))
                 ->setFrom($contact->getEmail())
                 ->setTo($container->getParameter('website.email'))
                 ->setSubject($contact->getSubject())
@@ -55,13 +60,14 @@ class DefaultController extends AbstractController
                 ->addPart(
                     $this->renderView(
                         'emails/contact.txt.twig',
-                        array('user' => $contact)
+                        ['user' => $contact]
                     ),
                     'text/plain'
                 );
             $mailer->send($message);
 
             $this->addFlash('success', 'contact.message_sent');
+
             return $this->redirectToRoute('index');
         }
 
@@ -75,10 +81,8 @@ class DefaultController extends AbstractController
         return $this->render('default/helpFAQ.html.twig');
     }
 
-
     public function termsCondtions(): Response
     {
         return $this->render('default/termsCondtions.html.twig');
     }
-
 }

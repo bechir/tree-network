@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the Kelemploi application.
+ * This file is part of the Tree Network application.
  *
- * (C) Bechir Ba <bechiirr71@gmail.com>
+ * (c) Bechir Ba <bechiirr71@gmail.com>
  */
 
 namespace App\DataFixtures;
@@ -19,7 +19,7 @@ class GenderFixtures extends Fixture implements FixtureGroupInterface
     {
         $genders = [
             'word.male',
-            'word.female'
+            'word.female',
         ];
 
         foreach ($genders as $name) {

@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of the Tree Network application.
+ *
+ * (c) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Form;
 
 use App\Entity\User;
@@ -17,13 +23,13 @@ class EditPasswordType extends AbstractType
     {
         $builder
             ->add('current_password', PasswordType::class, [
-                'label' => 'form.current_password','mapped' => false,
+                'label' => 'form.current_password', 'mapped' => false,
                 'constraints' => [
                     new NotBlank(),
                     new UserPassword(['message' => 'form.invalid_current_password']),
                 ],
             ])
-            ->add('plainPassword', RepeatedType::class, array(
+            ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'required' => false,
                 'invalid_message' => 'form.invalid_password_message',
@@ -31,15 +37,15 @@ class EditPasswordType extends AbstractType
                     'label' => 'form.new_password',
                 ],
                 'second_options' => [
-                    'label' => 'form.confirm_password'
-                ]
-            ));
+                    'label' => 'form.confirm_password',
+                ],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => User::class,
-        ));
+        ]);
     }
 }

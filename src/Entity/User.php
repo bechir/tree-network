@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of the Tree Network application.
+ *
+ * (c) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -15,11 +21,11 @@ use App\Validator\Constraints as SecurityAssert;
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\Table(name="app_user")
  * @ORM\HasLifecycleCallbacks()
- * 
+ *
  * @ORM\AttributeOverrides({
  *      @ORM\AttributeOverride(name="email", column=@ORM\Column(nullable=true)),
  *      @ORM\AttributeOverride(name="emailCanonical", column=@ORM\Column(nullable=true, unique=false)),
- *      @ORM\AttributeOverride(name="password", column=@ORM\Column(nullable=true)), 
+ *      @ORM\AttributeOverride(name="password", column=@ORM\Column(nullable=true)),
  *      @ORM\AttributeOverride(name="username",
  *         column=@ORM\Column(
  *             name="username",
@@ -43,8 +49,8 @@ use App\Validator\Constraints as SecurityAssert;
 class User extends BaseUser implements EquatableInterface
 {
     /**
-     * @var integer
-     * 
+     * @var int
+     *
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -53,14 +59,14 @@ class User extends BaseUser implements EquatableInterface
 
     /**
      * @var string
-     * 
+     *
      * @ORM\Column(type="string", length=255, unique=false, nullable=true)
      */
     private $phoneNumber;
 
     /**
      * @var Avatar
-     * 
+     *
      * @ORM\OneToOne(targetEntity="App\Entity\Avatar", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
      */
@@ -68,14 +74,14 @@ class User extends BaseUser implements EquatableInterface
 
     /**
      * @var string
-     * 
+     *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $firstName;
 
     /**
      * @var string
-     * 
+     *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $lastName;
@@ -89,7 +95,7 @@ class User extends BaseUser implements EquatableInterface
 
     /**
      * @var string
-     * 
+     *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $description;
@@ -107,7 +113,7 @@ class User extends BaseUser implements EquatableInterface
 
     /**
      * @var Locale
-     * 
+     *
      * @ORM\ManyToOne(targetEntity="App\Entity\Locale")
      */
     private $locale;
@@ -125,7 +131,7 @@ class User extends BaseUser implements EquatableInterface
 
     /**
      * @var string
-     * //@SecurityAssert\UserPassword()
+     *             //@SecurityAssert\UserPassword()
      */
     private $oldPassword;
 
@@ -145,7 +151,7 @@ class User extends BaseUser implements EquatableInterface
     private $gallery;
 
     const NB_IMTEMS_HOME = 4;
-    CONST NB_IMTEMS_SIMILAR = 7;
+    const NB_IMTEMS_SIMILAR = 7;
     const NB_ITEMS_LISTING = 12;
     const NB_ITEMS_ADMIN_LISTING = 50;
 
@@ -158,9 +164,9 @@ class User extends BaseUser implements EquatableInterface
     }
 
     /**
-     * Return the user's id
-     * 
-     * @return integer|null
+     * Return the user's id.
+     *
+     * @return int|null
      */
     public function getId(): ?int
     {
@@ -294,7 +300,7 @@ class User extends BaseUser implements EquatableInterface
             $this->password,
             $this->roles,
             $this->avatar,
-            $this->locale
+            $this->locale,
         ]);
     }
 
@@ -332,6 +338,7 @@ class User extends BaseUser implements EquatableInterface
         if ($this->username !== $user->getUsername()) {
             return false;
         }
+
         return true;
     }
 

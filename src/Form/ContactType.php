@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of the Tree Network application.
+ *
+ * (c) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Form;
 
 use App\Entity\Contact;
@@ -17,16 +23,16 @@ class ContactType extends AbstractType
         $builder
             ->add('fullname', TextType::class, [
                 'label' => 'form.fullname',
-                'required' => false
+                'required' => false,
             ])
             ->add('email', EmailType::class, [
-                'label' => 'form.email'
+                'label' => 'form.email',
             ])
             ->add('subject', TextType::class, [
-                'label' => 'form.subject'
+                'label' => 'form.subject',
             ])
             ->add('message', TextareaType::class, [
-                'label' => 'form.message'
+                'label' => 'form.message',
             ])
         ;
     }

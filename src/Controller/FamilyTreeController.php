@@ -1,11 +1,16 @@
 <?php
 
+/*
+ * This file is part of the Tree Network application.
+ *
+ * (c) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Gender;
 use App\Entity\LinkCategory;
-use App\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -27,7 +32,7 @@ class FamilyTreeController extends AbstractController
 
     public function show(Request $request, User $user, EntityManagerInterface $em): Response
     {
-        if(null === $user) {
+        if (null === $user) {
             return $this->createNotFoundException("Tree family can't be found. the username does not exists.");
         }
 
@@ -41,10 +46,10 @@ class FamilyTreeController extends AbstractController
         $gender = $em->getRepository(Gender::class)->findOneById($request->query->get('genderId'));
         $names = [];
 
-        if($gender) {
+        if ($gender) {
             $linkCategories = $em->getRepository(LinkCategory::class)->findByGender($gender);
 
-            foreach($linkCategories as $linkCategory) {
+            foreach ($linkCategories as $linkCategory) {
                 $names['' . $linkCategory->getId() . ''] = $translator->trans($linkCategory->getName());
             }
         }

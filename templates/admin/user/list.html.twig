@@ -1,0 +1,154 @@
+{% extends 'admin/base.html.twig' %}
+{% block left_sidebar %}
+    {% include 'admin/common/left-sidebar.twig' with { active: 'users' } %}
+{% endblock %}
+
+{% block main %}
+<h3 class="page-title text-info"><span class="lnr lnr-users"></span> Utilisateurs <span class="badge badge-info mb-1">{{ users|length }}</span></h3></h3>
+<div class="row">
+    <div class="col-md-12">
+        <!-- TABLE STRIPED -->
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Liste des utilisateurs</h3>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nom d'utilisateur</th>
+                                <th>Login</th>
+                                <th>Date d'inscription</th>
+                                <th>Type</th>
+                                <th>Statut</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in users %}
+                                <tr>
+                                    <td>
+                                        {{ loop.index }}</td>
+                                    <td>
+                                        <a href="{{ path('admin_user_show', {user: user.id}) }}">{{ user.fullname }}</a></td>
+                                    <td>
+                                        <a href="{{ path('admin_user_show', {user: user.id}) }}">{{ user.username }}</a></td>
+                                    <td>
+                                        {{ user.submittedAt|date('d M, Y') }}</td>
+                                    <td>
+                                        {% if user.isAdmin() %}
+                                            <label class="label label-info">Administrateur</label>
+                                        {% elseif user.isEmployer() %}
+                                            <label class="label label-primary">Recruteur</label>
+                                        {% else %}
+                                            <label class="label label-default">Candidat</label>
+                                        {% endif %}
+                                    </td>
+                                    {# <td>
+                                        {{ user.locale|upper }}
+                                    </td> #}
+                                    <td>
+                                        {% if user.enabled %}
+                                            <span class="label label-success">ACTIVÉ</span>
+                                        {% elseif user.lastLogin == null %}
+                                            <span class="label label-warning">EN ATTENTE</span>
+                                        {% else %}
+                                            <span class="label label-warning">DÉSACTIVÉ</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a class="edit-item" href="{{ path('admin_user_show', {user: user.id}) }}" data-toggle="tooltip" data-placement="top" title="Afficher le profil">
+                                                <i class="lnr lnr-eye fa-lg"></i>
+                                            </a>
+                                            &nbsp;&nbsp;
+                                            {% if not user.hasRole("ROLE_SUPER_ADMIN") %}
+                                                <a class="delete-item" data-placement="top" data-target="#confirmDeleteModal" data-username="{{ user.fullname }}" data-user-id="{{ user.id }}" data-toggle="modal" style="cursor:pointer;" title="Supprimer {{ user.fullname }}">
+                                                    <i class="lnr lnr-trash text-danger"></i>
+                                                </a>
+                                            {% else %}
+                                                <label class="label label-primary">Admin</label>
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% else %}
+                                    <p>Pas d'utilisateurs</p>
+                                {% endfor %}
+                        </tbody>
+                        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="confirmDeleteModalLabel">Confirmation</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p class="text-danger">Voulez-vous vraiment supprimer <strong class="username"></strong> de la base de données ?</p>
+                                        <p class="alert alert-danger"><span class="fa fa-warning"></span> Cette action est irréversible.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default btn-lg float-left" data-dismiss="modal">Annuler</button>
+                                        <form action="" method="POST" data-confirmation="true" id="delete-form">
+                                        <input type="hidden" name="user[delete_token]" value="{{ csrf_token('user.delete_token') }}" />
+                                        <button type="submit" id="btn-user-delete" class="btn btn-danger btn-lg">
+                                            <span class="lnr lnr-trash"></span> Supprimer
+                                        </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </table>
+                <div>
+            </div>
+            <div class="panel-footer">
+                 <!-- Page navigation start -->
+                  <nav aria-label="Page navigation">
+                      <ul class="pagination">
+                      {% if users.haveToPaginate %}
+                          {{ pagerfanta(
+                                    users,
+                                    'twitter_bootstrap3_translated',
+                                    { routeName: 'admin_users_paginated',
+                                          routeParams: app.request.query.all,
+                                          prev_message: 'Précédant',
+                                          next_message: 'Suivant',
+                                          page_template: '<li><a href="%href%" %rel%>%text%</a></li>'
+                                    }
+                               )
+                          }}
+                      {% else %}
+                            <li><button type="button" class="btn btn-default disabled">1</button> </li>
+                      {% endif %}
+                      </ul>
+                  </nav>
+                  <!-- Page navigation end -->
+            </div>
+        </div>
+        <!-- END TABLE STRIPED -->
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+
+    <script>
+        $("#confirmDeleteModal").on('show.bs.modal', function(e){
+            button = $(e.relatedTarget)
+
+            var modal = $(this);
+            var userId = button.data('user-id')
+            var username = button.data('username')
+
+            modal.find('.fullname').text(username)
+            modal.find('form').attr('action', '/admin/security/user/delete/' + userId)
+        });
+    </script>
+{% endblock %}
+

@@ -1,0 +1,19 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" xmlns="http://www.w3.org/1999/html"/>
+    {% block title %}
+      <title>{{ message.subject }}</title>
+    {% endblock %}
+</head>
+<body>
+  <main>
+    {{ message.message|raw }}
+  </main>
+  <footer>
+      Cordialement,<br>
+      <strong>The {{ website.name }} Team</strong>
+      <br>
+    {# <a href="{{ url('newsletter_unsubscrib', {token: message.token}) }}"><small>Se désabonner</small></a> #}
+  </footer>
+</body>
+</html>

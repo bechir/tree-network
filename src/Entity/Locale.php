@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of the Tree Network application.
+ *
+ * (c) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -32,7 +38,7 @@ class Locale
         self::FR,
         self::EN,
         self::WF,
-        self::PL
+        self::PL,
     ];
 
     public function __construct()
@@ -52,9 +58,9 @@ class Locale
 
     public function setName(string $name): self
     {
-        if(!in_array($name, self::LOCALES))
-            throw new \Exception(sprintf("Unknown locale %s, valid locales are [%s]", $name, implode(', ', self::LOCALES)));
-            
+        if (!in_array($name, self::LOCALES)) {
+            throw new \Exception(sprintf('Unknown locale %s, valid locales are [%s]', $name, implode(', ', self::LOCALES)));
+        }
         $this->name = $name;
 
         return $this;

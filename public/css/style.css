@@ -160,13 +160,17 @@ main.main-section {
 }
 .navbar.navbar-dark form .md-form .form-control:focus{
     width: 290px !important;
-    border-radius: 7px;
-    border-top-left-radius:0;
-    border-top-right-radius:0;
+    border-radius: 0;
     padding: 5px 3px 5px 10px;
     border-color: #fff !important;
     outline: none!important;
     box-shadow: none !important;
+}
+
+.navbar.navbar-dark form .form-resuslts {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    transition: height .5s;
 }
 
 .navbar.navbar-dark form .md-form i{
@@ -451,4 +455,8 @@ form img.img-preview{
 
 .cursor-pointer{
     cursor: pointer;
+}
+
+.f-small{
+    font-size: .75rem;
 }

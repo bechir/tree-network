@@ -1,0 +1,121 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block left_sidebar %}
+
+{% include 'admin/common/left-sidebar.twig' with { active: 'index' } %}
+
+{% endblock %}
+
+{% block main %}
+<!-- OVERVIEW -->
+<div class="panel panel-headline">
+    <div class="panel-heading">
+        <h3 class="panel-title">Vue d'ensemble</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="metric">
+                    <span class="icon"><i class="lnr lnr-users"></i></span>
+                    <p>
+                        <span class="number">{{ data.users }}</span>
+                        <span class="title">Utilisateurs</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="metric">
+                    <span class="icon"><i class="lnr lnr-license"></i></span>
+                    <p>
+                        <span class="number">{{ data.resumes }}</span>
+                        <span class="title">CV Créés</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="metric">
+                    <span class="icon"><i class="lnr lnr-briefcase"></i></span>
+                    <p>
+                        <span class="number">{{ data.companies }}</span>
+                        <span class="title">Entreprises</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="metric">
+                    <span class="icon"><i class="lnr lnr-bullhorn"></i></span>
+                    <p>
+                        <span class="number">{{ data.ads }}</span>
+                        <span class="title">Annonces</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END OVERVIEW -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Offres d'emploi récentes</h3>
+                <div class="right">
+                    <button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
+                    <button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
+                </div>
+            </div>
+            <div class="panel-body">
+                {% include 'admin/job/table.html.twig' with {jobs: jobs} %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Apples d'offres récents</h3>
+                <div class="right">
+                    <button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
+                    <button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
+                </div>
+            </div>
+            <div class="panel-body">
+                {% include 'admin/offer/table.html.twig' with {offers: offers} %}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Avis & Infos récents</h3>
+                <div class="right">
+                    <button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
+                    <button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
+                </div>
+            </div>
+            <div class="panel-body">
+                {% include 'admin/info/table.html.twig' with {infos: infos} %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+
+    <script>
+        $(".modal.fade.item").on('show.bs.modal', function(e){
+            button = $(e.relatedTarget)
+
+            var modal = $(this);
+            var adId = button.data('ad-id')
+            var adType = button.data('ad-type')
+            var adName = button.data('ad-name')
+
+            modal.find('.ad-name').text(adName)
+            modal.find('form').attr('action', `/admin/${adType}/delete/${adId}`)
+        });
+    </script>
+{% endblock %}

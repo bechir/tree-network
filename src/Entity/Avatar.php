@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of the Tree Network application.
+ *
+ * (c) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -37,7 +43,6 @@ class Avatar implements \Serializable
      */
     private $updatedAt;
 
-
     public function getId(): ?int
     {
         return $this->id;
@@ -52,7 +57,7 @@ class Avatar implements \Serializable
     {
         $this->avatarFile = $avatarFile;
 
-        if ($avatarFile !== null) {
+        if (null !== $avatarFile) {
             $this->updatedAt = new \DateTimeImmutable();
         }
 
@@ -85,16 +90,17 @@ class Avatar implements \Serializable
 
     /**
      * @Assert\Callback
+     *
      * @param ExecutionContextInterface $context
      */
     public function validate(ExecutionContextInterface $context)
     {
         // do your own validation
-        if (! in_array($this->avatarFile->getMimeType(), array(
+        if (!in_array($this->avatarFile->getMimeType(), [
             'image/jpeg',
             'image/jpg',
-            'image/png'
-        ))) {
+            'image/png',
+        ])) {
             $context
                 ->buildViolation('Erreur de format (Insérer uniquement une image au format jpg ou png)')
                 ->atPath('avatarFile')
@@ -104,6 +110,7 @@ class Avatar implements \Serializable
 
     /**
      * @Assert\Callback
+     *
      * @param ExecutionContextInterface $context
      */
     public function checkSize(ExecutionContextInterface $context)

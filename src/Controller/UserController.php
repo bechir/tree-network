@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of the Tree Network application.
+ *
+ * (c) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Controller;
 
 use App\Entity\Link;
@@ -20,7 +26,7 @@ use App\Form\LinkType;
 use FOS\UserBundle\Model\UserManagerInterface;
 
 /**
- * Controller that manage user
+ * Controller that manage user.
  */
 class UserController extends AbstractController
 {
@@ -30,14 +36,14 @@ class UserController extends AbstractController
     public function profile(UserInterface $user = null)
     {
         return $this->render('user/profile.html.twig', [
-            'user' => $user
+            'user' => $user,
         ]);
     }
 
     public function show(User $user)
     {
         return $this->render('user/show.html.twig', [
-            'user' => $user
+            'user' => $user,
         ]);
     }
 
@@ -46,6 +52,11 @@ class UserController extends AbstractController
         return $this->render('user/gallery.html.twig', [
             'user' => $user,
         ]);
+    }
+
+    public function search(Request $request): Response
+    {
+        return $this->render('common/search-result.html.twig');
     }
 
     /**
@@ -67,7 +78,7 @@ class UserController extends AbstractController
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
 
             $this->addFlash('success', 'edit_success');
@@ -77,7 +88,7 @@ class UserController extends AbstractController
 
         return $this->render('user/gallery-edit.html.twig', [
             'user' => $user,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
@@ -115,7 +126,7 @@ class UserController extends AbstractController
         }
 
         return $this->render('user/delete.html.twig', [
-            'user' => $user
+            'user' => $user,
         ]);
     }
 
@@ -130,25 +141,27 @@ class UserController extends AbstractController
         $formEmails->handleRequest($request);
         $formPassword->handleRequest($request);
 
-        if($formEmails->isSubmitted() && $formEmails->isValid()) {
+        if ($formEmails->isSubmitted() && $formEmails->isValid()) {
             $em->persist($user);
             $em->flush();
 
             $this->addFlash('success', 'setting.email_added');
+
             return $this->redirectToRoute('user_settings');
         }
 
-        if($formPassword->isSubmitted() && $formPassword->isValid()) {
+        if ($formPassword->isSubmitted() && $formPassword->isValid()) {
             $userManager->updateUser($user);
 
             $this->addFlash('success', 'setting.password_edited');
+
             return $this->redirectToRoute('user_settings');
         }
 
         return $this->render('user/settings.html.twig', [
             'form_emails' => $formEmails->createView(),
             'form_password' => $formPassword->createView(),
-            'user' => $user
+            'user' => $user,
         ]);
     }
 
@@ -157,30 +170,30 @@ class UserController extends AbstractController
      */
     public function treeShow(Request $request, EntityManagerInterface $em, UserInterface $user = null): Response
     {
-        if(null === $user) {
+        if (null === $user) {
             return $this->createNotFoundException("Tree family can't be found. the username does not exists.");
         }
 
         $link = new Link();
         $form = $this->createForm(LinkType::class, $link, [
-            'user' => $user
+            'user' => $user,
         ]);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $link->setOwner($user);
             $user->addLink($link);
             $linkCategory = $em->getRepository(LinkCategory::class)
                 ->findOneBy(
                     ['name' => $link->getLinkCategory()->getInverse()]
             );
-            
+
             $inversedLink = (new Link())
                 ->setLinkCategory($linkCategory)
                 ->setOwner($link->getInverse())
                 ->setInverse($user)
             ;
-            
+
             $link->getInverse()->addLink($inversedLink);
 
             $em->persist($inversedLink);
@@ -189,12 +202,13 @@ class UserController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', 'Le lien a été ajouté.');
+
             return $this->redirectToRoute('user_tree_show');
         }
-        
+
         return $this->render('user/tree-show.html.twig', [
             'user' => $user,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
@@ -202,6 +216,7 @@ class UserController extends AbstractController
      * Returns a JSON string with the neighborhoods of the City with the providen id.
      *
      * @param Request $request
+     *
      * @return JsonResponse
      */
     public function linkCategoriesList(Request $request)
@@ -211,22 +226,22 @@ class UserController extends AbstractController
         $categoriesRepository = $em->getRepository(ProductSubCategory::class);
 
         // Search the neighborhoods that belongs to the city with the given id as GET parameter "cityid"
-        $categories = $categoriesRepository->createQueryBuilder("q")
-            ->leftJoin("q.parentCategory", "p")
-              ->addSelect("p")
-            ->where("p.slug = :slug")
-            ->setParameter("slug", $request->query->get("category"))
+        $categories = $categoriesRepository->createQueryBuilder('q')
+            ->leftJoin('q.parentCategory', 'p')
+              ->addSelect('p')
+            ->where('p.slug = :slug')
+            ->setParameter('slug', $request->query->get('category'))
             ->getQuery()
             ->getResult();
 
         // Serialize into an array the data that we need, in this case only name and id
         // Note: you can use a serializer as well, for explanation purposes, we'll do it manually
-        $responseArray = array();
-        foreach($categories as $category){
-            $responseArray[] = array(
-                "slug" => $category->getSlug(),
-                "name" => $category->getName()
-            );
+        $responseArray = [];
+        foreach ($categories as $category) {
+            $responseArray[] = [
+                'slug' => $category->getSlug(),
+                'name' => $category->getName(),
+            ];
         }
 
         // Return array with structure of the neighborhoods of the providen city id

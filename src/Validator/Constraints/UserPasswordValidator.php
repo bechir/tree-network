@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of the Tree Network application.
+ *
+ * (c) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
@@ -22,7 +28,7 @@ class UserPasswordValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         if (!$constraint instanceof UserPassword) {
-            throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\UserPassword');
+            throw new UnexpectedTypeException($constraint, __NAMESPACE__ . '\UserPassword');
         }
 
         // custom constraints should ignore null and empty values to allow
@@ -45,7 +51,7 @@ class UserPasswordValidator extends ConstraintValidator
     {
         $encoder = $this->encoderFactory->getEncoder($user);
         $oldPassword = $encoder->encodePassword($value, $user->getSalt());
-        
+
         return $oldPassword == $user->getPassword();
     }
 }

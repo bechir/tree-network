@@ -1,0 +1,66 @@
+<!-- RECENT PURCHASES -->
+<div class="panel">
+    <div class="panel-heading">
+        <h3 class="panel-title">Abonnement récents</h3>
+        <div class="right">
+            <button class="btn-toggle-collapse" type="button">
+                <i class="lnr lnr-chevron-up"></i>
+            </button>
+            <button class="btn-remove" type="button">
+                <i class="lnr lnr-cross"></i>
+            </button>
+        </div>
+    </div>
+    <div class="panel-body no-padding">
+        {% if list is not empty %}
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Nom d'utilisateur</ht>
+                        <th>Titre</th>
+                        <th>Montant</th>
+                        <th>Date d'activation</th>
+                        <th>Statut</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for subscription in list %}
+                    <tr>
+                        <td>
+                            <a href="javascript:">{{ subscription.id }}</a>
+                        </td>
+                        <td><a href="{{ path('admin_user_show', {user: subscription.user.id}) }}">{{ subscription.user.username }}</a></td>
+                        <td><a href="{{ path('admin_training_show', {slug: subscription.package.slug}) }}">{{ subscription.title }}</a></td>
+                        <td>{{ subscription.paidPrice }} €</td>
+                        <td>{{ subscription.startAt|localizeddate('full', 'none', app.request.locale )|capitalize }}</td>
+                        <td>
+                            {% if subscription.expired %}
+                                <span class="label label-default">TERMINÉ</span>
+                            {% else %}
+                                <span class="label label-success">EN COURS</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="text-center">Aucun abonnement récent.</p>
+        {% endif %}
+    </div>
+    <div class="panel-footer">
+        <div class="row">
+            <div class="col-md-6">
+                <span class="panel-note">
+                    <i class="fa fa-clock-o"></i>
+                    Les 30 derniers jours</span>
+            </div>
+            <div class="col-md-6 text-right">
+                <a class="btn btn-primary" href="{{ path('admin_subscribers') }}">Voir tous les abonnements</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END RECENT PURCHASES -->
+

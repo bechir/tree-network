@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of the Tree Network application.
+ *
+ * (c) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Repository;
 
 use App\Entity\User;
@@ -49,9 +55,9 @@ class UserRepository extends ServiceEntityRepository
     public function createPaginator(Query $query, int $page, $isAdmin = false): Pagerfanta
     {
         $paginator = new Pagerfanta(new DoctrineORMAdapter(($query)));
-        if($isAdmin) {
+        if ($isAdmin) {
             $paginator->setMaxPerPage(User::NB_ITEMS_ADMIN_LISTING);
-        }else {
+        } else {
             $paginator->setMaxPerPage(User::NB_ITEMS_LISTING);
         }
         $paginator->setCurrentPage($page);

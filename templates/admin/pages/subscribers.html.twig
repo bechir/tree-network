@@ -1,0 +1,77 @@
+{% extends 'admin/base.html.twig' %}
+{% block left_sidebar %}
+    {% include 'admin/common/left-sidebar.twig' with { active: 'subscribers' } %}
+{% endblock %}
+
+{% block main %}
+<h3 class="page-title text-info"><span class="lnr lnr-star"></span> Abonnements <span class="badge badge-info mb-1">{{ list|length }}</span></h3></h3>
+<div class="row">
+    <div class="col-md-12">
+        <!-- TABLE STRIPED -->
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Liste des abonnements effectués</h3>
+            </div>
+            <div class="panel-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Niveau de formation</ht>
+                        <th>Nom de l'abonné</th>
+                        <th>Montant</th>
+                        <th>Date d'activation</th>
+                        <th>Statut</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for subscription in list %}
+                    <tr>
+                        <td>
+                            <a href="javascript:">#{{ subscription.id }}</a>
+                        </td>
+                        <td>{{ subscription.name }}</td>
+                        <td><a href="{{ path('admin_user_show', {user: subscription.user.id}) }}">{{ subscription.user.username }}</a></td>
+                        <td>{{ subscription.paidPrice }} €</td>
+                        <td>{{ subscription.startAt|localizeddate('full', 'none', app.request.locale )|capitalize }}</td>
+                        <td>
+                            {% if subscription.expired %}
+                                <span class="label label-default">TERMINÉ</span>
+                            {% else %}
+                                <span class="label label-success">EN COURS</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        </div>
+        <div class="panel-footer">
+                 <!-- Page navigation start -->
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                      {% if list.haveToPaginate %}
+                          {{ pagerfanta(
+                                    list,
+                                    'twitter_bootstrap3_translated',
+                                    { routeName: 'admin_subscribers_paginated',
+                                          routeParams: app.request.query.all,
+                                          prev_message: 'Précédant',
+                                          next_message: 'Suivant',
+                                          page_template: '<li><a href="%href%" %rel%>%text%</a></li>'
+                                    }
+                               )
+                          }}
+                      {% else %}
+                            <li><button type="button" class="btn btn-default disabled">1</button> </li>
+                      {% endif %}
+                      </ul>
+                  </nav>
+                  <!-- Page navigation end -->
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

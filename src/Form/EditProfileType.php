@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of the Tree Network application.
+ *
+ * (c) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Form;
 
 use App\Entity\User;
@@ -19,37 +25,37 @@ class EditProfileType extends AbstractType
         $builder
             ->add('firstName', TextType::class, [
                 'required' => false,
-                'label' => 'form.firstName'
+                'label' => 'form.firstName',
             ])
             ->add('lastName', TextType::class, [
                 'required' => false,
-                'label' => 'form.lastName'
+                'label' => 'form.lastName',
             ])
             ->add('phoneNumber', TextType::class, [
                 'required' => false,
-                'label' => 'form.phoneNumber'
+                'label' => 'form.phoneNumber',
             ])
             ->add('username', TextType::class, [
                 'required' => false,
-                'label' => 'form.username'
+                'label' => 'form.username',
             ])
             ->add('gender', EntityType::class, [
                 'class' => Gender::class,
                 'choice_label' => 'name',
                 'required' => false,
-                'choice_translation_domain' => true
+                'choice_translation_domain' => true,
             ])
             ->add('bornAt', TextType::class, [
                 'required' => false,
-                'label' => 'form.bornAt'
+                'label' => 'form.bornAt',
             ])
             ->add('birthPlace', TextType::class, [
                 'required' => false,
-                'label' => 'form.birthPlace'
+                'label' => 'form.birthPlace',
             ])
             ->add('description', TextareaType::class, [
                 'required' => false,
-                'label' => 'form.description'
+                'label' => 'form.description',
             ])
             ->add('avatar', UserAvatarType::class, [
                 'required' => false,

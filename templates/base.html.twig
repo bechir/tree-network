@@ -57,8 +57,11 @@
                         <ul class="navbar-nav ml-auto nav-flex-icons">
                             <form class="form-inline mr-5" method="GET">
                                 <div class="md-form my-0">
-                                    <input class="form-control" type="text" name="terms" placeholder="{{ 'layout.search'|trans }}" aria-label="Search" autocomplete="off">
+                                    <input class="form-control" data-url="{{ path('user_search') }}" type="text" id="search-user" name="terms" placeholder="{{ 'layout.search'|trans }}" aria-label="Search" autocomplete="off">
                                     <i class="fas fa-search"></i>
+
+                                    <div id="form-resuslts" class="form-resuslts shadow position-absolute bg-white ml-2 w-100">
+                                    </div>
                                 </div>
                             </form>
                             <li class="nav-item dropdown">
@@ -83,11 +86,11 @@
                                 </div>
                             </li>
                             {% if is_granted('ROLE_USER') %}
-                                <li class="nav-item {% if _route == 'messages' %}active{% endif %}">
+                                {# <li class="nav-item {% if _route == 'messages' %}active{% endif %}">
                                     <a class="nav-link waves-effect waves-light">1
                                         <i class="fas fa-envelope"></i>
                                     </a>
-                                </li>
+                                </li> #}
                                 <li class="nav-item avatar dropdown">
                                     <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink-555">
                                         <img class="avatar rounded-circle z-depth-0" src="{{ app.user.avatar ? vich_uploader_asset(app.user.avatar, 'avatarFile') : asset('img/user/default-avatar-profile.jpg') }}">
@@ -97,7 +100,7 @@
                                         <a class="dropdown-item" href="{{ path('user_tree_show') }}"><i class="fas fa-code-branch"></i> {{ 'layout.family_tree'|trans }}</a>
                                         <a class="dropdown-item" href="{{ path('user_settings') }}"><i class="fas fa-cog"></i> {{ 'layout.settings'|trans }}</a>
                                         {% if is_granted('ROLE_ADMIN') %}
-                                            <a class="dropdown-item" href="#"><i class="fas fa-user-secret"></i> {{ 'layout.admin'|trans }}</a>
+                                            <a class="dropdown-item" href="{{ path('admin_index') }}"><i class="fas fa-user-secret"></i> {{ 'layout.admin'|trans }}</a>
                                         {% endif %}
                                         <a class="dropdown-item" href="{{ path('fos_user_security_logout') }}"><i class="fas fa-sign-out-alt"></i> {{ 'layout.logout'|trans }}</a>
                                     </div>
@@ -116,7 +119,7 @@
                 {% block after_nav %}{% endblock %}
             </header>
 
-            <main class="main-section transition-fade" id="swup">
+            <main class="main-section">
                 {% block main %}{% endblock %}
             </main>
 
@@ -201,7 +204,6 @@
         <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/mdb.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/jquery-ui-1.12.1.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/swup.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
         {% block javascripts %}{% endblock %}
     </body>

@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of the Tree Network application.
+ *
+ * (c) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\Form;
 
 use App\Entity\Gender;
@@ -17,10 +23,10 @@ class LinkedUserType extends AbstractType
     {
         $builder
             ->add('firstName', TextType::class, [
-                'label' => 'form.firstName'
+                'label' => 'form.firstName',
             ])
             ->add('lastName', TextType::class, [
-                'label' => 'form.lastName'
+                'label' => 'form.lastName',
             ])
             // ->add('bornAt', TextType::class, [
             //     'required' => false,
@@ -28,7 +34,7 @@ class LinkedUserType extends AbstractType
             // ])
             ->add('description', TextareaType::class, [
                 'required' => false,
-                'label' => 'form.description'
+                'label' => 'form.description',
             ])
             // ->add('birthPlace', TextType::class, [
             //     'required' => false,
@@ -39,7 +45,7 @@ class LinkedUserType extends AbstractType
                 'choice_label' => 'name',
                 'choice_translation_domain' => true,
                 'required' => false,
-                'placeholder' => 'form.select'
+                'placeholder' => 'form.select',
             ])
             ->add('avatar', UserAvatarType::class, [
                 'required' => false,
