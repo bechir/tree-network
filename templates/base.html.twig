@@ -2,11 +2,98 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">  
+       
+        <link rel="stylesheet" href="{{ asset('css/fontawesome-v5.8.2.css') }}">
+        <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/mdb.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
         {% block stylesheets %}{% endblock %}
+
+        <title>{% block title %}Welcome to tree network!{% endblock %}</title>
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% block body %}
+        <header>
+            <!--Navbar -->
+            <nav class="mb-1 navbar navbar-expand-lg navbar-dark secondary-color lighten-1">
+                <a class="navbar-brand" href="#">Navbar</a>
+                <button aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent-555" data-toggle="collapse" type="button">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Home
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Features</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Pricing</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink-555">Dropdown
+                            </a>
+                            <div aria-labelledby="navbarDropdownMenuLink-555" class="dropdown-menu dropdown-secondary">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto nav-flex-icons">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">
+                                <i class="fab fa-facebook-f"></i>
+                                Facebook
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fab fa-instagram"></i>
+                                Instagram</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink-4">
+                                <i class="fas fa-user"></i>
+                                Profile
+                            </a>
+                            <div aria-labelledby="navbarDropdownMenuLink-4" class="dropdown-menu dropdown-menu-right dropdown-info">
+                                <a class="dropdown-item" href="#">My account</a>
+                                <a class="dropdown-item" href="#">Log out</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect waves-light">1
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item avatar dropdown">
+                            <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink-55">
+                                <img alt="avatar image" class="rounded-circle z-depth-0" src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg">
+                            </a>
+                            <div aria-labelledby="navbarDropdownMenuLink-55" class="dropdown-menu dropdown-menu-lg-right dropdown-secondary">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <!--/.Navbar -->
+        </header>
+        
+        {% endblock %}
+        <script type="text/javascript" src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/popper.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/mdb.min.js') }}"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

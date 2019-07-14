@@ -1,0 +1,10 @@
+vich_uploader:
+  db_driver: orm
+
+  mappings:
+    users:
+      uri_prefix: '%uploads_prefix%/users'
+      upload_destination: '%uploads_dir%/users'
+      namer: vich_uploader.namer_hash
+      delete_on_remove: true
+      delete_on_update: true
