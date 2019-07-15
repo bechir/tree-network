@@ -1,0 +1,19 @@
+app:
+  locale:
+    fr: Français
+    en: English
+    ar: العربية
+
+layout:
+  about: About
+  home: Home
+  contact_us: Contact-us
+  help_faq: Help / FAQ
+  help: Help
+  browse: Browse
+  profile: Profile
+  settings: Settings
+  family_tree: Family tree
+  logout: Logout
+  login: Sign up
+  register: Sign in

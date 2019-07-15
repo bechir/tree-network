@@ -1,5 +1,7 @@
 dashboard:
-  path: 
-    en: /dashboard
-    fr: /tableau-de-bord
+  path: /_locale/dashboard
   controller: App\Controller\UserController::dashboard
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'

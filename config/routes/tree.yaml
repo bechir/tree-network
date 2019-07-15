@@ -1,5 +1,7 @@
 browse:
-  path:
-    fr: /parcourir
-    en: /browse
+  path: /{_locale}/browse
   controller: App\Controller\DefaultController::browse
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'

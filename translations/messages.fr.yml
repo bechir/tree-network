@@ -1,0 +1,19 @@
+app:
+  locale:
+    fr: Français
+    en: English
+    ar: العربية
+
+layout:
+  about: À propos
+  home: Accueil # Home
+  contact_us: Contactez-nous # Contact-us
+  help_faq: Aide / FAQ # Help / FAQ
+  help: Aide # Help
+  browse: Parcourir # Browse
+  profile: Profil # Profile
+  settings:  Paramètres # Settings
+  family_tree:  Arbre généalogique # Family tree
+  logout:  Déconnexion # Logout
+  login: Connexion # Sign up
+  register: Inscription # Sign in
