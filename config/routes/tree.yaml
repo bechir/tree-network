@@ -1,0 +1,5 @@
+browse:
+  path:
+    fr: /parcourir
+    en: /browse
+  controller: App\Controller\DefaultController::browse

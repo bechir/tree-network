@@ -1,3 +1,38 @@
 index:
-   path: /
+   path: /{_locale}
    controller: App\Controller\DefaultController::index
+   requirements:
+    _locale: '%app_locales%'
+   defaults:
+    _locale: '%locale%'
+
+about:
+  path:
+    fr: /a-propos
+    en: /about-us
+  controller: App\Controller\DefaultController::about
+
+contact:
+  path:
+    fr: /contactez-nous
+    en: /contact-us
+  controller: App\Controller\DefaultController::contact
+  methods: [GET, POST]
+
+help_faq:
+  path:
+    fr: /help-faq
+    en: /aide-faq
+  controller: App\Controller\DefaultController::helpFAQ
+
+terms_conditions:
+  path:
+    fr: /conditions-utilisation
+    en: /about-us
+  controller: App\Controller\DefaultController::termsCondtions
+
+privacy:
+  path:
+    fr: /confidentialite
+    en: /privacy-policy
+  controller: App\Controller\DefaultController::privacy

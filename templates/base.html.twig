@@ -18,7 +18,7 @@
         <header>
             <!--Navbar -->
             <nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="{{ path('index') }}">
                     {# <img src="{{ asset('img/tree-network-2.png') }}" id="logo" alt="tree network logo"> #}
                     Tree network |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </a>
@@ -28,21 +28,21 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#"><i class="fas fa-home"></i> Accueil
+                            <a class="nav-link" href="{{ path('index') }}"><i class="fas fa-home"></i> Accueil
                                 <span class="sr-only">(current)</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fas fa-code-branch"></i> Parcourir</a>
+                            <a class="nav-link" href="{{ path('browse') }}"><i class="fas fa-code-branch"></i> Parcourir</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink-333">
                                 <i class="fas fa-question-circle"></i> Aide
                             </a>
                             <div aria-labelledby="navbarDropdownMenuLink-333" class="dropdown-menu dropdown-default">
-                                <a class="dropdown-item" href="#">&Agrave; propos</a>
-                                <a class="dropdown-item" href="#">Aide / FAQ</a>
-                                <a class="dropdown-item" href="#">Contatez-nous</a>
+                                <a class="dropdown-item" href="{{ path('about') }}">&Agrave; propos</a>
+                                <a class="dropdown-item" href="{{ path('help_faq') }}">Aide / FAQ</a>
+                                <a class="dropdown-item" href="{{ path('contact') }}">Contatez-nous</a>
                             </div>
                         </li>
                     </ul>

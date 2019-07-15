@@ -1,0 +1,5 @@
+dashboard:
+  path: 
+    en: /dashboard
+    fr: /tableau-de-bord
+  controller: App\Controller\UserController::dashboard
