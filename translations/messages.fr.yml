@@ -10,6 +10,8 @@ layout:
   contact_us: Contactez-nous # Contact-us
   help_faq: Aide / FAQ # Help / FAQ
   help: Aide # Help
+  terms_conditions: Conditions générales d'utilisations
+  privacy: Politique de confidentialié
   browse: Parcourir # Browse
   profile: Profil # Profile
   settings:  Paramètres # Settings
@@ -17,3 +19,5 @@ layout:
   logout:  Déconnexion # Logout
   login: Connexion # Sign up
   register: Inscription # Sign in
+  join_socials: Retrouvez-nous sur les réseaux sociaux!
+  useful_links: Liens utiles

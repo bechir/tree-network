@@ -5,8 +5,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">  
-       
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
         <link rel="stylesheet" href="{{ asset('css/fontawesome-v5.8.2.css') }}">
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/mdb.min.css') }}" rel="stylesheet">
@@ -19,10 +18,10 @@
         {% block body %}
         <header>
             <!--Navbar -->
-            <nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
+            <nav class="mb-1 navbar fixed-top navbar-expand-lg navbar-dark default-color">
                 <a class="navbar-brand" href="{{ path('index') }}">
                     {# <img src="{{ asset('img/tree-network-2.png') }}" id="logo" alt="tree network logo"> #}
-                    Tree network |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="fas fa-code-branch f-16"></i> Tree network |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </a>
                 <button aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent-333" data-toggle="collapse" type="button">
                     <span class="navbar-toggler-icon"></span>
@@ -66,28 +65,144 @@
                                 {% endfor %}
                             </div>
                         </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <li class="nav-item">
-                            <a class="nav-link waves-effect waves-light">1
-                                <i class="fas fa-envelope"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item avatar dropdown">
-                            <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink-555">
-                                <img src="{{ asset('img/users/randomdev.jpg') }}" class="avatar rounded-circle z-depth-0" alt="avatar image">
-                            </a>
-                            <div aria-labelledby="navbarDropdownMenuLink-55" class="dropdown-menu dropdown-menu-lg-right dropdown-secondary">
-                                <a class="dropdown-item" href="#"><i class="fas fa-id-card"></i> {{ 'layout.profile'|trans }}</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-code-branch"></i> {{ 'layout.family_tree'|trans }}</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-cog"></i> {{ 'layout.settings'|trans }}</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> {{ 'layout.logout'|trans }}</a>
-                            </div>
-                        </li>
+                        {% if is_granted('ROLE_USER') %}
+                            <li class="nav-item">
+                                <a class="nav-link waves-effect waves-light">1
+                                    <i class="fas fa-envelope"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item avatar dropdown">
+                                <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink-555">
+                                    <img src="{{ asset('img/users/randomdev.jpg') }}" class="avatar rounded-circle z-depth-0" alt="avatar image">
+                                </a>
+                                <div aria-labelledby="navbarDropdownMenuLink-55" class="dropdown-menu dropdown-menu-lg-right dropdown-secondary">
+                                    <a class="dropdown-item" href="#"><i class="fas fa-id-card"></i> {{ 'layout.profile'|trans }}</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-code-branch"></i> {{ 'layout.family_tree'|trans }}</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-cog"></i> {{ 'layout.settings'|trans }}</a>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <a class="dropdown-item" href="#"><i class="fas fa-user-secret"></i> {{ 'layout.admin'|trans }}</a>
+                                    {% endif %}
+                                    
+                                    <a class="dropdown-item" href="{{ path('fos_user_security_logout') }}"><i class="fas fa-sign-out-alt"></i> {{ 'layout.logout'|trans }}</a>
+                                </div>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link waves-effect waves-light" href="{{ path('fos_user_security_login') }}">
+                                    <i class="fas fa-sign-in-alt"></i> {{ 'layout.login'|trans }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link waves-effect waves-light" href="{{ path('fos_user_registration_register') }}">
+                                    <i class="fas fa-user-plus"></i> {{ 'layout.register'|trans }}
+                                </a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
             </nav>
             <!--/.Navbar -->
         </header>
-        
+        <main class="main-section">
+            {% block main %}{% endblock %}
+        </main>
+
+        <!-- Footer -->
+        <footer class="page-footer font-small unique-color-dark">
+            <div class="default-color">
+                <div class="container">
+                    <!-- Grid row-->
+                    <div class="row py-4 d-flex align-items-center">
+                        <!-- Grid column -->
+                        <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+                            <h6 class="mb-0">{{ 'layout.join_socials'|trans }}</h6>
+                        </div>
+                        <!-- Grid column -->
+                        <!-- Grid column -->
+                        <div class="col-md-6 col-lg-7 text-center text-md-right">
+                            <!-- Facebook -->
+                            <a class="fb-ic">
+                                <i class="fab fa-facebook-f white-text mr-4"></i>
+                            </a>
+                            <!-- Twitter -->
+                            <a class="tw-ic">
+                                <i class="fab fa-twitter white-text mr-4"></i>
+                            </a>
+                            <!-- Google +-->
+                            <a class="gplus-ic">
+                                <i class="fab fa-google-plus-g white-text mr-4"></i>
+                            </a>
+                            <!--Linkedin -->
+                            <a class="li-ic">
+                                <i class="fab fa-linkedin-in white-text mr-4"></i>
+                            </a>
+                            <!--Instagram-->
+                            <a class="ins-ic">
+                                <i class="fab fa-instagram white-text"></i>
+                            </a>
+                        </div>
+                        <!-- Grid column -->
+                    </div>
+                    <!-- Grid row-->
+                </div>
+            </div>
+            <!-- Footer Links -->
+            <div class="container text-center text-md-left mt-5">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <!-- Content -->
+                        <h6 class="text-uppercase font-weight-bold">{{ website.name }}</h6>
+                        <hr class="default-color accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                        <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    </div>
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase font-weight-bold">{{ 'layout.useful_links'|trans }}</h6>
+                        <hr class="indigo accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                        <p>
+                            <a href="{{ path('about') }}">{{ 'layout.about'|trans }}</a>
+                        </p>
+                        <p>
+                            <a href="{{ path('help_faq') }}">{{ 'layout.help_faq'|trans }}</a>
+                        </p>
+                        <p>
+                            <a href="{{ path('terms_conditions') }}">{{ 'layout.terms_conditions'|trans }}</a>
+                        </p>
+                        <p>
+                            <a href="{{ path('privacy') }}">{{ 'layout.privacy'|trans }}</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase font-weight-bold">Contact</h6>
+                        <hr class="default-color accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                        <p>
+                            <i class="fas fa-home mr-3"></i>
+                            Sanar, Saint-Louis &mdash; Sénégal</p>
+                        <p>
+                            <i class="fas fa-envelope mr-3"></i>
+                            {{ website.email }}</p>
+                        <p>
+                            <i class="fas fa-phone mr-3"></i>
+                            {{ website.phoneNumber }}</p>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+            </div>
+            <!-- Footer Links -->
+            <!-- Copyright -->
+            <div class="footer-copyright text-center py-3">© 2019 Copyright:
+                <a href="/"> {{ website.name }}.com</a>
+            </div>
+            <!-- Copyright -->
+        </footer>
+        <!-- Footer -->
         {% endblock %}
         <script type="text/javascript" src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/popper.min.js') }}"></script>

@@ -1,0 +1,57 @@
+<div class="search-box">
+  <h3>Recherchez
+    <small><i class="fa fa-map-marker">&nbsp;</i> Où allez vous en Mauritanie ?</small>
+  </h3>
+  <div class="search-form">
+      <form class="search-form" method="post">
+          <div class="form-group">
+              <label for="">Ville de destination</label>
+              <select class="form-control" name="">
+                  {% for code, name in citiesByCountry('MR') %}
+                      <option value="{{ code }}">{{ name }}</option>
+                  {% endfor %}
+              </select>
+          </div>
+          <label for="">Date d'arrivée</label>
+          <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+              </span>
+              <input type="text" class="form-control btn-default datepicker" autocomplete="of">
+          </div>
+          <label for="">Date de départ</label>
+          <div class="input-group" style="padding-bottom:11px">
+              <span class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+              </span>
+              <input type="text" class="form-control btn-default datepicker" autocomplete="of">
+          </div>
+          <div class="form-group">
+            <select class="form-control" name="">
+              <option value="">1 Adulte</option>
+              {% for i in 2 .. 20 %}
+                  <option value="">{{ i }} Adultes</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form-group">
+            <select class="form-control" name="">
+              <option value="">Pas d'enfant</option>
+              <option value="">1 enfant</option>
+              {% for i in 2 .. 7 %}
+                  <option value="">{{ i }} Enfants</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form-group">
+            <select class="form-control" name="">
+              <option value="">Une chambre</option>
+              {% for i in 2 .. 20 %}
+                  <option value="">{{ i }} Chambres</option>
+              {% endfor %}
+            </select>
+          </div>
+          <button type="submit" class="btn btn-theme btn-block" style="border-radius:2px"><i class="fa fa-circle-o"></i> Rechercher</button>
+      </form>
+  </div>
+</div>

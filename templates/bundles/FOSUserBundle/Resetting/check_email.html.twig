@@ -1,0 +1,21 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+
+<div class="contact-3 content-area-6">
+    <div class="container">
+        <div class="main-title mb-60">
+        <p class="lead">
+            {{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime})|nl2br }}
+        </p>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="send-btn mb-0  text-center">
+                <a href="{{ path('fos_user_resetting_request') }}" class="btn-md btn-theme"><i class="lnr lnr-redo fa-lg bold"></i> Renvoyer</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

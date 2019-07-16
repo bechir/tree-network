@@ -1,0 +1,89 @@
+<!-- Search area box start -->
+<div class="search-area-box-3 hidden-xs hidden-sm">
+    <div class="search-contents">
+          {{ form_start(form, {'method': 'POST', 'action': path('search')})}}
+            <div class="col-lg-12 col-pad col-pad-2">
+                <div class="search-your-rooms">
+                    <h2 class="hidden-xs hidden-sm">{{ 'search.title'|trans|raw }}</h2>
+                </div>
+            </div>
+            <div class="search-your-details">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="form-group">
+                        {{ form_widget(form.bookingDates.checkIn, {'attr': {'autocomplete': 'off', 'class': 'btn-default datepicker', 'placeholder': 'search.check_in'|trans}})}}
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="form-group">
+                      {{ form_widget(form.bookingDates.checkOut, {'attr': {'autocomplete': 'off', 'class': 'btn-default datepicker', 'placeholder': 'search.check_out'|trans}})}}
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="form-group">
+                        {{ form_widget(form.category, {'attr': {'class': 'selectpicker search-fields form-control-2'}}) }}
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="form-group">
+                        {{ form_widget(form.rooms, {'attr': {'class': 'selectpicker search-fields form-control-2'}}) }}
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="form-group">
+                        <button class="search-button btn-theme">{{ 'action.search'|trans }}</button>
+                    </div>
+                </div>
+            </div>
+          {{ form_end(form)}}
+    </div>
+</div>
+<!-- Search area box end -->
+<!-- Search area box 2 start -->
+<div class="search-area-box-2 hidden-lg hidden-md">
+    <div class="container">
+        <div class="search-contents">
+            {{ form_start(mobile_form, {'method': 'POST', 'action': path('search')})}}
+                <div class="row">
+                    <div class="col-md-3 col-pad col-pad-2">
+                        <div class="search-your-rooms">
+                            <h2 class="hidden-lg hidden-md">{{ 'search.title'|trans|raw }}</h2>
+                        </div>
+                    </div>
+                    <div class="search-your-details">
+                        <div class="col-md-2 col-sm-4 col-xs-6 col-pad">
+                            <div class="form-group">
+                                {{ form_widget(mobile_form.bookingDates.checkIn, {'attr': {'autocomplete': 'off', 'class': 'btn-default datepicker', 'placeholder': 'search.check_in'|trans}})}}
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-xs-6 col-pad">
+                            <div class="form-group">
+                              {{ form_widget(mobile_form.bookingDates.checkOut, {'attr': {'autocomplete': 'off', 'class': 'btn-default datepicker', 'placeholder': 'search.check_out'|trans}})}}
+                            </div>
+                        </div>
+                        <div class="col-md-1 col-sm-4 col-xs-6 col-pad">
+                            <div class="form-group">
+                              {{ form_widget(mobile_form.category, {'attr': {'class': 'selectpicker search-fields form-control-2'}}) }}
+                            </div>
+                        </div>
+                        <div class="col-md-1 col-sm-4 col-xs-6 col-pad">
+                            <div class="form-group">
+                              {{ form_widget(mobile_form.rooms, {'attr': {'class': 'selectpicker search-fields form-control-2'}}) }}
+                            </div>
+                        </div>{#
+                        <div class="col-md-1 col-sm-4 col-xs-6 col-pad">
+                            <div class="form-group">
+                              {{ form_widget(mobile_form.childs, {'attr': {'class': 'selectpicker search-fields form-control-2'}}) }}
+                            </div>
+                        </div>#}
+                        <div class="col-md-2 col-sm-4 col-xs-6 col-pad">
+                            <div class="form-group">
+                                <button class="search-button btn-theme">{{ 'action.search'|trans }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{ form_end(mobile_form) }}
+        </div>
+    </div>
+</div>
+<!-- Search area box 2 end -->

@@ -4,6 +4,9 @@ img.avatar {
 a.navbar-brand{
     font-size: 1.57rem;
 }
+a.navbar-brand i{
+    font-size: 21px;
+}
 
 .nav-item.avatar.dropdown {
     top: -4px;
@@ -11,4 +14,9 @@ a.navbar-brand{
 
 #logo{
     height: 50px;
+}
+
+main.main-section {
+    margin-top: 65px;
+    min-height: 700px;
 }
