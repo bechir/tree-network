@@ -20,3 +20,24 @@ main.main-section {
     margin-top: 65px;
     min-height: 700px;
 }
+.navbar.navbar-dark form .md-form{
+    top: -4px
+}
+.navbar.navbar-dark form .md-form .form-control{
+    width: 133px !important;
+    transition: width .5s !important;
+}
+.navbar.navbar-dark form .md-form .form-control:focus{
+    width: 290px !important;
+    border-radius: 7px;
+    padding: 5px 3px 5px 10px;
+}
+
+.navbar.navbar-dark form .md-form i{
+    position: absolute;
+    bottom: 29%;
+    color: #fff;
+    right: 10px;
+    font-weight: 200;
+    font-size: 15px;
+}
