@@ -48,6 +48,13 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav ml-auto nav-flex-icons">
+
+    <form class="form-inline mr-5">
+      <div class="md-form my-0">
+        <input class="form-control" type="text" placeholder="{{ 'layout.search'|trans }}" aria-label="Search">
+      </div>
+    </form>
+
                         <li class="nav-item dropdown">
                             <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink-4">
                                 <i class="fas fa-language"></i>
@@ -89,12 +96,12 @@
                         {% else %}
                             <li class="nav-item">
                                 <a class="nav-link waves-effect waves-light" href="{{ path('fos_user_security_login') }}">
-                                    <i class="fas fa-sign-in-alt"></i> {{ 'layout.login'|trans }}
+                                    <i class="fas fa-sign-in-alt"></i> {# { 'layout.login'|trans } #}
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link waves-effect waves-light" href="{{ path('fos_user_registration_register') }}">
-                                    <i class="fas fa-user-plus"></i> {{ 'layout.register'|trans }}
+                                    <i class="fas fa-user-plus"></i> {# { 'layout.register'|trans } #}
                                 </a>
                             </li>
                         {% endif %}
