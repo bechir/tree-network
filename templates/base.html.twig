@@ -48,14 +48,12 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav ml-auto nav-flex-icons">
-
-    <form class="form-inline mr-5">
-      <div class="md-form my-0">
-        <input class="form-control" type="text" placeholder="{{ 'layout.search'|trans }}" aria-label="Search">
-        <i class="fas fa-search"></i>
-      </div>
-    </form>
-
+                        <form class="form-inline mr-5">
+                            <div class="md-form my-0">
+                                <input class="form-control" type="text" placeholder="{{ 'layout.search'|trans }}" aria-label="Search">
+                                <i class="fas fa-search"></i>
+                            </div>
+                        </form>
                         <li class="nav-item dropdown">
                             <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink-4">
                                 <i class="fas fa-language"></i>
@@ -64,11 +62,15 @@
                             <div aria-labelledby="navbarDropdownMenuLink-4" class="dropdown-menu dropdown-menu-right dropdown-info">
                                 {% for l in locales() %}
                                     {% if l.code != request_locale %}
-                                    <a class="dropdown-item" href="{{ path(
-                                                    app.request.get('_route', 'index'),
-                                                    app.request.get('_route_params', [])|merge({_locale: l.code})) }}">
-                                        {{ l.name|capitalize }}
-                                    </a>
+                                        <a class="dropdown-item" href="{{ path(
+                                                        app.request.get('_route', 'index'),
+                                                        app.request.get('_route_params', [])|merge({_locale: l.code})) }}">
+                                            {% if l.name is empty %}
+                                                {{ ('app.locale.' ~ l.code)|trans|capitalize }}
+                                            {% else %}
+                                                {{ l.name|capitalize }}
+                                            {% endif %}
+                                        </a>
                                     {% endif %}
                                 {% endfor %}
                             </div>

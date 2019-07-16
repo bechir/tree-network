@@ -1,5 +1,7 @@
 app:
   locale:
+    plr: Pulaar
+    wlf: Wolof
     fr: Français
     en: English
     ar: العربية

@@ -2,12 +2,7 @@
 
 namespace App\Entity;
 
-use App\Entity\Establishment\BasicInfo;
-use App\Entity\Establishment\Immovable;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use FOS\UserBundle\Model\User as BaseUser;
@@ -20,6 +15,8 @@ use FOS\UserBundle\Model\User as BaseUser;
 class User extends BaseUser implements EquatableInterface
 {
     /**
+     * @var integer
+     * 
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -27,6 +24,8 @@ class User extends BaseUser implements EquatableInterface
     protected $id;
 
     /**
+     * @var string
+     * 
      * @ORM\Column(type="string", length=255, unique=false, nullable=true)
      */
     private $phoneNumber;
@@ -40,28 +39,57 @@ class User extends BaseUser implements EquatableInterface
     private $avatar;
 
     /**
-     * @ORM\Column(type="string", length=10, nullable=true, unique=false)
+     * @var string
+     * 
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $firstName;
+
+    /**
+     * @var string
+     * 
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $lastName;
+
+    /**
+     * @var \Date
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $bornAt;
+
+    /**
+     * @var string
+     * 
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var BirthPlace
+     * @ORM\ManyToOne(targetEntity="App\Entity\BirthPlace")
+     */
+    private $birthPlace;
+
+    /**
+     * @var Locale
+     * 
+     * @ORM\ManyToOne(targetEntity="App\Entity\Locale")
      */
     private $locale;
 
     const NUM_ITEMS = 15;
 
-    const LC_FR = 'app.locale.fr';
-    const LC_EN = 'app.locale.en';
-    const LC_AR = 'app.locale.ar';
-
-    const LOCALES = [
-        self::LC_AR,
-        self::LC_FR,
-        self::LC_EN
-    ];
-
     public function __construct()
     {
         parent::__construct();
-        $this->setLocale(self::LC_FR);
     }
 
+    /**
+     * Return the user's id
+     * 
+     * @return integer|null
+     */
     public function getId(): ?int
     {
         return $this->id;
@@ -79,21 +107,6 @@ class User extends BaseUser implements EquatableInterface
         return $this;
     }
 
-    public function getLocale(): ?string
-    {
-        return $this->locale;
-    }
-
-    public function setLocale(?string $locale): self
-    {
-        if(!in_array($locale, self::LOCALES))
-            throw new \Exception(sprintf("Unknown locale %s, valid locales are [%s]", $locale, implode(', ', self::LOCALES)));
-            
-        $this->locale = $locale;
-
-        return $this;
-    }
-
     public function getAvatar()
     {
         return $this->avatar;
@@ -106,6 +119,78 @@ class User extends BaseUser implements EquatableInterface
         return $this;
     }
 
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(?string $firstName): self
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(?string $lastName): self
+    {
+        $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    public function getBornAt()
+    {
+        return $this->bornAt;
+    }
+
+    public function setBornAt($bornAt): self
+    {
+        $this->bornAt = $bornAt;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getBirthPlace(): ?BirthPlace
+    {
+        return $this->birthPlace;
+    }
+
+    public function setBirthPlace(?BirthPlace $birthPlace): self
+    {
+        $this->birthPlace = $birthPlace;
+
+        return $this;
+    }
+
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+
+    public function setLocale(?Locale $locale): self
+    {
+        $this->locale = $locale;
+
+        return $this;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -114,6 +199,11 @@ class User extends BaseUser implements EquatableInterface
         return serialize([
             $this->id,
             $this->username,
+            $this->firstName,
+            $this->lastName,
+            $this->description,
+            $this->bornAt,
+            $this->birthPlace,
             $this->phoneNumber,
             $this->email,
             $this->plainPassword,
@@ -132,6 +222,11 @@ class User extends BaseUser implements EquatableInterface
         [
             $this->id,
             $this->username,
+            $this->firstName,
+            $this->lastName,
+            $this->description,
+            $this->bornAt,
+            $this->birthPlace,
             $this->phoneNumber,
             $this->email,
             $this->plainPassword,
