@@ -1,5 +1,5 @@
 {% set request_locale = app.request.attributes.get('_locale') %}
-{% set request_locale = app.request.attributes.get('_locale') %}
+{% set _route = app.request.attributes.get('_route') %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -28,15 +28,15 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
+                        <li class="nav-item {% if _route == 'index' %}active{% endif %}">
                             <a class="nav-link" href="{{ path('index') }}"><i class="fas fa-home"></i> {{ 'layout.home'|trans }}
                                 <span class="sr-only">(current)</span>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item {% if _route == 'browse' %}active{% endif %}">
                             <a class="nav-link" href="{{ path('browse') }}"><i class="fas fa-code-branch"></i> {{ 'layout.browse'|trans }}</a>
                         </li>
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown {% if _route in ['about', 'help_faq', 'contact'] %}active{% endif %}">
                             <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink-333">
                                 <i class="fas fa-question-circle"></i> {{ 'layout.help'|trans }}
                             </a>
@@ -76,7 +76,7 @@
                             </div>
                         </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         {% if is_granted('ROLE_USER') %}
-                            <li class="nav-item">
+                            <li class="nav-item {% if _route == 'messages' %}active{% endif %}">
                                 <a class="nav-link waves-effect waves-light">1
                                     <i class="fas fa-envelope"></i>
                                 </a>
@@ -97,12 +97,12 @@
                                 </div>
                             </li>
                         {% else %}
-                            <li class="nav-item">
+                            <li class="nav-item {% if _route == 'fos_user_security_login' %}active{% endif %}">
                                 <a class="nav-link waves-effect waves-light" href="{{ path('fos_user_security_login') }}">
                                     <i class="fas fa-sign-in-alt"></i> {# { 'layout.login'|trans } #}
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item {% if _route == 'fos_user_registration_register' %}active{% endif %}">
                                 <a class="nav-link waves-effect waves-light" href="{{ path('fos_user_registration_register') }}">
                                     <i class="fas fa-user-plus"></i> {# { 'layout.register'|trans } #}
                                 </a>

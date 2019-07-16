@@ -8,6 +8,7 @@ app:
 
 layout:
   about: À propos
+  admin: Administration
   home: Accueil # Home
   contact_us: Contactez-nous # Contact-us
   help_faq: Aide / FAQ # Help / FAQ

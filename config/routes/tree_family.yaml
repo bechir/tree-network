@@ -1,6 +1,6 @@
 browse:
   path: /{_locale}/browse
-  controller: App\Controller\DefaultController::browse
+  controller: App\Controller\TreeFamilyController::browse
   requirements:
     _locale: '%app_locales%'
   defaults:
