@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
@@ -78,11 +80,17 @@ class User extends BaseUser implements EquatableInterface
      */
     private $locale;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Relationship", mappedBy="user")
+     */
+    private $relationships;
+
     const NUM_ITEMS = 15;
 
     public function __construct()
     {
         parent::__construct();
+        $this->relationships = new ArrayCollection();
     }
 
     /**
@@ -249,5 +257,36 @@ class User extends BaseUser implements EquatableInterface
             return false;
         }
         return true;
+    }
+
+    /**
+     * @return Collection|Relationship[]
+     */
+    public function getRelationships(): Collection
+    {
+        return $this->relationships;
+    }
+
+    public function addRelationship(Relationship $relationship): self
+    {
+        if (!$this->relationships->contains($relationship)) {
+            $this->relationships[] = $relationship;
+            $relationship->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRelationship(Relationship $relationship): self
+    {
+        if ($this->relationships->contains($relationship)) {
+            $this->relationships->removeElement($relationship);
+            // set the owning side to null (unless already changed)
+            if ($relationship->getUser() === $this) {
+                $relationship->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }
