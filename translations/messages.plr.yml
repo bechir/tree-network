@@ -25,17 +25,3 @@ layout:
   join_socials: Retrouvez-nous sur les réseaux sociaux!
   useful_links: Liens utiles
   search: Rechercher...
-
-
-form:
-  password: Mot de passe
-  username_email: Nom d'utilisateur ou email
-  sign_in: Se connecter
-  forgot_password: Mot de passe oublié?
-  already_member: Déjà membre ? # Already a member?
-  not_member: Pas de compte ?
-  login_sign_up: Inscrivez vous
-  remember_me: Se souvenir de moi
-
-login:
-  title: Connectez vous

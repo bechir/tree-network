@@ -1,69 +1,56 @@
 {% extends 'base.html.twig' %}
-{% block title %}{{ 'user.sign_in_to_account'|trans }}{% endblock %}
+{% block title %}
+    {{ 'user.sign_in_to_account'|trans }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="styelsheet" type="text/css" href="{{ asset('css/form.css') }}" />
+{% endblock %}
 
 {% block main %}
-<!-- Content area start -->
-<div class="contact-bg overview-bgi">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <!-- Form content box start -->
-                <div class="form-content-box">
-                    <!-- logo -->
-                    <a href="{{ path('index') }}" class="clearfix alpha-logo logo">
-                          {# <img src="{{ asset('img/logo/logo.png') }}" alt="white-logo"> #}
-                        <span class="last">{{ website.name }}</span>
-                    </a>
-                    <!-- details -->
-                    <div class="details">
-                        <h3>{{ 'user.sign_in_to_account'|trans }}</h3>
-                        <!-- Form start -->
-                          {% if error %}
-                          <div class="alert alert-danger">
-                              {{ error.messageKey|trans(error.messageData, 'security') }}
-                          </div>
-                          {% endif %}
-                          <form action="{{ path("fos_user_security_check") }}" method="post">
-                              {% if csrf_token %}
-                                  <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-                              {% endif %}
-
-                              <div class="input-group">
-                                <label for="username">{{ 'user.username_email'|trans }}</label>
-                                <input type="text" id="username" class="input-text" name="_username" value="{{ last_username }}" required="required" autocomplete="username" />
-                              </div>
-                              <div class="form-group">
-                                <label for="password">Mot de passe</label>
-                                <input type="password" id="password" class="input-text" name="_password" required="required" autocomplete="current-password" />
-                              </div>
-                              <div class="checkbox">
-                                <div class="ez-checkbox pull-left">
-                                  <label>
-                                    <input type="checkbox" name="_remember_me" class="ez-hide">
-                                    {{ 'user.remember_me'|trans }}
-                                  </label>
-                                </div>
-                                <a href="{{ path('fos_user_resetting_request') }}" class="link-not-important pull-right">{{ 'user.forgot_password'|trans }}</a>
-                                <div class="clearfix"></div>
-                              </div>
-                              <div class="mb-0">
-                                <input type="submit" id="_submit" class="btn btn-theme btn-block btn-lg" name="_submit" value="Connexion" />
-                              </div>
-                            </form>
-                        <!-- Form end -->
-                    </div>
-                    <!-- Footer -->
-                    <div class="footer">
-                      <a class="pull-left" href="{{ path('index') }}"><span>Retourner &agrave; l'accueil</span></a>
-                        <span>
-                            {{ 'user.dont_have_account'|trans({"%link%": path('fos_user_registration_register')})|raw }}
-                        </span>
-                    </div>
-                </div>
-                <!-- Form content box end -->
+<div class="login-form">
+    <form action="{{ path("fos_user_security_check") }}" method="post">
+        <h1 class="text-center mb-5">{{ 'login.title'|trans }}</h1>
+        {% if error %}
+            <div class="alert alert-danger">
+                {{ error.messageKey|trans(error.messageData, 'security') }}
             </div>
+        {% endif %}
+
+        <div class="md-form md-outline">
+            <i class="fas fa-envelope prefix"></i>
+            <input name="_username" class="form-control" id="username" value="{{ last_username }}" required type="text">
+            <label for="username">{{ 'form.username_email'|trans }}</label>
         </div>
-    </div>
+
+        <div class="md-form md-outline">
+            <i class="fas fa-lock prefix"></i>
+            <input name="_password" class="form-control" id="password" type="password">
+            <label for="password">{{ 'form.password'|trans }}</label>
+        </div>
+
+        <div class="form-check mb-2 mr-sm-2">
+            <input class="form-check-input" type="checkbox" id="inlineFormCheckMD">
+            <label name="_remember_me" class="form-check-label" for="inlineFormCheckMD">
+                {{ 'form.remember_me'|trans }}
+            </label>
+        </div>
+
+        {% if csrf_token %}
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+        {% endif %}
+        <button type="submit" class="btn submit aqua-gradient mt-5"><i class="fas fa-sign-in-alt mr-1"></i>{{ 'form.sign_in'|trans }}</button>
+
+        <div class="py-3 mt-3 text-center">
+          <p class="font-small text-info d-flex justify-content-start">{{ 'form.not_member'|trans }} <a href="{{ path('fos_user_registration_register') }}" class="ml-2 btn-link text-info">
+              {{ 'form.login_sign_up'|trans }}</a></p>
+        </div>
+
+        <div class="bottom-text">
+            <a class="f-w-400 btn-link text-info" href="{{ path('fos_user_resetting_request') }}">{{ 'form.forgot_password'|trans }}</a>
+        </div>
+    </form>
 </div>
-<!-- Content area end -->
 {% endblock %}
+

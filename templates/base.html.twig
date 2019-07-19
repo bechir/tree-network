@@ -18,7 +18,7 @@
         {% block body %}
         <header>
             <!--Navbar -->
-            <nav class="mb-1 navbar fixed-top navbar-expand-lg navbar-dark default-color">
+            <nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
                 <a class="navbar-brand" href="{{ path('index') }}">
                     {# <img src="{{ asset('img/tree-network-2.png') }}" id="logo" alt="tree network logo"> #}
                     <i class="fas fa-code-branch f-16"></i> Tree network |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -50,7 +50,7 @@
                     <ul class="navbar-nav ml-auto nav-flex-icons">
                         <form class="form-inline mr-5">
                             <div class="md-form my-0">
-                                <input class="form-control" type="text" placeholder="{{ 'layout.search'|trans }}" aria-label="Search">
+                                <input class="form-control" type="text" placeholder="{{ 'layout.search'|trans }}" aria-label="Search" autocomplete="off">
                                 <i class="fas fa-search"></i>
                             </div>
                         </form>
@@ -92,19 +92,14 @@
                                     {% if is_granted('ROLE_ADMIN') %}
                                         <a class="dropdown-item" href="#"><i class="fas fa-user-secret"></i> {{ 'layout.admin'|trans }}</a>
                                     {% endif %}
-                                    
                                     <a class="dropdown-item" href="{{ path('fos_user_security_logout') }}"><i class="fas fa-sign-out-alt"></i> {{ 'layout.logout'|trans }}</a>
                                 </div>
                             </li>
                         {% else %}
                             <li class="nav-item {% if _route == 'fos_user_security_login' %}active{% endif %}">
-                                <a class="nav-link waves-effect waves-light" href="{{ path('fos_user_security_login') }}">
-                                    <i class="fas fa-sign-in-alt"></i> {# { 'layout.login'|trans } #}
-                                </a>
-                            </li>
-                            <li class="nav-item {% if _route == 'fos_user_registration_register' %}active{% endif %}">
-                                <a class="nav-link waves-effect waves-light" href="{{ path('fos_user_registration_register') }}">
-                                    <i class="fas fa-user-plus"></i> {# { 'layout.register'|trans } #}
+                                <a id="navbar-static-login" href="{{ path('fos_user_security_login') }}" class="btn aqua-gradient-rgba btn-rounded btn-sm text-white">
+                                    {{ 'layout.login'|trans }}
+                                    <i class="fas fa-sign-in-alt ml-2"></i>
                                 </a>
                             </li>
                         {% endif %}
@@ -218,6 +213,7 @@
         <script type="text/javascript" src="{{ asset('js/popper.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/mdb.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>
