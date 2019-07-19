@@ -18,7 +18,7 @@
         {% block body %}
         <header>
             <!--Navbar -->
-            <nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
+            <nav class="mb-1 navbar navbar-expand-lg fixed-top navbar-dark default-color">
                 <a class="navbar-brand" href="{{ path('index') }}">
                     {# <img src="{{ asset('img/tree-network-2.png') }}" id="logo" alt="tree network logo"> #}
                     <i class="fas fa-code-branch f-16"></i> Tree network |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -106,6 +106,7 @@
                     </ul>
                 </div>
             </nav>
+            {% block after_nav %}{% endblock %}
             <!--/.Navbar -->
         </header>
         <main class="main-section">

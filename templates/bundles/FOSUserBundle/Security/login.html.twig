@@ -1,11 +1,10 @@
 {% extends 'base.html.twig' %}
 {% block title %}
-    {{ 'user.sign_in_to_account'|trans }}
+    {{ 'login.title'|trans }}
 {% endblock %}
 
 {% block stylesheets %}
-    {{ parent() }}
-    <link rel="styelsheet" type="text/css" href="{{ asset('css/form.css') }}" />
+    <link href="{{ asset('css/login.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block main %}
