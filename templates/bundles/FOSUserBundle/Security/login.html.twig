@@ -30,12 +30,12 @@
         </div>
 
         <div class="form-check mb-2 mr-sm-2">
-            <input class="form-check-input" type="checkbox" id="inlineFormCheckMD">
-            <label name="_remember_me" class="form-check-label" for="inlineFormCheckMD">
+            <input class="form-check-input" type="checkbox" id="materialChecked2">
+            <label name="_remember_me" class="form-check-label" for="materialChecked2">
                 {{ 'form.remember_me'|trans }}
             </label>
-        </div>
 
+        </div>
         {% if csrf_token %}
             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
         {% endif %}

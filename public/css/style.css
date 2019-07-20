@@ -3,6 +3,19 @@
 	--second-color: #da6f28;
 }
 
+.text-aqua-gradient{
+    background: linear-gradient(#2096ff, #05ffa3);
+    -o-background-clip: text;
+    -moz-background-clip: text;
+    -ms-background-clip: text;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    -o-text-fill-color: transparent;
+    background-size: 100%;
+}
+
 img.avatar {
     width: 33px
 }
@@ -22,7 +35,6 @@ a.navbar-brand i{
 }
 
 main.main-section {
-    min-height: 500px;
     margin-top: 60px;
 }
 .navbar.navbar-dark form .md-form{

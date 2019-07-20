@@ -17,7 +17,7 @@
     <body>
         {% block body %}
         <header>
-            <nav class="mb-1 navbar navbar-expand-lg fixed-top navbar-dark default-color">
+            <nav class="mb-1 navbar navbar-expand-lg fixed-top navbar-dark aqua-gradient">
                 <a class="navbar-brand" href="{{ path('index') }}">
                     {# <img src="{{ asset('img/tree-network-2.png') }}" id="logo" alt="tree network logo"> #}
                     <i class="fas fa-code-branch f-16"></i> Tree network |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -96,7 +96,7 @@
                             </li>
                         {% else %}
                             <li class="nav-item {% if _route == 'fos_user_security_login' %}active{% endif %}">
-                                <a id="navbar-static-login" href="{{ path('fos_user_security_login') }}" class="btn aqua-gradient-rgba btn-rounded btn-sm text-white">
+                                <a id="navbar-static-login" href="{{ path('fos_user_security_login') }}" class="btn bg-primary btn-rounded btn-sm text-white">
                                     {{ 'layout.login'|trans }}
                                     <i class="fas fa-sign-in-alt ml-2"></i>
                                 </a>
@@ -111,7 +111,7 @@
             {% block main %}{% endblock %}
         </main>
 
-        <footer class="page-footer font-small unique-color-dark">
+        <footer class="page-footer font-small unique-color-dark pos-absolute">
             <div class="default-color">
                 <div class="container">
                     <div class="row py-4 d-flex align-items-center">
