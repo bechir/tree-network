@@ -3,6 +3,79 @@
 	--second-color: #da6f28;
 }
 
+
+.section-padding {
+    padding: 120px 0;
+}
+
+.section-padding-top {
+    padding-top: 120px;
+}
+
+.section-padding-bottom {
+    padding-bottom: 120px;
+}
+
+.section-padding-150 {
+padding: 150px 0;
+}
+
+.padding-top-90 {
+    padding-top: 90px;
+}
+
+.padding-bottom-90 {
+    padding-bottom: 90px;
+}
+
+.padding-top-100 {
+    padding-top: 100px;
+}
+
+.padding-bottom-100 {
+    padding-bottom: 100px;
+}
+
+.padding-top-80 {
+    padding-top: 80px;
+}
+
+.padding-bottom-70 {
+    padding-bottom: 70px;
+}
+
+.padding-top-70 {
+    padding-top: 70px;
+}
+
+.padding-top-60 {
+    padding-top: 60px;
+}
+
+.padding-bottom-60 {
+    padding-bottom: 60px;
+}
+
+.padding-bottom-40 {
+    padding-bottom: 40px;
+}
+
+.section-padding-60 {
+    padding: 60px 0;
+}
+
+.section-margin{
+    margin: 120px 0;
+}
+
+.border-bottom {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+.border-top {
+    border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
 .text-aqua-gradient{
     background: linear-gradient(#2096ff, #05ffa3);
     -o-background-clip: text;
@@ -68,3 +141,67 @@ main.main-section {
     background-position: right;
     color: #fff
 }
+
+
+
+.call-to-action-bg {
+    background: url(/img/bg/cta-2-bg.jpg) no-repeat center;
+    background-size: cover;
+  }
+  
+  .call-to-action-2 {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+  
+  .call-to-action-2 .call-to-action-content {
+    color: #ffffff;
+  }
+  
+  .call-to-action-2 .call-to-action-content h2 {
+    font-size: 2.6rem;
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+  
+  .call-to-action-2 .call-to-action-content p {
+    max-width: 450px;
+  }
+  
+  .call-to-action-2 .call-to-action-button .button {
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px 30px;
+    color: #ffffff;
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+  
+/* .call-to-action-2 .call-to-action-button .button:before {
+    content: '\f067';
+    font-family: 'Font Awesome\ 5 Free';
+    font-weight: 900;
+    margin-right: 10px;
+} */
+  
+  .call-to-action-2 .call-to-action-button .button:hover {
+    background: #ffffff;
+    border-color: #ffffff;
+    color: #246df8;
+  }
+  
+  .call-to-action-2 .call-to-action-button span {
+    margin: 0 10px;
+    color: #ffffff;
+  }
+  
