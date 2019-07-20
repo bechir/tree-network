@@ -12,12 +12,11 @@
         <link href="{{ asset('css/style.css') }}" rel="stylesheet">
         {% block stylesheets %}{% endblock %}
 
-        <title>{% block title %}Welcome to tree network!{% endblock %}</title>
+        <title>{% block title %}{{ website.name }}{% endblock %}</title>
     </head>
     <body>
         {% block body %}
         <header>
-            <!--Navbar -->
             <nav class="mb-1 navbar navbar-expand-lg fixed-top navbar-dark default-color">
                 <a class="navbar-brand" href="{{ path('index') }}">
                     {# <img src="{{ asset('img/tree-network-2.png') }}" id="logo" alt="tree network logo"> #}
@@ -107,65 +106,46 @@
                 </div>
             </nav>
             {% block after_nav %}{% endblock %}
-            <!--/.Navbar -->
         </header>
         <main class="main-section">
             {% block main %}{% endblock %}
         </main>
 
-        <!-- Footer -->
         <footer class="page-footer font-small unique-color-dark">
             <div class="default-color">
                 <div class="container">
-                    <!-- Grid row-->
                     <div class="row py-4 d-flex align-items-center">
-                        <!-- Grid column -->
                         <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
                             <h6 class="mb-0">{{ 'layout.join_socials'|trans }}</h6>
                         </div>
-                        <!-- Grid column -->
-                        <!-- Grid column -->
                         <div class="col-md-6 col-lg-7 text-center text-md-right">
-                            <!-- Facebook -->
                             <a class="fb-ic">
                                 <i class="fab fa-facebook-f white-text mr-4"></i>
                             </a>
-                            <!-- Twitter -->
                             <a class="tw-ic">
                                 <i class="fab fa-twitter white-text mr-4"></i>
                             </a>
-                            <!-- Google +-->
                             <a class="gplus-ic">
                                 <i class="fab fa-google-plus-g white-text mr-4"></i>
                             </a>
-                            <!--Linkedin -->
                             <a class="li-ic">
                                 <i class="fab fa-linkedin-in white-text mr-4"></i>
                             </a>
-                            <!--Instagram-->
                             <a class="ins-ic">
                                 <i class="fab fa-instagram white-text"></i>
                             </a>
                         </div>
-                        <!-- Grid column -->
                     </div>
-                    <!-- Grid row-->
                 </div>
             </div>
-            <!-- Footer Links -->
             <div class="container text-center text-md-left mt-5">
-                <!-- Grid row -->
                 <div class="row mt-3">
-                    <!-- Grid column -->
                     <div class="col-md-4 col-lg-4 col-xl-3 mx-auto mb-4">
-                        <!-- Content -->
                         <h6 class="text-uppercase font-weight-bold">{{ website.name }}</h6>
                         <hr class="default-color accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                        <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        <p>{{ website.name }} est une application web responsive, permettant de gérer des arbres généalogiques avec possibilité de collaboration.</p>
                     </div>
-                    <!-- Grid column -->
                     <div class="col-md-4 col-lg-4 col-xl-3 mx-auto mb-4">
-                        <!-- Links -->
                         <h6 class="text-uppercase font-weight-bold">{{ 'layout.useful_links'|trans }}</h6>
                         <hr class="indigo accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                         <p>
@@ -181,10 +161,7 @@
                             <a href="{{ path('privacy') }}">{{ 'layout.privacy'|trans }}</a>
                         </p>
                     </div>
-                    <!-- Grid column -->
-                    <!-- Grid column -->
                     <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                        <!-- Links -->
                         <h6 class="text-uppercase font-weight-bold">Contact</h6>
                         <hr class="default-color accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                         <p>
@@ -197,18 +174,13 @@
                             <i class="fas fa-phone mr-3"></i>
                             {{ website.phoneNumber }}</p>
                     </div>
-                    <!-- Grid column -->
                 </div>
-                <!-- Grid row -->
             </div>
-            <!-- Footer Links -->
-            <!-- Copyright -->
-            <div class="footer-copyright text-center py-3">© 2019 Copyright:
-                <a href="/"> {{ website.name }}.com</a>
+            <div class="footer-copyright text-center py-3">
+                <span class="ml-5 float-left">© 2019 Copyright<a href="/"> {{ website.name }}.com</a></span>
+                <span class="mr-5 float-right">Made with <i class="fas fa-heart text-danger"></i> by <a href="https://github.com/rand0mdev" target="_blank">rand0mdev</a></span>
             </div>
-            <!-- Copyright -->
         </footer>
-        <!-- Footer -->
         {% endblock %}
         <script type="text/javascript" src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/popper.min.js') }}"></script>

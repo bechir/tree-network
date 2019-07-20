@@ -48,3 +48,7 @@ register:
   title: Créer un compte
   h1: Inscription
 
+
+tree:
+  list:
+    title: Parcourir les arbres
