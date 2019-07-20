@@ -1,7 +1,16 @@
 dashboard:
-  path: /_locale/dashboard
+  path: /_locale/user/dashboard
   controller: App\Controller\UserController::dashboard
   requirements:
     _locale: '%app_locales%'
   defaults:
     _locale: '%locale%'
+
+user_tree:
+  path: /_locale/user/tree
+  controller: App\Controller\UserController::tree
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
