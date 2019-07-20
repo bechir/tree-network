@@ -1,0 +1,30 @@
+{% macro level1(title) %}
+    <!-- Breadcrumb -->
+    <div class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="breadcrumb-area">
+                        <h1>{{ title|trans }}</h1>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a class="black-text" href="{{ path('index' ) }}">{{ 'layout.home'|trans }}</a></li>
+                                <li class="breadcrumb-item active">{{ title|trans }}</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro level2(first, title) %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb purple lighten-4">
+            <li class="breadcrumb-item"><a class="black-text" href="{{ path('index' ) }}">{{ 'layout.home'|trans }}</a></li>
+            <li class="breadcrumb-item"><a class="black-text" href="{{ path(first.route) }}">{{ first.title|trans }}</a></li>
+            <li class="breadcrumb-item active">{{ title|trans }}</li>
+        </ol>
+    </nav>
+{% endmacro %}

@@ -36,6 +36,7 @@ a.navbar-brand i{
 
 main.main-section {
     margin-top: 60px;
+    min-height: 300px;
 }
 .navbar.navbar-dark form .md-form{
     top: -4px
