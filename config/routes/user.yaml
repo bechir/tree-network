@@ -1,13 +1,22 @@
-dashboard:
-  path: /_locale/user/dashboard
-  controller: App\Controller\UserController::dashboard
+profile:
+  path: /{_locale}/user/profile
+  controller: App\Controller\UserController::profile
   requirements:
     _locale: '%app_locales%'
   defaults:
     _locale: '%locale%'
 
+user_edit:
+  path: /{_locale}/user/edit
+  controller: App\Controller\UserController::edit
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+
 user_tree:
-  path: /_locale/user/tree
+  path: /{_locale}/user/tree
   controller: App\Controller\UserController::tree
   requirements:
     _locale: '%app_locales%'

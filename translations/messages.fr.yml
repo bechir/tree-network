@@ -52,3 +52,7 @@ register:
 tree:
   list:
     title: Parcourir les arbres
+
+profile:
+  title: Mon profil
+  

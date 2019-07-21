@@ -92,6 +92,19 @@ padding: 150px 0;
 img.avatar {
     width: 33px
 }
+
+img.img-50{
+    width: 50px;
+}
+
+img.img-100{
+    width: 100px;
+}
+
+img.img-circle{
+    border-radius: 50%;
+}
+
 a.navbar-brand{
     font-size: 1.57rem;
 }

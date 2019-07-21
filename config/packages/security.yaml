@@ -35,6 +35,7 @@ security:
                 csrf_token_generator: security.csrf.token_manager
                 remember_me: true
                 use_referer: true
+                default_target_path: /(%app_locales%)/user/profile
             logout:
               path: fos_user_security_logout
 

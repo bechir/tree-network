@@ -18,9 +18,9 @@
         {% block body %}
         <header>
             <nav class="mb-1 navbar navbar-expand-lg fixed-top navbar-dark aqua-gradient">
-                <a class="navbar-brand" href="{{ path('index') }}">
+                <a class="navbar-brand mr-4 ml-1" href="{{ path('index') }}">
                     {# <img src="{{ asset('img/tree-network-2.png') }}" id="logo" alt="tree network logo"> #}
-                    <i class="fas fa-code-branch f-16"></i> Tree network |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="fas fa-code-branch f-16"></i> Tree network |
                 </a>
                 <button aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent-333" data-toggle="collapse" type="button">
                     <span class="navbar-toggler-icon"></span>
@@ -73,7 +73,7 @@
                                     {% endif %}
                                 {% endfor %}
                             </div>
-                        </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </li>
                         {% if is_granted('ROLE_USER') %}
                             <li class="nav-item {% if _route == 'messages' %}active{% endif %}">
                                 <a class="nav-link waves-effect waves-light">1
@@ -85,8 +85,8 @@
                                     <img src="{{ asset('img/users/randomdev.jpg') }}" class="avatar rounded-circle z-depth-0" alt="avatar image">
                                 </a>
                                 <div aria-labelledby="navbarDropdownMenuLink-55" class="dropdown-menu dropdown-menu-lg-right dropdown-secondary">
-                                    <a class="dropdown-item" href="#"><i class="fas fa-id-card"></i> {{ 'layout.profile'|trans }}</a>
-                                    <a class="dropdown-item" href="#"><i class="fas fa-code-branch"></i> {{ 'layout.family_tree'|trans }}</a>
+                                    <a class="dropdown-item" href="{{ path('profile') }}"><i class="fas fa-id-card"></i> {{ 'layout.profile'|trans }}</a>
+                                    <a class="dropdown-item" href="{{ path('user_tree') }}"><i class="fas fa-code-branch"></i> {{ 'layout.family_tree'|trans }}</a>
                                     <a class="dropdown-item" href="#"><i class="fas fa-cog"></i> {{ 'layout.settings'|trans }}</a>
                                     {% if is_granted('ROLE_ADMIN') %}
                                         <a class="dropdown-item" href="#"><i class="fas fa-user-secret"></i> {{ 'layout.admin'|trans }}</a>

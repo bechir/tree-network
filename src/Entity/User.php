@@ -151,6 +151,13 @@ class User extends BaseUser implements EquatableInterface
         return $this;
     }
 
+    public function getFullName(): string
+    {
+        return (!empty($this->firstName) || !empty($this->lastName))
+            ? $this->firstName . ' ' . $this->lastName
+            : $this->username;
+    }
+
     public function getBornAt()
     {
         return $this->bornAt;
