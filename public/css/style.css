@@ -101,6 +101,10 @@ img.img-100{
     width: 100px;
 }
 
+img.img-150{
+    width: 150px;
+}
+
 img.img-circle{
     border-radius: 50%;
 }
@@ -218,3 +222,18 @@ main.main-section {
     color: #ffffff;
   }
   
+
+.browser.custom-select {
+    border:none;
+    border-bottom: 1px solid #ccc;
+    font-weight: 300;
+    cursor: text;
+    color: #757575;
+    transform: translateY(3px);
+    border-radius: 0;
+    outline: none !important;
+}
+
+.browser.custom-select:focus{
+    outline: none !important;
+}

@@ -14,6 +14,14 @@ user_edit:
   defaults:
     _locale: '%locale%'
 
+user_settings:
+  path: /{_locale}/user/settings
+  controller: App\Controller\UserController::settings
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
 
 user_tree:
   path: /{_locale}/user/tree

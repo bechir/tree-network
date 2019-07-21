@@ -74,6 +74,11 @@ class User extends BaseUser implements EquatableInterface
     private $birthPlace;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $submittedAt;
+
+    /**
      * @var Locale
      * 
      * @ORM\ManyToOne(targetEntity="App\Entity\Locale")
@@ -194,6 +199,11 @@ class User extends BaseUser implements EquatableInterface
         return $this;
     }
 
+    public function getSubmittedAt(): ?\DateTimeInterface
+    {
+        return $this->submittedAt;
+    }
+
     public function getLocale()
     {
         return $this->locale;
@@ -295,5 +305,13 @@ class User extends BaseUser implements EquatableInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setSubmittedAt()
+    {
+        $this->submittedAt = new \DateTime();
     }
 }

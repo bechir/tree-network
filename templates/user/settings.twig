@@ -16,8 +16,9 @@
                     <div class="breadcrumb-area pt-3">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb bg-white">
-                                <li class="breadcrumb-item"><a class="black-text" href="{{ path('index' ) }}">{{ 'layout.home'|trans }}</a></li>
-                                <li class="breadcrumb-item active">{{ app.user.username }}</li>
+                                <li class="breadcrumb-item"><a class="black-text" href="{{ path('index') }}">{{ 'layout.home'|trans }}</a></li>
+                                <li class="breadcrumb-item"><a class="black-text" href="{{ path('profile') }}">{{ app.user.username }}</a></li>
+                                <li class="breadcrumb-item active">Paramètres</li>
                             </ol>
                         </nav>
                         <h1 class="ml-3">Profil</h1>
@@ -25,10 +26,10 @@
                     <!-- Breadcrumb End -->
                     <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
                         <li class="nav-item">
-                            <a aria-controls="profile" aria-selected="true" class="nav-link active" data-toggle="tab" href="#profile" id="profile-tab" role="tab"><span class="fas fa-user"></span> Profil</a>
+                            <a aria-controls="profile" aria-selected="false" class="nav-link text-info" href="{{ path('profile') }}"><span class="fas fa-user"></span> Profil</a>
                         </li>
                         <li class="nav-item">
-                            <a aria-controls="settings" aria-selected="false" class="nav-link text-info" href="{{ path('user_settings') }}"><span class="fas fa-cogs"></span> Paramètres</a>
+                            <a aria-controls="settings" aria-selected="true" class="nav-link active" data-toggle="tab" href="#settings" id="settings-tab" role="tab"><span class="fas fa-cogs"></span> Paramètres</a>
                         </li>
                     </ul>
                 </div>
@@ -39,7 +40,7 @@
     <div cass="row">
         <div class="container">
             <div class="tab-content" id="myTabContent">
-                <div aria-labelledby="profile-tab" class="tab-pane fade active show" id="profile" role="tabpanel">
+                <div aria-labelledby="settings-tab" class="tab-pane fade active show" id="settings" role="tabpanel">
                     <a class="btn btn btn-outline-info rounded ml-0 wow bounceIn" data-wow-delay="2s" href="{{ path('user_edit') }}"><i class="fas fa-user-edit mr-1"></i> Modifier</a>
                     <div class="text-white d-flex h-100 mask aqua-gradient-rgba rounded shadow my-5">
                         <div class="first-content align-self-center p-3">

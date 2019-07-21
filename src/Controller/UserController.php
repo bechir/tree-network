@@ -15,7 +15,12 @@ class UserController extends AbstractController
     public function profile()
     {
         return $this->render('user/profile.html.twig', [
-            'controller_name' => 'UserController',
+        ]);
+    }
+
+    public function edit()
+    {
+        return $this->render('user/edit.html.twig', [
         ]);
     }
 }

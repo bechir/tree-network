@@ -1,0 +1,129 @@
+{% extends 'base.html.twig' %}
+
+{% import 'util/breadcrumb.twig' as breadcrumb %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block main %}
+
+    <div class="mb-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Breadcrumb -->
+                    <div class="breadcrumb-area pt-3">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb bg-white">
+                                <li class="breadcrumb-item"><a class="black-text" href="{{ path('index') }}">{{ 'layout.home'|trans }}</a></li>
+                                <li class="breadcrumb-item"><a class="black-text" href="{{ path('profile') }}">{{ app.user.username }}</a></li>
+                                <li class="breadcrumb-item active">Modifier</li>
+                            </ol>
+                        </nav>
+                        <h1 class="ml-3">Profil</h1>
+                    </div>
+                    <!-- Breadcrumb End -->
+                    <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a aria-controls="profile" aria-selected="false" class="nav-link text-info" href="{{ path('profile') }}"><span class="fas fa-user"></span> Profil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a aria-controls="settings" aria-selected="false" class="nav-link text-info" href="{{ path('user_settings') }}"><span class="fas fa-cogs"></span> Paramètres</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div cass="row">
+        <div class="container mb-5">
+            <div class="card shadow py-3">
+                <div class="card-body">
+                    <h5 class="card-title">Modifier mes informations</h5>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3 mr-5">
+                            <div class="avatar text-center">
+                                <img class="img-circle img-150" src="{{ asset('img/users/randomdev.jpg') }}">
+                                <button class="btn-edit btn aqua-gradient">Modifier</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="md-form form-lg">
+                                <input type="text" id="inputLGEx" class="form-control form-control-lg" value="{{ app.user.username }}">
+                                <label for="inputLGEx">Nom d'utilisateur</label>
+                            </div>
+                            
+                            <h6 class="help-block">Description
+                            <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Une petite description qui apparaîtra dans les résultats de recherche.">
+                                <i class="fas fa-info-circle text-info"></i>
+                            </span>
+                            </h6>
+                            <div class="md-form md-outline">
+                                <textarea id="form75" class="md-textarea form-control" rows="3"></textarea>
+                                <label for="form75">Description</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-5">
+                        <div class="container mx-5">
+                            <h5 class="card-subtitle text-muted">À propos de moi</h5>
+                            {# <hr> #}
+                             <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="md-form form-group">
+                                        <input type="text" class="form-control" id="frstName" value="Bechir">
+                                        <label for="frstName">Prénoms</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="md-form form-group">
+                                        <input type="text" class="form-control" id="lastName" value="">
+                                        <label for="lastName">Nom</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="md-form form-group">
+                                        <input type="text" class="form-control datepicker" id="birthDate" value="">
+                                        <label for="birthDate">Date de naissance</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="md-form form-group">
+                                        <input type="text" class="form-control" id="birthPlace" value="">
+                                        <label for="birthPlace">Lieu de naissance</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="md-form form-group">
+                                        <select class="browser custom-select px-0" name="gender">
+                                            <option value="" selected>Sexe</option>
+                                            <option value="1">Masculin</option>
+                                            <option value="2">Féminin</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="md-form form-group">
+                                        <select class="browser custom-select px-0">
+                                            <option value="" selected>Pays</option>
+                                            <option value="1">Option 1</option>
+                                            <option value="2">Option 2</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-text mt-5 text-center">
+                        <button type="submit" class="btn aqua-gradient"><i class="fas fa-save"></i> Enregistrer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
