@@ -1,0 +1,124 @@
+{% extends 'base.html.twig' %}
+
+{% import 'util/breadcrumb.twig' as breadcrumb %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block main %}
+
+    <div class="mb-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Breadcrumb -->
+                    <div class="breadcrumb-area pt-3">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb bg-white">
+                                <li class="breadcrumb-item"><a class="black-text" href="{{ path('index') }}">{{ 'layout.home'|trans }}</a></li>
+                                <li class="breadcrumb-item"><a class="black-text" href="{{ path('profile') }}">{{ app.user.username }}</a></li>
+                                <li class="breadcrumb-item active">Paramètres</li>
+                            </ol>
+                        </nav>
+                        <h1 class="ml-3">Profil</h1>
+                    </div>
+                    <!-- Breadcrumb End -->
+                    <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a aria-controls="profile" aria-selected="false" class="nav-link text-info" href="{{ path('profile') }}"><span class="fas fa-user"></span> Profil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a aria-controls="settings" aria-selected="true" class="nav-link active" data-toggle="tab" href="#settings" id="settings-tab" role="tab"><span class="fas fa-cogs"></span> Paramètres</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div cass="row">
+        <div class="container">
+            <div class="tab-content" id="myTabContent">
+                <div aria-labelledby="settings-tab" class="tab-pane fade active show" id="settings" role="tabpanel">
+
+                    <div class="card shadow py-3 mt-5">
+                        <div class="card-body">
+                            <h5 class="card-title">Adresse e-mail</h5>
+                            <hr>
+                            <div class="md-form form-group">
+                                <input type="email" class="form-control" id="email" value="{{ app.user.email }}" disabled>
+                                <label for="email">adresse e-mail actuelle</label>
+                            </div>
+
+                            <div class="md-form form-group">
+                                <input type="email" class="form-control" id="email2">
+                                <label for="email2">Ajouter une adresse e-mail</label>
+                            </div>
+                            
+                            <div class="card-text text-muted">
+                                <blockquote class="blockquote bq-warning">
+                                    <p class="mb-0"><small>Pour changer d'adresse e-mail, vous devez d'abord confirmez votre seconde adresse.</small></p>
+                                </blockquote>
+                            </div>
+
+                            <div class="card-text"><button class="btn btn-sm btn-info font-weight-bold ml-0" type="submit">Enregistrer</button></div>
+                        </div>
+                    </div>
+
+                    <div class="card shadow py-3 my-5">
+                        <div class="card-body">
+                            <h5 class="card-title text-muted text-warning">Changer de mot de passe</h5>
+                            <hr>
+                            <div class="md-form form-group">
+                                <input type="password" class="form-control" id="oldPassword">
+                                <label for="oldPassword">Ancien mot de passe</label>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="md-form form-group">
+                                        <input type="password" class="form-control" id="newPassword">
+                                        <label for="newPassword">Nouveau mot de passe</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="md-form form-group">
+                                        <input type="password" class="form-control" id="newPasswordConfirm">
+                                        <label for="newPasswordConfirm">Confirmez le nouveau mot de passe</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-text"><button class="btn btn-sm btn-info font-weight-bold ml-0" type="submit">Enregistrer</button></div>
+                        </div>
+                    </div>
+
+                    <div class="card shadow py-3 my-5">
+                        <div class="card-body">
+                            <h5 class="card-title">Votre langue</h5>
+                            <hr>
+                            <p class="card-text">Changer de langue</p>
+                            <div class="md-form form-group">
+                                <select class="browser custom-select px-0" name="lang">
+                                    <option value="{{ app.user.locale }}" selected>{{ ('app.locale.' ~ request_locale)|trans }}</option>
+                                    {% for l in locales() %}
+                                        {% if l.code != request_locale %}
+                                            <option value="{{ l.code }}">
+                                                {% if l.name is empty %}
+                                                    {{ ('app.locale.' ~ l.code)|trans|capitalize }}
+                                                {% else %}
+                                                    {{ l.name|capitalize }}
+                                                {% endif %}
+                                            </option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="card-text"><button class="btn btn-sm btn-info font-weight-bold ml-0" type="submit">Enregistrer</button></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

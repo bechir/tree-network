@@ -23,4 +23,10 @@ class UserController extends AbstractController
         return $this->render('user/edit.html.twig', [
         ]);
     }
+
+    public function settings()
+    {
+        return $this->render('user/settings.html.twig', [
+        ]);
+    }
 }
