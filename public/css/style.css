@@ -3,7 +3,6 @@
 	--second-color: #da6f28;
 }
 
-
 .section-padding {
     padding: 120px 0;
 }
@@ -114,6 +113,10 @@ a.navbar-brand{
 }
 a.navbar-brand i{
     font-size: 21px;
+}
+
+.btn-circle{
+    border-radius: 50%;
 }
 
 .nav-item.avatar.dropdown {
@@ -236,4 +239,11 @@ main.main-section {
 
 .browser.custom-select:focus{
     outline: none !important;
+}
+
+/*
+    Tree family show
+*/
+.view.view-cascade {
+    margin-top: -15px;
 }

@@ -1,0 +1,17 @@
+browse:
+  path: /{_locale}/browse
+  controller: App\Controller\FamilyTreeController::browse
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+
+tree_show:
+  path: /{_locale}/tree/{username}
+  controller: App\Controller\FamilyTreeController::show
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+

@@ -22,12 +22,10 @@ user_settings:
   defaults:
     _locale: '%locale%'
 
-
-user_tree:
-  path: /{_locale}/user/tree
-  controller: App\Controller\UserController::tree
+user_show:
+  path: /{_locale}/users/{username}
+  controller: App\Controller\UserController::profile
   requirements:
     _locale: '%app_locales%'
   defaults:
     _locale: '%locale%'
-

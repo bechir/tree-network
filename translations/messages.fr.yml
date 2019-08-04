@@ -47,12 +47,18 @@ login:
 register:
   title: Créer un compte
   h1: Inscription
+  sign_up_now: "Inscrivez-vous maintenant!" # Sign up right now!
 
 
 tree:
   list:
-    title: Parcourir les arbres
+    title: Arbres généalogiques
+
+
+  show:
 
 profile:
   title: Mon profil
-  
+
+action:
+  learn_more: "En savoir plus" # Learn more

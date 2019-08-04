@@ -35,7 +35,7 @@ security:
                 csrf_token_generator: security.csrf.token_manager
                 remember_me: true
                 use_referer: true
-                default_target_path: /(%app_locales%)/user/profile
+                default_target_path: profile
             logout:
               path: fos_user_security_logout
 
@@ -50,7 +50,7 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/(%app_locales%)/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/(%app_locales%)/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/(%app_locales%)/resetting, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        # - { path: ^/(%app_locales%)/%app.submit_establishment_route%, roles: IS_AUTHENTICATED_REMEMBERED }
+        - { path: /fr/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/(%locale%)/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/(%locale%)/resetting, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        # - { path: ^/(%locale%)/%app.submit_establishment_route%, roles: IS_AUTHENTICATED_REMEMBERED }

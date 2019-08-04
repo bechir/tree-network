@@ -53,7 +53,7 @@
 
                     <div class="card shadow py-3 wow fadeInUp" data-wow-delay=".7s">
                         <div class="card-body">
-                            <h5 class="card-title">Mes parents <a href="#" class="btn btn-info rounded float-right">Voir toute la famille</a></h5>
+                            <h5 class="card-title">Mes parents <a href="{{ path('tree_show', {username: app.user.username}) }}" class="btn btn-info rounded float-right">Voir toute la famille</a></h5>
                             <hr>
                             <div class="row">
                                 <div class="col-md-6">

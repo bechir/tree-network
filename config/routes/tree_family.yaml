@@ -1,7 +1,0 @@
-browse:
-  path: /{_locale}/browse
-  controller: App\Controller\TreeFamilyController::browse
-  requirements:
-    _locale: '%app_locales%'
-  defaults:
-    _locale: '%locale%'

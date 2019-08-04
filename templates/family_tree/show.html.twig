@@ -1,0 +1,115 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {{ user.fullName }} - {{ 'layout.family_tree'|trans }}
+{% endblock title %}
+
+
+{% block main %}
+    <div class="mb-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Breadcrumb -->
+                    <div class="breadcrumb-area pt-3">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb bg-white">
+                                <li class="breadcrumb-item"><a class="black-text" href="{{ path('index' ) }}">{{ 'layout.home'|trans }}</a></li>
+                                <li class="breadcrumb-item"><a class="black-text" href="{{ path('browse') }}">{{ 'tree.list.title'|trans }}</a></li>
+                                <li class="breadcrumb-item active">{{ user.username }}</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <!-- Breadcrumb End -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div cass="row">
+        <div class="container padding-bottom-100">
+            <!-- Table with panel -->
+            <div class="card card-cascade narrower mt-5">
+                <!--Card image-->
+                <div class="view shadow rounded view-cascade gradient-card-header aqua-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
+
+                <div class="ml-3">
+                    <button type="button" class="btn btn-outline-white btn-circle btn-sm px-2">
+                    <i class="fas fa-th-large mt-0"></i>
+                    </button>
+                    <button type="button" class="btn btn-outline-white btn-circle btn-sm px-2">
+                    <i class="fas fa-columns mt-0"></i>
+                    </button>
+                </div>
+
+                <a href="#" onclick="return false;" class="white-text mx-3">
+                    <i class="fas fa-tree"></i> Arbre généalogique de {{ user.fullName }}</a>
+
+                <div class="mr-3">
+                    <button type="button" class="btn btn-outline-white btn-circle btn-sm px-2">
+                    <i class="fas fa-pencil-alt mt-0"></i>
+                    </button>
+                    <button type="button" class="btn btn-outline-white btn-circle btn-sm px-2">
+                    <i class="far fa-trash-alt mt-0"></i>
+                    </button>
+                    <button type="button" class="btn btn-outline-white btn-circle btn-sm px-2">
+                    <i class="fas fa-info-circle mt-0"></i>
+                    </button>
+                </div>
+
+                </div>
+                <!--/Card image-->
+
+                <div class="px-4">
+
+                <div class="table-wrapper">
+                    <!--Table-->
+                    <table class="table table-hover text-justify mb-0">
+
+                    <!--Table head-->
+                    <thead>
+                        <tr>
+                        <th>
+                            <a>Nom complet
+                            <i class="fas fa-sort ml-1"></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a href="">Description
+                            <i class="fas fa-sort ml-1"></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a href="">Type de lien
+                            <i class="fas fa-sort ml-1"></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a href="">Photo
+                            <i class="fas fa-sort ml-1"></i>
+                            </a>
+                        </th>
+                        </tr>
+                    </thead>
+                    <!--Table head-->
+
+                    <!--Table body-->
+                    <tbody>
+                        <tr>
+                        <td>Bechir Issmaila Ba</td>
+                        <td>Bechir Ba est un excellent menusier</td>
+                        <td>Frère</td>
+                        <td><img class="img-circle img-50" src="/img/users/randomdev.jpg"></td>
+                        </tr>
+                    </tbody>
+                    <!--Table body-->
+                    </table>
+                    <!--Table-->
+                </div>
+
+                </div>
+            </div>
+            <!-- Table with panel -->
+        </div>
+    </div>
+{% endblock main %}
