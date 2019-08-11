@@ -8,6 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use FOS\UserBundle\Model\User as BaseUser;
+use Symfony\Component\Validator\Constraints as Assert;
+use App\Validator\Constraints as SecurityAssert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -57,6 +59,7 @@ class User extends BaseUser implements EquatableInterface
     /**
      * @var \Date
      * @ORM\Column(type="date", nullable=true)
+     * @Assert\Date()
      */
     private $bornAt;
 
@@ -94,6 +97,19 @@ class User extends BaseUser implements EquatableInterface
      * @ORM\ManyToOne(targetEntity="App\Entity\Gender")
      */
     private $gender;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Email()
+     */
+    private $email2;
+
+    /**
+     * @var string
+     * //@SecurityAssert\UserPassword()
+     */
+    private $oldPassword;
+
 
     const NUM_ITEMS = 15;
 
@@ -328,6 +344,30 @@ class User extends BaseUser implements EquatableInterface
     public function setGender(?Gender $gender): self
     {
         $this->gender = $gender;
+
+        return $this;
+    }
+
+    public function getEmail2(): ?string
+    {
+        return $this->email2;
+    }
+
+    public function setEmail2(?string $email2): self
+    {
+        $this->email2 = $email2;
+
+        return $this;
+    }
+
+    public function getOldPassword(): ?string
+    {
+        return $this->oldPassword;
+    }
+
+    public function setOldPassword(?string $oldPassword): self
+    {
+        $this->oldPassword = $oldPassword;
 
         return $this;
     }

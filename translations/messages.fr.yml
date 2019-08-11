@@ -32,12 +32,15 @@ form:
   lastName: Nom
   phoneNumber: Numéro de téléphone
   bornAt: Date de naissance
+  second_email: Seconde adresse email
   birthPlace:  Lieu de naissance
   description: Description
   username: Nom d'utilisateur
   email: Adresse email
   do_signup: S'inscrire
   password: Mot de passe
+  current_password: Mot de passe acutel
+  new_password: Nouveau mot de passe
   confirm_password: Confirmez le mot de passe
   username_email: Nom d'utilisateur ou email
   sign_in: Se connecter
@@ -66,6 +69,10 @@ tree:
 profile:
   edit_success: Votre profil a été modifé avec succès!
   title: Mon profil
+
+setting:
+  email_added: L'adresse email a été ajoutée.
+  password_edited: Votre mot de passe a été modifé.
 
 action:
   learn_more: "En savoir plus" # Learn more

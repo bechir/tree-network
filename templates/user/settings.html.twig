@@ -17,7 +17,7 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb bg-white">
                                 <li class="breadcrumb-item"><a class="black-text" href="{{ path('index') }}">{{ 'layout.home'|trans }}</a></li>
-                                <li class="breadcrumb-item"><a class="black-text" href="{{ path('profile') }}">{{ app.user.username }}</a></li>
+                                <li class="breadcrumb-item"><a class="black-text" href="{{ path('profile') }}">{{ user.username }}</a></li>
                                 <li class="breadcrumb-item active">Paramètres</li>
                             </ol>
                         </nav>
@@ -42,55 +42,72 @@
             <div class="tab-content" id="myTabContent">
                 <div aria-labelledby="settings-tab" class="tab-pane fade active show" id="settings" role="tabpanel">
 
-                    <div class="card shadow py-3 mt-5">
-                        <div class="card-body">
-                            <h5 class="card-title">Adresse e-mail</h5>
-                            <hr>
-                            <div class="md-form form-group">
-                                <input type="email" class="form-control" id="email" value="{{ app.user.email }}" disabled>
-                                <label for="email">adresse e-mail actuelle</label>
-                            </div>
+                    {{ form_start(form_emails) }}
+                        <div class="card shadow py-3 mt-5">
+                            <div class="card-body">
+                                <h5 class="card-title">Adresse e-mail</h5>
+                                <hr>
+                                <div class="md-form form-group">
+                                    <input type="email" class="form-control" id="email" value="{{ user.email }}" disabled>
+                                    <label for="email">adresse e-mail actuelle</label>
+                                </div>
 
-                            <div class="md-form form-group">
-                                <input type="email" class="form-control" id="email2">
-                                <label for="email2">Ajouter une adresse e-mail</label>
-                            </div>
-                            
-                            <div class="card-text text-muted">
-                                <blockquote class="blockquote bq-warning">
-                                    <p class="mb-0"><small>Pour changer d'adresse e-mail, vous devez d'abord confirmez votre seconde adresse.</small></p>
-                                </blockquote>
-                            </div>
+                                <div class="md-form form-group">
+                                    {{ form_widget(form_emails.email2, {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_label(form_emails.email2) }}
+                                </div>
+                                
+                                <div class="card-text text-muted">
+                                    <blockquote class="blockquote bq-warning">
+                                        <p class="mb-0"><small>Pour changer d'adresse e-mail, vous devez d'abord confirmez votre seconde adresse.</small></p>
+                                    </blockquote>
+                                </div>
 
-                            <div class="card-text"><button class="btn btn-sm btn-info font-weight-bold ml-0" type="submit">Enregistrer</button></div>
+                                <div class="card-text">
+                                    <button class="btn btn-sm btn-info font-weight-bold ml-0" type="submit">Enregistrer</button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    {{ form_end(form_emails) }}
 
+                    {{ form_start(form_password) }}
                     <div class="card shadow py-3 my-5">
                         <div class="card-body">
                             <h5 class="card-title text-muted text-warning">Changer de mot de passe</h5>
                             <hr>
+
+                            {% if form_errors(form_password.current_password) %}
+                                <div class="alert alert-danger">
+                                    <p>{{ form_errors(form_password.current_password) }}</p>
+                                </div>
+                            {% endif %}
                             <div class="md-form form-group">
-                                <input type="password" class="form-control" id="oldPassword">
-                                <label for="oldPassword">Ancien mot de passe</label>
+                                {{ form_widget(form_password.current_password, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_label(form_password.current_password) }}
                             </div>
-                            <div class="row">
+                            {% if form_errors(form_password.plainPassword.first) %}
+                                <div class="alert alert-danger">
+                                    <p>{{ form_errors(form_password.plainPassword.first) }}</p>
+                                </div>
+                            {% endif %}
+                            <div class="row">                                
                                 <div class="col-md-6">
                                     <div class="md-form form-group">
-                                        <input type="password" class="form-control" id="newPassword">
-                                        <label for="newPassword">Nouveau mot de passe</label>
+                                        {{ form_widget(form_password.plainPassword.first, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_label(form_password.plainPassword.first) }}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="md-form form-group">
-                                        <input type="password" class="form-control" id="newPasswordConfirm">
-                                        <label for="newPasswordConfirm">Confirmez le nouveau mot de passe</label>
+                                        {{ form_widget(form_password.plainPassword.second, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_label(form_password.plainPassword.second) }}
                                     </div>
                                 </div>
                             </div>
                             <div class="card-text"><button class="btn btn-sm btn-info font-weight-bold ml-0" type="submit">Enregistrer</button></div>
                         </div>
                     </div>
+                    {{ form_end(form_password) }}
 
                     <div class="card shadow py-3 my-5">
                         <div class="card-body">
@@ -99,7 +116,7 @@
                             <p class="card-text">Changer de langue</p>
                             <div class="md-form form-group">
                                 <select class="browser custom-select px-0" name="lang">
-                                    <option value="{{ app.user.locale }}" selected>{{ ('app.locale.' ~ request_locale)|trans }}</option>
+                                    <option value="{{ user.locale }}" selected>{{ ('app.locale.' ~ request_locale)|trans }}</option>
                                     {% for l in locales() %}
                                         {% if l.code != request_locale %}
                                             <option value="{{ l.code }}">
