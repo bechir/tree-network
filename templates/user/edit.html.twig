@@ -38,6 +38,7 @@
     </div>
 
     <div cass="row">
+        {{ form_start(form) }}
         <div class="container mb-5">
             <div class="card shadow py-3">
                 <div class="card-body">
@@ -52,7 +53,7 @@
                         </div>
                         <div class="col-sm-8">
                             <div class="md-form form-lg">
-                                <input type="text" id="inputLGEx" class="form-control form-control-lg" value="{{ app.user.username }}">
+                                {{ form_widget(form.username, {'attr': {'class': 'form-control form-control-lg'}}) }}
                                 <label for="inputLGEx">Nom d'utilisateur</label>
                             </div>
                             
@@ -62,7 +63,7 @@
                             </span>
                             </h6>
                             <div class="md-form md-outline">
-                                <textarea id="form75" class="md-textarea form-control" rows="3"></textarea>
+                                {{ form_widget(form.description, {'attr': {'class': 'md-textarea form-control', 'rows': '3'}}) }}
                                 <label for="form75">Description</label>
                             </div>
                         </div>
@@ -75,44 +76,37 @@
                              <div class="form-row">
                                 <div class="col-md-6">
                                     <div class="md-form form-group">
-                                        <input type="text" class="form-control" id="frstName" value="Bechir">
-                                        <label for="frstName">Prénoms</label>
+                                        {{ form_widget(form.firstName, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_label(form.firstName) }}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="md-form form-group">
-                                        <input type="text" class="form-control" id="lastName" value="">
-                                        <label for="lastName">Nom</label>
+                                        {{ form_widget(form.lastName, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_label(form.lastName) }}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="md-form form-group">
-                                        <input type="text" class="form-control datepicker" id="birthDate" value="">
-                                        <label for="birthDate">Date de naissance</label>
+                                        {{ form_widget(form.phoneNumber, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_label(form.phoneNumber) }}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="md-form form-group">
-                                        <input type="text" class="form-control" id="birthPlace" value="">
-                                        <label for="birthPlace">Lieu de naissance</label>
+                                        {{ form_widget(form.bornAt, {'attr': {'class': 'form-control datepicker'}}) }}
+                                        {{ form_label(form.bornAt) }}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="md-form form-group">
-                                        <select class="browser custom-select px-0" name="gender">
-                                            <option value="" selected>Sexe</option>
-                                            <option value="1">Masculin</option>
-                                            <option value="2">Féminin</option>
-                                        </select>
+                                        {{ form_widget(form.birthPlace, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_label(form.birthPlace) }}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="md-form form-group">
-                                        <select class="browser custom-select px-0">
-                                            <option value="" selected>Pays</option>
-                                            <option value="1">Option 1</option>
-                                            <option value="2">Option 2</option>
-                                        </select>
+                                        {{ form_widget(form.gender, {'attr': {'class': 'browser custom-select px-0'}}) }}
                                     </div>
                                 </div>
                             </div>
@@ -125,5 +119,6 @@
                 </div>
             </div>
         </div>
+        {{ form_end(form) }}
     </div>
 {% endblock %}

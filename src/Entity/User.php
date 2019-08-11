@@ -68,8 +68,8 @@ class User extends BaseUser implements EquatableInterface
     private $description;
 
     /**
-     * @var BirthPlace
-     * @ORM\ManyToOne(targetEntity="App\Entity\BirthPlace")
+     * @var string
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $birthPlace;
 
@@ -89,6 +89,11 @@ class User extends BaseUser implements EquatableInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Relationship", mappedBy="user")
      */
     private $relationships;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Gender")
+     */
+    private $gender;
 
     const NUM_ITEMS = 15;
 
@@ -170,7 +175,11 @@ class User extends BaseUser implements EquatableInterface
 
     public function setBornAt($bornAt): self
     {
-        $this->bornAt = $bornAt;
+        try {
+            $this->bornAt = new \DateTime($bornAt);
+        } catch (\Exception $e) {
+            throw new \Exception('Error: ' . $e->getMessage());
+        }
 
         return $this;
     }
@@ -187,12 +196,12 @@ class User extends BaseUser implements EquatableInterface
         return $this;
     }
 
-    public function getBirthPlace(): ?BirthPlace
+    public function getBirthPlace(): ?string
     {
         return $this->birthPlace;
     }
 
-    public function setBirthPlace(?BirthPlace $birthPlace): self
+    public function setBirthPlace(?string $birthPlace): self
     {
         $this->birthPlace = $birthPlace;
 
@@ -313,5 +322,17 @@ class User extends BaseUser implements EquatableInterface
     public function setSubmittedAt()
     {
         $this->submittedAt = new \DateTime();
+    }
+
+    public function getGender(): ?Gender
+    {
+        return $this->gender;
+    }
+
+    public function setGender(?Gender $gender): self
+    {
+        $this->gender = $gender;
+
+        return $this;
     }
 }
