@@ -16,9 +16,10 @@ use App\Form\EditProfileType;
  */
 class UserController extends AbstractController
 {
-    public function profile()
+    public function profile(UserInterface $user = null)
     {
         return $this->render('user/profile.html.twig', [
+            'user' => $user
         ]);
     }
 

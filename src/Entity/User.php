@@ -164,7 +164,7 @@ class User extends BaseUser implements EquatableInterface
     public function getFullName(): string
     {
         return (!empty($this->firstName) || !empty($this->lastName))
-            ? $this->firstName . ' ' . $this->lastName
+            ? $this->lastName . ' ' . $this->firstName
             : $this->username;
     }
 
@@ -173,13 +173,9 @@ class User extends BaseUser implements EquatableInterface
         return $this->bornAt;
     }
 
-    public function setBornAt($bornAt): self
+    public function setBornAt(\DateTimeInterface $bornAt): self
     {
-        try {
-            $this->bornAt = new \DateTime($bornAt);
-        } catch (\Exception $e) {
-            throw new \Exception('Error: ' . $e->getMessage());
-        }
+        $this->bornAt = $bornAt;
 
         return $this;
     }

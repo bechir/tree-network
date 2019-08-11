@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\CallbackTransformer;
 
 class EditProfileType extends AbstractType
 {
@@ -54,6 +55,22 @@ class EditProfileType extends AbstractType
             //     'required' => false,
             //     'label' => 'form.d'
             // ])
+        ;
+
+        $builder->get('bornAt')
+            ->addModelTransformer(new CallbackTransformer(
+                function ($bornAtAsDate) {
+                    return $bornAtAsDate ? $bornAtAsDate->format('d/m/Y') : '';
+                },
+
+                function ($bornAtAsString) {
+                    if (empty($bornAtAsString)) {
+                        return null;
+                    }
+
+                    return \DateTime::createFromFormat('d/m/Y', $bornAtAsString);
+                }
+            ))
         ;
     }
 

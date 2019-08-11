@@ -17,7 +17,7 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb bg-white">
                                 <li class="breadcrumb-item"><a class="black-text" href="{{ path('index' ) }}">{{ 'layout.home'|trans }}</a></li>
-                                <li class="breadcrumb-item active">{{ app.user.username }}</li>
+                                <li class="breadcrumb-item active">{{ user.username }}</li>
                             </ol>
                         </nav>
                         <h1 class="ml-3">Profil</h1>
@@ -43,8 +43,8 @@
                     <a class="btn btn btn-outline-info rounded ml-0 wow bounceIn" data-wow-delay="2s" href="{{ path('user_edit') }}"><i class="fas fa-user-edit mr-1"></i> Modifier</a>
                     <div class="text-white d-flex h-100 mask aqua-gradient-rgba rounded shadow my-5">
                         <div class="first-content align-self-center p-3">
-                            <h3 class="card-title">{{ app.user.username }}</h3>
-                            <p class="lead mb-0">{{ app.user.email }}</p>
+                            <h3 class="card-title">{{ user.username }}</h3>
+                            <p class="lead mb-0">{{ user.email }}</p>
                         </div>
                         <div class="second-content align-self-center ml-auto pr-3">
                             <img class="img-100 img-circle" src="{{ asset('img/users/randomdev.jpg') }}"/>
@@ -53,7 +53,7 @@
 
                     <div class="card shadow py-3 wow fadeInUp" data-wow-delay=".7s">
                         <div class="card-body">
-                            <h5 class="card-title">Mes parents <a href="{{ path('tree_show', {username: app.user.username}) }}" class="btn btn-info rounded float-right">Voir toute la famille</a></h5>
+                            <h5 class="card-title">Mes parents <a href="{{ path('tree_show', {username: user.username}) }}" class="btn btn-info rounded float-right">Voir toute la famille</a></h5>
                             <hr>
                             <div class="row">
                                 <div class="col-md-6">
@@ -94,12 +94,12 @@
                         <div class="card-body">
                             <h5 class="card-title">À propos de moi</h5>
                             <hr>
-                            <p class="card-subtitle my-2 text-muted">Bechir Ba &mdash; randomdev</p>
-                            <p class="card-text"><i class="fas fa-calendar-alt"></i> Date de naissance: 30 octobre 1997</p>
-                            <p class="card-text"><i class="fas fa-map-marked-alt"></i> Lieu de naissance: Médina Gounass</p>
+                            <p class="card-subtitle my-2 text-muted">{{ user.fullName }} &mdash; {{ user.username }}</p>
+                            <p class="card-text"><i class="fas fa-calendar-alt"></i> Date de naissance: {{ user.bornAt|localizeddate('full', 'none', app.request.locale)|capitalize }}</p>
+                            <p class="card-text"><i class="fas fa-map-marked-alt"></i> Lieu de naissance: {{ user.birthPlace }}</p>
                             <hr>
                             <div class="card-subtitle text-muted font-italic">
-                                Je suis autodidacte en développement web. Je suis très à l'aise avec le framework Symfony 4.
+                                {{ user.description }}
                             </div>
                         </div>
                     </div>
@@ -108,8 +108,8 @@
                         <div class="card-body">
                             <h5 class="card-title">Informations sur le compte</h5>
                             <hr>
-                            <p class="card-text">Date d'inscription : 12 septembre 2018</p>
-                            <p class="card-text">Dernière connexion : Il y a environ 1 heure</p>
+                            <p class="card-text">Date d'inscription : {{ user.submittedAt|localizeddate('full', 'none', app.request.locale )|capitalize }}</p>
+                            <p class="card-text">Dernière connexion : {{ user.lastLogin|date('d/m/Y H:i') }}</p>
                         </div>
                     </div>
 
