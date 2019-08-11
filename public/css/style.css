@@ -247,3 +247,50 @@ main.main-section {
 .view.view-cascade {
     margin-top: -15px;
 }
+
+#snackbar{
+    visibility: hidden;
+    min-width: 270px;
+    text-align: center;
+    border-radius: 2px;
+    padding: 12px 0;
+    position: fixed;
+    z-index: 999;
+    left: 33px;
+    bottom: 13px;
+}
+
+#snackbar.show .alert{
+border-radius: 3px;
+opacity: .95;
+border:none;
+}
+#snackbar.show .alert p{
+color: #fff !important;
+}
+
+#snackbar.show .alert{
+background-color: #333333;
+}
+#snackbar.show {
+  visibility: visible;
+ -webkit-animation: fadein 0.5s, fadeout 0.5s 7s;
+ animation: fadein 0.5s, fadeout 0.5s 7s;
+}
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 11px; opacity: 1;}
+}
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 11px; opacity: 1;}
+}
+@-webkit-keyframes fadeout {
+  from {bottom: 11px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 11px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}

@@ -3,10 +3,10 @@
 /.env.local
 /.env.local.php
 /.env.*.local
-/public/bundles/
 /var/cache/
 /var/log/
 /vendor/
+/tree_network/
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###

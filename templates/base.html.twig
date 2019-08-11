@@ -17,180 +17,181 @@
     </head>
     <body>
         {% block body %}
-        <header>
-            <nav class="mb-1 navbar navbar-expand-lg fixed-top navbar-dark aqua-gradient">
-                <a class="navbar-brand mr-4 ml-1" href="{{ path('index') }}">
-                    {# <img src="{{ asset('img/tree-network-2.png') }}" id="logo" alt="tree network logo"> #}
-                    <i class="fas fa-code-branch f-16"></i> Tree network |
-                </a>
-                <button aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent-333" data-toggle="collapse" type="button">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item {% if _route == 'index' %}active{% endif %}">
-                            <a class="nav-link" href="{{ path('index') }}"><i class="fas fa-home"></i> {{ 'layout.home'|trans }}
-                                <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-                        <li class="nav-item {% if _route == 'browse' %}active{% endif %}">
-                            <a class="nav-link" href="{{ path('browse') }}"><i class="fas fa-code-branch"></i> {{ 'layout.browse'|trans }}</a>
-                        </li>
-                        <li class="nav-item dropdown {% if _route in ['about', 'help_faq', 'contact'] %}active{% endif %}">
-                            <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink-333">
-                                <i class="fas fa-question-circle"></i> {{ 'layout.help'|trans }}
-                            </a>
-                            <div aria-labelledby="navbarDropdownMenuLink-333" class="dropdown-menu dropdown-default">
-                                <a class="dropdown-item" href="{{ path('about') }}">{{ 'layout.about'|trans }}</a>
-                                <a class="dropdown-item" href="{{ path('help_faq') }}">{{ 'layout.help_faq'|trans }}</a>
-                                <a class="dropdown-item" href="{{ path('contact') }}">{{ 'layout.contact_us'|trans }}</a>
-                            </div>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav ml-auto nav-flex-icons">
-                        <form class="form-inline mr-5">
-                            <div class="md-form my-0">
-                                <input class="form-control" type="text" placeholder="{{ 'layout.search'|trans }}" aria-label="Search" autocomplete="off">
-                                <i class="fas fa-search"></i>
-                            </div>
-                        </form>
-                        <li class="nav-item dropdown">
-                            <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink-4">
-                                <i class="fas fa-language"></i>
-                                {{ ('app.locale.' ~ request_locale)|trans }}
-                            </a>
-                            <div aria-labelledby="navbarDropdownMenuLink-4" class="dropdown-menu dropdown-menu-right dropdown-info">
-                                {% for l in locales() %}
-                                    {% if l.code != request_locale %}
-                                        <a class="dropdown-item" href="{{ path(
-                                                        app.request.get('_route', 'index'),
-                                                        app.request.get('_route_params', [])|merge({_locale: l.code})) }}">
-                                            {% if l.name is empty %}
-                                                {{ ('app.locale.' ~ l.code)|trans|capitalize }}
-                                            {% else %}
-                                                {{ l.name|capitalize }}
-                                            {% endif %}
-                                        </a>
-                                    {% endif %}
-                                {% endfor %}
-                            </div>
-                        </li>
-                        {% if is_granted('ROLE_USER') %}
-                            <li class="nav-item {% if _route == 'messages' %}active{% endif %}">
-                                <a class="nav-link waves-effect waves-light">1
-                                    <i class="fas fa-envelope"></i>
+            <header>
+                <nav class="mb-1 navbar navbar-expand-lg fixed-top navbar-dark aqua-gradient">
+                    <a class="navbar-brand mr-4 ml-1" href="{{ path('index') }}">
+                        {# <img src="{{ asset('img/tree-network-2.png') }}" id="logo" alt="tree network logo"> #}
+                        <i class="fas fa-code-branch f-16"></i> Tree network |
+                    </a>
+                    <button aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent-333" data-toggle="collapse" type="button">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item {% if _route == 'index' %}active{% endif %}">
+                                <a class="nav-link" href="{{ path('index') }}"><i class="fas fa-home"></i> {{ 'layout.home'|trans }}
+                                    <span class="sr-only">(current)</span>
                                 </a>
                             </li>
-                            <li class="nav-item avatar dropdown">
-                                <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink-555">
-                                    <img src="{{ asset('img/users/randomdev.jpg') }}" class="avatar rounded-circle z-depth-0" alt="avatar image">
+                            <li class="nav-item {% if _route == 'browse' %}active{% endif %}">
+                                <a class="nav-link" href="{{ path('browse') }}"><i class="fas fa-code-branch"></i> {{ 'layout.browse'|trans }}</a>
+                            </li>
+                            <li class="nav-item dropdown {% if _route in ['about', 'help_faq', 'contact'] %}active{% endif %}">
+                                <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink-333">
+                                    <i class="fas fa-question-circle"></i> {{ 'layout.help'|trans }}
                                 </a>
-                                <div aria-labelledby="navbarDropdownMenuLink-55" class="dropdown-menu dropdown-menu-lg-right dropdown-secondary">
-                                    <a class="dropdown-item" href="{{ path('profile') }}"><i class="fas fa-id-card"></i> {{ 'layout.profile'|trans }}</a>
-                                    <a class="dropdown-item" href="{{ path('tree_show', {username: app.user.username}) }}"><i class="fas fa-code-branch"></i> {{ 'layout.family_tree'|trans }}</a>
-                                    <a class="dropdown-item" href="{{ path('user_settings') }}"><i class="fas fa-cog"></i> {{ 'layout.settings'|trans }}</a>
-                                    {% if is_granted('ROLE_ADMIN') %}
-                                        <a class="dropdown-item" href="#"><i class="fas fa-user-secret"></i> {{ 'layout.admin'|trans }}</a>
-                                    {% endif %}
-                                    <a class="dropdown-item" href="{{ path('fos_user_security_logout') }}"><i class="fas fa-sign-out-alt"></i> {{ 'layout.logout'|trans }}</a>
+                                <div aria-labelledby="navbarDropdownMenuLink-333" class="dropdown-menu dropdown-default">
+                                    <a class="dropdown-item" href="{{ path('about') }}">{{ 'layout.about'|trans }}</a>
+                                    <a class="dropdown-item" href="{{ path('help_faq') }}">{{ 'layout.help_faq'|trans }}</a>
+                                    <a class="dropdown-item" href="{{ path('contact') }}">{{ 'layout.contact_us'|trans }}</a>
                                 </div>
                             </li>
-                        {% else %}
-                            <li class="nav-item {% if _route == 'fos_user_security_login' %}active{% endif %}">
-                                <a id="navbar-static-login" href="{{ path('fos_user_security_login') }}" class="btn bg-primary btn-rounded btn-sm text-white">
-                                    {{ 'layout.login'|trans }}
-                                    <i class="fas fa-sign-in-alt ml-2"></i>
+                        </ul>
+                        <ul class="navbar-nav ml-auto nav-flex-icons">
+                            <form class="form-inline mr-5">
+                                <div class="md-form my-0">
+                                    <input class="form-control" type="text" placeholder="{{ 'layout.search'|trans }}" aria-label="Search" autocomplete="off">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                            </form>
+                            <li class="nav-item dropdown">
+                                <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink-4">
+                                    <i class="fas fa-language"></i>
+                                    {{ ('app.locale.' ~ request_locale)|trans }}
                                 </a>
+                                <div aria-labelledby="navbarDropdownMenuLink-4" class="dropdown-menu dropdown-menu-right dropdown-info">
+                                    {% for l in locales() %}
+                                        {% if l.code != request_locale %}
+                                            <a class="dropdown-item" href="{{ path(
+                                                            app.request.get('_route', 'index'),
+                                                            app.request.get('_route_params', [])|merge({_locale: l.code})) }}">
+                                                {% if l.name is empty %}
+                                                    {{ ('app.locale.' ~ l.code)|trans|capitalize }}
+                                                {% else %}
+                                                    {{ l.name|capitalize }}
+                                                {% endif %}
+                                            </a>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
                             </li>
-                        {% endif %}
-                    </ul>
-                </div>
-            </nav>
-            {% block after_nav %}{% endblock %}
-        </header>
+                            {% if is_granted('ROLE_USER') %}
+                                <li class="nav-item {% if _route == 'messages' %}active{% endif %}">
+                                    <a class="nav-link waves-effect waves-light">1
+                                        <i class="fas fa-envelope"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item avatar dropdown">
+                                    <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink-555">
+                                        <img src="{{ asset('img/users/randomdev.jpg') }}" class="avatar rounded-circle z-depth-0" alt="avatar image">
+                                    </a>
+                                    <div aria-labelledby="navbarDropdownMenuLink-55" class="dropdown-menu dropdown-menu-lg-right dropdown-secondary">
+                                        <a class="dropdown-item" href="{{ path('profile') }}"><i class="fas fa-id-card"></i> {{ 'layout.profile'|trans }}</a>
+                                        <a class="dropdown-item" href="{{ path('tree_show', {username: app.user.username}) }}"><i class="fas fa-code-branch"></i> {{ 'layout.family_tree'|trans }}</a>
+                                        <a class="dropdown-item" href="{{ path('user_settings') }}"><i class="fas fa-cog"></i> {{ 'layout.settings'|trans }}</a>
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            <a class="dropdown-item" href="#"><i class="fas fa-user-secret"></i> {{ 'layout.admin'|trans }}</a>
+                                        {% endif %}
+                                        <a class="dropdown-item" href="{{ path('fos_user_security_logout') }}"><i class="fas fa-sign-out-alt"></i> {{ 'layout.logout'|trans }}</a>
+                                    </div>
+                                </li>
+                            {% else %}
+                                <li class="nav-item {% if _route == 'fos_user_security_login' %}active{% endif %}">
+                                    <a id="navbar-static-login" href="{{ path('fos_user_security_login') }}" class="btn bg-primary btn-rounded btn-sm text-white">
+                                        {{ 'layout.login'|trans }}
+                                        <i class="fas fa-sign-in-alt ml-2"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </nav>
+                {% block after_nav %}{% endblock %}
+            </header>
 
-        <main class="main-section transition-fade" id="swup">
-            {% block main %}{% endblock %}
-        </main>
+            <main class="main-section transition-fade" id="swup">
+                {% block main %}{% endblock %}
+            </main>
 
-        <footer class="page-footer font-small unique-color-dark pos-absolute">
-            <div class="default-color">
-                <div class="container">
-                    <div class="row py-4 d-flex align-items-center">
-                        <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
-                            <h6 class="mb-0">{{ 'layout.join_socials'|trans }}</h6>
-                        </div>
-                        <div class="col-md-6 col-lg-7 text-center text-md-right">
-                            <a class="fb-ic">
-                                <i class="fab fa-facebook-f white-text mr-4"></i>
-                            </a>
-                            <a class="tw-ic">
-                                <i class="fab fa-twitter white-text mr-4"></i>
-                            </a>
-                            <a class="gplus-ic">
-                                <i class="fab fa-google-plus-g white-text mr-4"></i>
-                            </a>
-                            <a class="li-ic">
-                                <i class="fab fa-linkedin-in white-text mr-4"></i>
-                            </a>
-                            <a class="ins-ic">
-                                <i class="fab fa-instagram white-text"></i>
-                            </a>
+            <footer class="page-footer font-small unique-color-dark pos-absolute">
+                <div class="default-color">
+                    <div class="container">
+                        <div class="row py-4 d-flex align-items-center">
+                            <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+                                <h6 class="mb-0">{{ 'layout.join_socials'|trans }}</h6>
+                            </div>
+                            <div class="col-md-6 col-lg-7 text-center text-md-right">
+                                <a class="fb-ic">
+                                    <i class="fab fa-facebook-f white-text mr-4"></i>
+                                </a>
+                                <a class="tw-ic">
+                                    <i class="fab fa-twitter white-text mr-4"></i>
+                                </a>
+                                <a class="gplus-ic">
+                                    <i class="fab fa-google-plus-g white-text mr-4"></i>
+                                </a>
+                                <a class="li-ic">
+                                    <i class="fab fa-linkedin-in white-text mr-4"></i>
+                                </a>
+                                <a class="ins-ic">
+                                    <i class="fab fa-instagram white-text"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="container text-center text-md-left mt-5">
-                <div class="row mt-3">
-                    <div class="col-md-4 col-lg-4 col-xl-3 mx-auto mb-4">
-                        <h6 class="text-uppercase font-weight-bold">{{ website.name }}</h6>
-                        <hr class="default-color accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                        <p>{{ website.name }} est une application web responsive, permettant de gérer des arbres généalogiques avec possibilité de collaboration.</p>
-                    </div>
-                    <div class="col-md-4 col-lg-4 col-xl-3 mx-auto mb-4">
-                        <h6 class="text-uppercase font-weight-bold">{{ 'layout.useful_links'|trans }}</h6>
-                        <hr class="indigo accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                        <p>
-                            <a href="{{ path('about') }}">{{ 'layout.about'|trans }}</a>
-                        </p>
-                        <p>
-                            <a href="{{ path('help_faq') }}">{{ 'layout.help_faq'|trans }}</a>
-                        </p>
-                        <p>
-                            <a href="{{ path('terms_conditions') }}">{{ 'layout.terms_conditions'|trans }}</a>
-                        </p>
-                        <p>
-                            <a href="{{ path('privacy') }}">{{ 'layout.privacy'|trans }}</a>
-                        </p>
-                    </div>
-                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                        <h6 class="text-uppercase font-weight-bold">Contact</h6>
-                        <hr class="default-color accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                        <p>
-                            <i class="fas fa-home mr-3"></i>
-                            Sanar, Saint-Louis &mdash; Sénégal</p>
-                        <p>
-                            <i class="fas fa-envelope mr-3"></i>
-                            {{ website.email }}</p>
-                        <p>
-                            <i class="fas fa-phone mr-3"></i>
-                            {{ website.phoneNumber }}</p>
+                <div class="container text-center text-md-left mt-5">
+                    <div class="row mt-3">
+                        <div class="col-md-4 col-lg-4 col-xl-3 mx-auto mb-4">
+                            <h6 class="text-uppercase font-weight-bold">{{ website.name }}</h6>
+                            <hr class="default-color accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                            <p>{{ website.name }} est une application web responsive, permettant de gérer des arbres généalogiques avec possibilité de collaboration.</p>
+                        </div>
+                        <div class="col-md-4 col-lg-4 col-xl-3 mx-auto mb-4">
+                            <h6 class="text-uppercase font-weight-bold">{{ 'layout.useful_links'|trans }}</h6>
+                            <hr class="indigo accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                            <p>
+                                <a href="{{ path('about') }}">{{ 'layout.about'|trans }}</a>
+                            </p>
+                            <p>
+                                <a href="{{ path('help_faq') }}">{{ 'layout.help_faq'|trans }}</a>
+                            </p>
+                            <p>
+                                <a href="{{ path('terms_conditions') }}">{{ 'layout.terms_conditions'|trans }}</a>
+                            </p>
+                            <p>
+                                <a href="{{ path('privacy') }}">{{ 'layout.privacy'|trans }}</a>
+                            </p>
+                        </div>
+                        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                            <h6 class="text-uppercase font-weight-bold">Contact</h6>
+                            <hr class="default-color accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                            <p>
+                                <i class="fas fa-home mr-3"></i>
+                                Sanar, Saint-Louis &mdash; Sénégal</p>
+                            <p>
+                                <i class="fas fa-envelope mr-3"></i>
+                                {{ website.email }}</p>
+                            <p>
+                                <i class="fas fa-phone mr-3"></i>
+                                {{ website.phoneNumber }}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="footer-copyright text-center py-3">
-                <span class="ml-5 float-left">© 2019 Copyright<a href="/"> {{ website.name }}.com</a></span>
-                <span class="mr-5 float-right">Made with <i class="fas fa-heart text-danger"></i> by <a href="https://github.com/rand0mdev" target="_blank">rand0mdev</a></span>
-            </div>
-        </footer>
+                <div class="footer-copyright text-center py-3">
+                    <span class="ml-5 float-left">© 2019 Copyright<a href="/"> {{ website.name }}.com</a></span>
+                    <span class="mr-5 float-right">Made with <i class="fas fa-heart text-danger"></i> by <a href="https://github.com/rand0mdev" target="_blank">rand0mdev</a></span>
+                </div>
+            </footer>
         {% endblock %}
-            <script type="text/javascript" src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('js/popper.min.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('js/mdb.min.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('js/jquery-ui-1.12.1.min.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('js/swup.min.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+        {% include 'common/flash_messages.twig' %}
+        <script type="text/javascript" src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/popper.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/mdb.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/jquery-ui-1.12.1.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/swup.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

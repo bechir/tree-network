@@ -13,4 +13,10 @@ $(document).ready(function() {
         showAnim: 'slideDown',
         maxDate: '-12Y'
     });
+
+    var snackbar = $("#snackbar");
+    snackbar.addClass("show");
+    setTimeout(function() {
+        snackbar.removeClass("show");
+    }, 7000);
 });

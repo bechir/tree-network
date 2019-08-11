@@ -1,0 +1,7 @@
+2019-08-10 22:39:18.202 GMT [2080] LOG:  could not bind IPv4 address "127.0.0.1": Address already in use
+2019-08-10 22:39:18.202 GMT [2080] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2019-08-10 22:39:18.237 GMT [2080] LOG:  could not bind IPv6 address "::1": Address already in use
+2019-08-10 22:39:18.237 GMT [2080] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2019-08-10 22:39:18.238 GMT [2080] WARNING:  could not create listen socket for "localhost"
+2019-08-10 22:39:18.238 GMT [2080] FATAL:  could not create any TCP/IP sockets
+2019-08-10 22:39:18.250 GMT [2080] LOG:  database system is shut down
