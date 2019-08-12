@@ -14,15 +14,15 @@
       <div class="container px-md-3 px-sm-0">
 
         <!--Grid row-->
-        <div class="row wow fadeIn" data-wow-delay=".3s">
+        <div class="row reveal">
 
           <!--Grid column-->
-          <div class="col-md-12 mb-4 white-text text-center wow fadeIn">
+          <div class="col-md-12 mb-4 white-text text-center">
 
-            <h3 class="display-3 font-weight-bold white-text mb-0 pt-md-5 pt-5 wow zoomIn" data-wow-delay=".7s" data-wow-duration="1s">{{ website.name }}</h3>
-            <hr class="hr-light my-4 w-75">
-            <h4 class="subtext-header mt-2 mb-4">Bienvenue sur {{ website.name }}, ici vous retrouverez rapidement vos ancêtres!</h4>
-            <a href="{#{ path('browse') }#}#section1" class="btn btn-rounded btn-outline-white wow fadeInUp" data-wow-delay="2s">
+            <h3 class="display-3 font-weight-bold white-text mb-0 pt-md-5 pt-5 reveal-1">{{ website.name }}</h3>
+            <hr class="hr-light my-4 w-75 reveal-2">
+            <h4 class="subtext-header mt-2 mb-4 reveal-3">Bienvenue sur {{ website.name }}, ici vous retrouverez rapidement vos ancêtres!</h4>
+            <a href="{#{ path('browse') }#}#section1" class="btn btn-rounded btn-outline-white wow fadeInUp" data-wow-delay="1.33s">
               <i class="fas fa-code-branch"></i> Voir les arbres
             </a>
 
@@ -45,14 +45,14 @@
 
 {% block main %}
 <div class="container" id="section1">
-    <div class="my-4 my-md-5 overflow-hidden">
-        <div class="text-center mb-5 wow fadeInDown" data-wow-delay=".1s">
-            <h3 class="text-aqua-gradient d-inline-block">
+    <div class="my-4 my-md-5 overflow-hidden reveal-1">
+        <div class="text-center mb-5">
+            <h3 class="text-aqua-gradient d-inline-bloc">
                 <span class="mx-4">À propos de {{ website.name }}</span>
             </h3>
         </div>
-        <div class="row">
-            <div class="col-12 col-md-6 mb-4 mb-md-0 wow fadeInDown" data-wow-delay=".7s">
+        <div class="row reveal-2">
+            <div class="col-12 col-md-6 mb-4 mb-md-0">
                 <div class="about-icon-style">
                     <h2 class="mt-3 mb-2"><span class="fas fa-tree"></span> Retrouvez votre famille</h2>
                     <span class="app-title-border"></span>
@@ -61,7 +61,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-6 mb-4 mb-md-0 wow fadeInDown" data-wow-delay=".7s">
+            <div class="col-12 col-md-6 mb-4 mb-md-0">
                 <div class="about-icon-style">
                     <h2 class="mt-3 mb-2"><span class="fas fa-share-alt"></span> Partagez votre arbre</h2>
                     <span class="app-title-border"></span>

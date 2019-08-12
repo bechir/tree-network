@@ -294,3 +294,27 @@ background-color: #333333;
   from {bottom: 11px; opacity: 1;}
   to {bottom: 0; opacity: 0;}
 }
+
+
+[class*="reveal-"] {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+[class*="reveal-"].visible{
+    opacity: 1;
+    transform: translateY(0);
+    transition: 1s cubic-bezier(.5, 0, 0, 1);
+}
+
+.reveal-1{
+    transition-delay: .1s;
+}
+
+.reveal-2{
+    transition-delay: .2s;
+}
+
+.reveal-3{
+    transition-delay: .3s;
+}
