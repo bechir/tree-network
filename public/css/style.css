@@ -161,7 +161,12 @@ main.main-section {
     background-position: right;
     color: #fff
 }
-
+.navbar-collapse{
+    overflow: visible!important;
+}
+.navbar .dropdown-menu {
+    left: -200px;
+}
 
 
 .call-to-action-bg {
@@ -317,4 +322,42 @@ background-color: #333333;
 
 .reveal-3{
     transition-delay: .3s;
+}
+
+.browse.row{
+    display: flex;
+    flex-flow: row wrap;
+    margin: auto;
+    justify-content: space-between;
+}
+
+@media (min-width: 576px) {
+    .browse.row .card {
+        -ms-flex: 0 0 49%;
+        flex: 0 0 49%;
+        max-width: 49%;
+    }
+}
+@media (min-width: 768px) {
+    .browse.row .card {
+        -ms-flex: 0 0 32%;
+        flex: 0 0 32%;
+        max-width: 32%;
+    }
+}
+@media (min-width: 1200px) {
+    .browse.row .card {
+        -ms-flex: 0 0 24%;
+        flex: 0 0 24%;
+        max-width: 24%;
+    }
+}
+
+.browse .card-img-top {
+    width: 125px;
+    margin: auto;
+}
+
+.browse .bottom-text{
+    font-size: small;
 }

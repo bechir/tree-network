@@ -3,9 +3,9 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
-<div class="contact-3 content-area-6">
+<div class="contact-3 content-area-6 section-margin">
     <div class="container">
-        <div class="main-title mb-60">
+        <div class="main-title mb-60 text-center">
             <p class="lead">✅ {{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
             {% if targetUrl %}
             <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>

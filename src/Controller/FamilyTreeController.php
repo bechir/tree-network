@@ -4,13 +4,16 @@ namespace App\Controller;
 
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\UserRepository;
 
 class FamilyTreeController extends AbstractController
 {
-    public function browse()
+    public function browse(UserRepository $userRepository)
     {
+        $list = $userRepository->findAll();
+
         return $this->render('family_tree/browse.html.twig', [
-            'controller_name' => 'TreeFamilyController',
+            'users' => $list,
         ]);
     }
 

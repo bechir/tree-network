@@ -74,6 +74,9 @@
     </div>
 </div>
 
+{# Recents add #}
+{{ render(controller('App\\Controller\\RenderedController::recents')) }}
+
 {% include 'common/call-to-action.html.twig' %}
 
 {% endblock %}
