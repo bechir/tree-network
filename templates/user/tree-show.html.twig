@@ -52,56 +52,44 @@
                             <!--/.Header-->
                             <!--Body-->
                             <div class="modal-body mb-0">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="md-form form-sm">
-                                        <input type="text" id="form8" class="form-control">
-                                        <label for="form8" class="active">Prénoms</label>
+                                {{ form_start(form) }}
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="md-form form-sm">
+                                                {{ form_widget(form.inverse.firstName, {'attr': {'class': 'form-control'}}) }}
+                                                {{ form_label(form.inverse.firstName) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="md-form form-sm">
+                                                {{ form_widget(form.inverse.lastName, {'attr': {'class': 'form-control'}}) }}
+                                                {{ form_label(form.inverse.lastName) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="md-form form-sm">
+                                                {{ form_widget(form.inverse.description, {'attr': {'class': 'md-textarea w-100 mb-0'}}) }}
+                                                {{ form_label(form.inverse.description) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="mb-0">Sexe</label>
+                                            <div class="md-form form-group mt-0">
+                                                {{ form_widget(form.inverse.gender, {'attr': {'class': 'browser custom-select px-0'}}) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="mb-0">Vous êtes {{ user.gender == 'word.male' ? 'son' : user.gender == 'word.female' ? 'san' : 'son(sa)' }}</label>
+                                            <div class="md-form form-group mt-0">
+                                                {{ form_widget(form.linkCategory, {'attr': {'class': 'browser custom-select px-0'}}) }}
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="md-form form-sm">
-                                        <input type="text" id="form8" class="form-control">
-                                        <label for="form8" class="active">Nom de famille</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="md-form form-sm">
-                                        <textarea type="text" id="form67" class="md-textarea w-100 mb-0"></textarea>
-                                        <label for="form67">Description</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="mb-0">Sexe</label>
-                                        <div class="md-form form-group mt-0">
-                                            <select class="browser custom-select px-0" name="lang">
-                                                <option value="">Homme</option>
-                                                <option value="">Femme</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="mb-0">Vous êtes {{ user.gender == 'word.male' ? 'son' : user.gender == 'word.female' ? 'san' : 'son(sa)' }}</label>
-                                        <div class="md-form form-group mt-0">
-                                            <select class="browser custom-select px-0" name="lang">
-                                                <option value="">Fils</option>
-                                                <option value="">Père</option>
-                                                <option value="">Oncle</option>
-                                                <option value="">Cousin</option>
-                                                <option value="">Beau père</option>
-                                                <option value="">Beau frère</option>
-                                                <option value="">Grand père</option>
-                                                <option value="">Mari</option>
-                                                <option value="">Ami</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="text-center mt-1-half">
-                                <button class="btn btn-info mb-2 waves-effect waves-light">Ajouter <i class="fas fa-check-circle ml-1"></i></button>
-                                </div>
-
+                                    <div class="text-center mt-1-half">
+                                    <button class="btn btn-info mb-2 waves-effect waves-light">Ajouter <i class="fas fa-check-circle ml-1"></i></button>
+                                    </div>
+                                {{ form_end(form) }}
                             </div>
                             <!--/.Body-->
                         </div>
@@ -162,12 +150,14 @@
 
                     <!--Table body-->
                     <tbody>
+                    {% for link in user.links %}
                         <tr>
-                        <td>Bechir Issmaila Ba</td>
-                        <td>Bechir Ba est un excellent menusier</td>
-                        <td>Frère</td>
-                        <td><img class="img-circle img-50" src="/img/users/randomdev.jpg"></td>
+                            <td>{{ link.inverse.fullName }}</td>
+                            <td>{{ link.inverse.description }}</td>
+                            <td>{{ link.linkCategory|trans }}</td>
+                            <td><img class="img-circle img-50" src="/img/users/default-avatar-profile.jpg"></td>
                         </tr>
+                    {% endfor %}
                     </tbody>
                     <!--Table body-->
                     </table>

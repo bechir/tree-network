@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\LinkName;
+use App\Entity\Link;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method LinkName|null find($id, $lockMode = null, $lockVersion = null)
- * @method LinkName|null findOneBy(array $criteria, array $orderBy = null)
- * @method LinkName[]    findAll()
- * @method LinkName[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Link|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Link|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Link[]    findAll()
+ * @method Link[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class LinkNameRepository extends ServiceEntityRepository
+class LinkRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, LinkName::class);
+        parent::__construct($registry, Link::class);
     }
 
     // /**
-    //  * @return LinkName[] Returns an array of LinkName objects
+    //  * @return Link[] Returns an array of Link objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class LinkNameRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?LinkName
+    public function findOneBySomeField($value): ?Link
     {
         return $this->createQueryBuilder('l')
             ->andWhere('l.exampleField = :val')

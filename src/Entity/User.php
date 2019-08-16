@@ -15,6 +15,14 @@ use App\Validator\Constraints as SecurityAssert;
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\Table(name="app_user")
  * @ORM\HasLifecycleCallbacks()
+ * 
+ * @ORM\AttributeOverrides({
+ *      @ORM\AttributeOverride(name="email", column=@ORM\Column(nullable=true)),
+ *      @ORM\AttributeOverride(name="emailCanonical", column=@ORM\Column(nullable=true, unique=false)),
+ *      @ORM\AttributeOverride(name="username", column=@ORM\Column(nullable=true)),
+ *      @ORM\AttributeOverride(name="usernameCanonical", column=@ORM\Column(nullable=true, unique=false)),
+ *      @ORM\AttributeOverride(name="password", column=@ORM\Column(nullable=true)),
+ * })
  */
 class User extends BaseUser implements EquatableInterface
 {
@@ -89,11 +97,6 @@ class User extends BaseUser implements EquatableInterface
     private $locale;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Relationship", mappedBy="user")
-     */
-    private $relationships;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Gender")
      */
     private $gender;
@@ -110,13 +113,23 @@ class User extends BaseUser implements EquatableInterface
      */
     private $oldPassword;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Link", mappedBy="owner")
+     */
+    private $links;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Link", mappedBy="inverse")
+     */
+    private $inverses;
 
     const NUM_ITEMS = 15;
 
     public function __construct()
     {
         parent::__construct();
-        $this->relationships = new ArrayCollection();
+        $this->links = new ArrayCollection();
+        $this->inverses = new ArrayCollection();
     }
 
     /**
@@ -298,37 +311,6 @@ class User extends BaseUser implements EquatableInterface
     }
 
     /**
-     * @return Collection|Relationship[]
-     */
-    public function getRelationships(): Collection
-    {
-        return $this->relationships;
-    }
-
-    public function addRelationship(Relationship $relationship): self
-    {
-        if (!$this->relationships->contains($relationship)) {
-            $this->relationships[] = $relationship;
-            $relationship->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRelationship(Relationship $relationship): self
-    {
-        if ($this->relationships->contains($relationship)) {
-            $this->relationships->removeElement($relationship);
-            // set the owning side to null (unless already changed)
-            if ($relationship->getUser() === $this) {
-                $relationship->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @ORM\PrePersist
      */
     public function setSubmittedAt()
@@ -368,6 +350,68 @@ class User extends BaseUser implements EquatableInterface
     public function setOldPassword(?string $oldPassword): self
     {
         $this->oldPassword = $oldPassword;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Link[]
+     */
+    public function getLinks(): Collection
+    {
+        return $this->links;
+    }
+
+    public function addLink(Link $link): self
+    {
+        if (!$this->links->contains($link)) {
+            $this->links[] = $link;
+            $link->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLink(Link $link): self
+    {
+        if ($this->links->contains($link)) {
+            $this->links->removeElement($link);
+            // set the owning side to null (unless already changed)
+            if ($link->getOwner() === $this) {
+                $link->setOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Link[]
+     */
+    public function getInverses(): Collection
+    {
+        return $this->inverses;
+    }
+
+    public function addInverse(Link $inverse): self
+    {
+        if (!$this->inverses->contains($inverse)) {
+            $this->inverses[] = $inverse;
+            $inverse->setInverse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInverse(Link $inverse): self
+    {
+        if ($this->inverses->contains($inverse)) {
+            $this->inverses->removeElement($inverse);
+            // set the owning side to null (unless already changed)
+            if ($inverse->getInverse() === $this) {
+                $inverse->setInverse(null);
+            }
+        }
 
         return $this;
     }

@@ -5,7 +5,7 @@
 
 {# From component #}
 <div class="container padding-top-60">
-<h2 class="h1-responsive font-weight-bold text-center mb-5">Aide et FAQ</h2>
+<h2 class="h1-responsive font-weight-bold text-center mb-5">Contactez nous</h2>
   <!-- Section description -->
   <p class="grey-text text-center w-responsive mx-auto mb-5">Lorem ipsum dolor sit amet, consectetur
     adipisicing elit. Fugit, error amet numquam iure provident voluptate esse quasi, veritatis totam voluptas
@@ -31,13 +31,13 @@
             <div class="col-md-6">
               <div class="md-form mb-0">
                 {{ form_widget(form.fullname, {'attr': {'class': 'form-control'}}) }}
-                <label for="form-contact-name" class="">Votre nom</label>
+                {{ form_label(form.fullname) }}
               </div>
             </div>
             <div class="col-md-6">
               <div class="md-form mb-0">
                 {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
-                <label for="form-contact-email" class="">Adresse e-mail</label>
+                {{ form_label(form.email) }}
               </div>
             </div>
           </div>
@@ -48,7 +48,7 @@
             <div class="col-md-12">
               <div class="md-form mb-0">
                 {{ form_widget(form.subject, {'attr': {'class': 'form-control'}}) }}
-                <label for="form-contact-company" class="">Sujet</label>
+                {{ form_label(form.subject) }}
               </div>
             </div>
           </div>
@@ -59,7 +59,7 @@
             <div class="col-md-12">
               <div class="md-form mb-0">
                 {{ form_widget(form.message, {'attr': {'class': 'form-control md-textarea', 'rows': '3'}}) }}
-                <label for="form-contact-message">Votre message</label>
+                {{ form_label(form.message) }}
                 <button type="submit" class="btn btn-lg aqua-gradient rounded border-none text-white">
                   <i class="far fa-paper-plane"></i> Envoyer
                 </button>

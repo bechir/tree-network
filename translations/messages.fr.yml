@@ -37,6 +37,9 @@ form:
   description: Description
   username: Nom d'utilisateur
   email: Adresse email
+  fullname: Nom complet
+  subject: Sujet
+  message: Votre message
   do_signup: S'inscrire
   password: Mot de passe
   current_password: Mot de passe acutel
@@ -80,3 +83,29 @@ action:
 word:
   male: Homme
   female: Femme
+  father: Père
+  brother: Frère
+  uncle: Oncle
+  son: Fils
+  husband: Mari
+  grand_father: Grand père
+  stepfather: Beau père
+  stepchild: Beau fils
+  half_brother: Démi frère
+  brother_in_law: Beau frère
+  friend: Ami
+  cousin: Cousin
+  nephew: Neveau
+  mother: "Mère"
+  sister: "Soeur"
+  aunt: Tante
+  sister_in_law: "Belle soeur"
+  daughter: Fille
+  wife: "Épouse"
+  grand_mother: "Grande mère"
+  m_friend: "Amie"
+  stepdaughter: "Belle fille"
+  stepmother: Belle mère
+  half_sister: "Démi soeur"
+  m_cousin: Cousine
+  niece: "Nièce"

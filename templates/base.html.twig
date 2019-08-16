@@ -87,7 +87,7 @@
                                     </a>
                                     <div aria-labelledby="navbarDropdownMenuLink-55" class="dropdown-menu dropdown-menu-lg-right dropdown-secondary">
                                         <a class="dropdown-item" href="{{ path('profile') }}"><i class="fas fa-id-card"></i> {{ 'layout.profile'|trans }}</a>
-                                        <a class="dropdown-item" href="{{ path('tree_show', {username: app.user.username}) }}"><i class="fas fa-code-branch"></i> {{ 'layout.family_tree'|trans }}</a>
+                                        <a class="dropdown-item" href="{{ path('user_tree_show') }}"><i class="fas fa-code-branch"></i> {{ 'layout.family_tree'|trans }}</a>
                                         <a class="dropdown-item" href="{{ path('user_settings') }}"><i class="fas fa-cog"></i> {{ 'layout.settings'|trans }}</a>
                                         {% if is_granted('ROLE_ADMIN') %}
                                             <a class="dropdown-item" href="#"><i class="fas fa-user-secret"></i> {{ 'layout.admin'|trans }}</a>

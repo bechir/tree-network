@@ -8,7 +8,15 @@
         </div>
         <div class="card-body">
             <h5 class="card-title text-center">{{ user.fullName }}</h5>
-            <p class="card-text text-justify">Une petite description de la famille. Une petite description de la famille</p>
+            {% set desc = 'Pas de description.' %}
+            {% if user.description %}
+                {% set desc = user.description %}
+                {% if desc|length > 90 %}
+                    {% set desc = desc[:87] ~ '...' %}
+                {% endif %}
+                
+            {% endif %}
+            <p class="card-text text-center">{{ desc }}</p>
             <div class="bottom-text">
                 <hr>
                 <span>

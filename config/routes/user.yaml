@@ -29,3 +29,11 @@ user_show:
     _locale: '%app_locales%'
   defaults:
     _locale: '%locale%'
+
+user_tree_show:
+  path: /{_locale}/my-tree
+  controller: App\Controller\UserController::treeShow
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
