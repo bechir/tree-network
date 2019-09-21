@@ -51,10 +51,9 @@ class EditProfileType extends AbstractType
                 'required' => false,
                 'label' => 'form.description'
             ])
-            // ->add('avatar', UserAvatarType::class, [
-            //     'required' => false,
-            //     'label' => 'form.d'
-            // ])
+            ->add('avatar', UserAvatarType::class, [
+                'required' => false,
+            ])
         ;
 
         $builder->get('bornAt')

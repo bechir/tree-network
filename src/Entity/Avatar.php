@@ -23,7 +23,7 @@ class Avatar implements \Serializable
     /**
      * @var File
      *
-     * @Vich\UploadableField(mapping="users", fileNameProperty="src")
+     * @Vich\UploadableField(mapping="user", fileNameProperty="src")
      */
     private $avatarFile;
 

@@ -40,4 +40,23 @@ $(document).ready(function() {
     document.querySelectorAll('[class*="reveal-"]').forEach(r => {
         observer.observe(r);
     });
+
+    const avatarInput = $('input#edit_profile_avatar_avatarFile');
+    const img = `<img class="img-circle img-150" src="#">`;
+
+    avatarInput.change(function(){
+        $('.preview-container').html(img);
+        readURL(this, '.avatar .img-preview img');
+    });
+
+    function readURL(input, src) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+
+          reader.onload = function(e) {
+            $(src).attr('src', e.target.result);
+          }
+          reader.readAsDataURL(input.files[0]);
+        }
+    }
 });

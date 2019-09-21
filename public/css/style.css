@@ -361,3 +361,7 @@ background-color: #333333;
 .browse .bottom-text{
     font-size: small;
 }
+
+input#edit_profile_avatar_avatarFile{
+    display: none;
+}

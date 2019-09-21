@@ -90,7 +90,7 @@
                                 </li>
                                 <li class="nav-item avatar dropdown">
                                     <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink-555">
-                                        <img src="{{ asset('img/users/default-avatar-profile.jpg') }}" class="avatar rounded-circle z-depth-0" alt="avatar image">
+                                        <img class="avatar rounded-circle z-depth-0" src="{{ user.avatar ? vich_uploader_asset(user.avatar, 'avatarFile') : asset('img/user/default-avatar-profile.jpg') }}">
                                     </a>
                                     <div aria-labelledby="navbarDropdownMenuLink-55" class="dropdown-menu dropdown-menu-lg-right dropdown-secondary">
                                         <a class="dropdown-item" href="{{ path('profile') }}"><i class="fas fa-id-card"></i> {{ 'layout.profile'|trans }}</a>
@@ -173,6 +173,9 @@
                         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                             <h6 class="text-uppercase font-weight-bold">Contact</h6>
                             <hr class="default-color accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                            <p>
+                                <a href="{{ path('contact') }}">{{ 'layout.contact_us'|trans }}</a>
+                            </p>
                             <p>
                                 <i class="fas fa-home mr-3"></i>
                                 Sanar, Saint-Louis &mdash; Sénégal</p>
