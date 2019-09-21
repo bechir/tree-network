@@ -14,6 +14,13 @@
         {% block stylesheets %}{% endblock %}
 
         <title>{% block title %}{{ website.name }}{% endblock %}</title>
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+        {# {% for l in locales() %}
+            {% if l.code != request_locale %}
+            <link rel="alternate" hreflang="{{ l.code }}" href="{{ url(app.request.get('_route', 'homepage'), app.request.get('_route_params', [])|merge({_locale: l.code})) }}" />
+            {% endif %}
+            <link rel="alternate" hreflang="fr" href="{{ url(app.request.get('_route', 'homepage'), app.request.get('_route_params', [])|merge({_locale: 'fr'})) }}" />
+        {% endfor %} #}
     </head>
     <body>
         {% block body %}

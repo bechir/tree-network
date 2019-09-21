@@ -19,9 +19,25 @@ use App\Validator\Constraints as SecurityAssert;
  * @ORM\AttributeOverrides({
  *      @ORM\AttributeOverride(name="email", column=@ORM\Column(nullable=true)),
  *      @ORM\AttributeOverride(name="emailCanonical", column=@ORM\Column(nullable=true, unique=false)),
- *      @ORM\AttributeOverride(name="username", column=@ORM\Column(nullable=true)),
- *      @ORM\AttributeOverride(name="usernameCanonical", column=@ORM\Column(nullable=true, unique=false)),
- *      @ORM\AttributeOverride(name="password", column=@ORM\Column(nullable=true)),
+ *      @ORM\AttributeOverride(name="password", column=@ORM\Column(nullable=true)), 
+ *      @ORM\AttributeOverride(name="username",
+ *         column=@ORM\Column(
+ *             name="username",
+ *             type="string",
+ *             length=255,
+ *             unique=false,
+ *             nullable=true
+ *         )
+ *     ),
+ *     @ORM\AttributeOverride(name="usernameCanonical",
+ *         column=@ORM\Column(
+ *             name="usernameCanonical",
+ *             type="string",
+ *             length=255,
+ *             unique=false,
+ *             nullable=true
+ *         )
+ *     ),
  * })
  */
 class User extends BaseUser implements EquatableInterface

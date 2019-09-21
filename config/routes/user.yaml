@@ -23,8 +23,8 @@ user_settings:
     _locale: '%locale%'
 
 user_show:
-  path: /{_locale}/users/{username}
-  controller: App\Controller\UserController::profile
+  path: /{_locale}/user/{usernameCanonical}
+  controller: App\Controller\UserController::show
   requirements:
     _locale: '%app_locales%'
   defaults:

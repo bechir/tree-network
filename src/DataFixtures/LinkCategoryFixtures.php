@@ -15,17 +15,17 @@ class LinkCategoryFixtures extends Fixture implements FixtureGroupInterface, Dep
     {
         $maleCategories = [
             ['word.father'          => 'word.son'],
-            ['word.brother'         => 'word.brother'],
+            ['word.brother'         => 'word.inv_brother'],
             ['word.uncle'           => 'word.nephew'],
-            ['word.son'             => 'word.father'],
+            ['word.son'             => 'word.inv_son'],
             ['word.husband'         => 'word.wife'],
             ['word.grand_father'    => 'word.inv_grand_father'],
             ['word.stepfather'      => 'word.stepchild'],
             ['word.stepchild'       => 'word.stepfather'],
             ['word.half_brother'    => 'word.half_brother'],
             ['word.brother_in_law'  => 'word.inv_brother_in_law'],
-            ['word.friend'          => 'word.friend'],
-            ['word.cousin'          => 'word.cousin'],
+            ['word.friend'          => 'word.inv_friend'],
+            ['word.cousin'          => 'word.inv_cousin'],
             ['word.nephew'          => 'word.uncle'],
         ];
 

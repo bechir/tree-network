@@ -79,11 +79,19 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <label class="mb-0">Vous êtes {{ user.gender == 'word.male' ? 'son' : user.gender == 'word.female' ? 'san' : 'son(sa)' }}</label>
+                                            <label class="mb-0">C'est votre</label>
                                             <div class="md-form form-group mt-0">
                                                 {{ form_widget(form.linkCategory, {'attr': {'class': 'browser custom-select px-0'}}) }}
                                             </div>
                                         </div>
+                                        <select class="form-control" style="border:none" name="category" id="select_category">
+                                            <option value="">{{ 'form.select_category'|trans }}</option>
+                                            {% for category in categories() %}
+                                            <option value="{{ category.slug }}">{{ ('ad.category.' ~ category.slug)|trans }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <select class="form-control" name="sc" id="select_sub_category" style="display:none;">
+                                        </select>
                                     </div>
 
                                     <div class="text-center mt-1-half">
@@ -154,7 +162,7 @@
                         <tr>
                             <td>{{ link.inverse.fullName }}</td>
                             <td>{{ link.inverse.description }}</td>
-                            <td>{{ link.linkCategory|trans }}</td>
+                            <td>{{ link.linkCategory.inverse|trans }}</td>
                             <td><img class="img-circle img-50" src="/img/users/default-avatar-profile.jpg"></td>
                         </tr>
                     {% endfor %}
@@ -170,3 +178,51 @@
         </div>
     </div>
 {% endblock main %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+
+    $('#select_category').change(function () {
+         var categorySelector = $(this);
+
+         // Request the subCategories of the selected city.
+         $.ajax({
+             url: "{{ path('categories_list_sub_categories') }}",
+             type: "GET",
+             dataType: "JSON",
+             data: {
+                 category: categorySelector.val()
+             },
+             success: function (subCategories) {
+                 var subCategoriesSelect = $("#select_sub_category");
+
+                 subCategoriesSelect.show();
+
+                 console.log(subCategories);
+
+                 // Remove current options
+                 subCategoriesSelect.html('');
+                 if(subCategories.length == 0) {
+                    subCategoriesSelect.addClass('hidden');
+                    subCategoriesSelect.removeClass('visible');
+                    $('#submit-sm').attr('disabled', true);
+                    $('#submit-sm').attr('title', '{{ 'form.select_category'|trans }}');
+                  }
+                else {
+                   subCategoriesSelect.addClass('visible');
+                   subCategoriesSelect.removeClass('hidden');
+                   $('#submit-sm').removeAttr('disabled');
+                }
+
+                $.each(subCategories, function (key, subCateory) {
+                   subCategoriesSelect.append('<option value="' + subCateory.slug + '">' + subCateory.name + '</option>');
+                });
+             },
+             error: function (err) {
+                 alert("An error ocurred while loading data ...");
+             }
+         });
+     });
+    </script>
+{% endblock %}

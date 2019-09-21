@@ -9,14 +9,16 @@
 
     {{ breadcrumb.level1('tree.list.title') }}
 
-    <!-- Card deck -->
-    <div class="row browse">
-    {% for user in users %}
-        {{ user_card(user) }}
-    {% else %}
-        <div class="alert alert-info">
-            <p>Il n'y a acutellement aucun arbre.</p>
-    {% endfor %}
+    <div class="container">
+        <!-- Card deck -->
+        <div class="row browse">
+        {% for user in users %}
+            {{ user_card(user) }}
+        {% else %}
+            <div class="alert alert-info">
+                <p>Il n'y a acutellement aucun arbre.</p>
+        {% endfor %}
+        </div>
     </div>
 </div>
 

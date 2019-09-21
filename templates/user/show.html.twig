@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+
+{% import 'util/breadcrumb.twig' as breadcrumb %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block main %}
+
+    <div class="mb-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Breadcrumb -->
+                    <div class="breadcrumb-area pt-3">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb bg-white">
+                                <li class="breadcrumb-item"><a class="black-text" href="{{ path('index' ) }}">{{ 'layout.home'|trans }}</a></li>
+                                <li class="breadcrumb-item active">{{ user.username }}</li>
+                            </ol>
+                        </nav>
+                        <h1 class="ml-3">Profil</h1>
+                    </div>
+                    <!-- Breadcrumb End -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div cass="row">
+        <div class="container">
+            <div class="tab-content" id="myTabContent">
+                <div aria-labelledby="profile-tab" class="tab-pane fade active show" id="profile" role="tabpanel">
+                    <div class="text-white d-flex h-100 mask aqua-gradient-rgba rounded shadow my-5">
+                        <div class="first-content align-self-center p-3">
+                            <h3 class="card-title">{{ user.username }}</h3>
+                            <p class="lead mb-0">{{ user.email }}</p>
+                        </div>
+                        <div class="second-content align-self-center ml-auto pr-3">
+                            <img class="img-100 img-circle" src="{{ asset('img/users/default-avatar-profile.jpg') }}"/>
+                        </div>
+                    </div>
+
+                    <div class="card shadow py-3 reveal-1">
+                        <div class="card-body">
+                            <h5 class="card-title">Ses parents <a href="{{ path('user_tree_show') }}" class="btn btn-info rounded float-right">Voir toute la famille</a></h5>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card shadow-sm">
+                                        <div class="card-body">
+                                            <div class="d-flex flex-row justify-content-between">
+                                                <div class="p-2 text-muted">
+                                                    Père<br>
+                                                    <a class="btn-link text-info" href="#">Issmaila Ibrahim Ba</a>
+                                                </div>
+                                                <div class="p-2">
+                                                    <img class="img-circle img-50 h-100" src="{{ asset('img/users/default-avatar-profile.jpg') }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card shadow-sm">
+                                        <div class="card-body">
+                                            <div class="d-flex flex-row justify-content-between">
+                                                <div class="p-2 text-muted">
+                                                    Mère<br>
+                                                    <a class="btn-link text-info" href="#">Aissata Yaya Sy</a>
+                                                </div>
+                                                <div class="p-2">
+                                                    <img class="img-circle img-50 h-100" src="{{ asset('img/users/default-avatar-profile.jpg') }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card shadow py-3 mt-5">
+                        <div class="card-body">
+                            <h5 class="card-title reveal-1">À propos de {{ user.fullName }}</h5>
+                            <hr>
+                            <div class="reveal-2">
+                                <p class="card-subtitle my-2 text-muted">{{ user.fullName }} &mdash; {{ user.username }}</p>
+                                <p class="card-text"><i class="fas fa-calendar-alt"></i> Date de naissance: {{ user.bornAt|localizeddate('full', 'none', app.request.locale)|capitalize }}</p>
+                                <p class="card-text"><i class="fas fa-map-marked-alt"></i> Lieu de naissance: {{ user.birthPlace }}</p>
+                                <hr>
+                                <div class="card-subtitle text-muted font-italic">
+                                    {{ user.description }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card shadow py-3 my-5">
+                        <div class="card-body">
+                            <h5 class="card-title reveal-1">Informations sur le compte</h5>
+                            <hr>
+                            <div class="reveal-2">
+                                <p class="card-text">Date d'inscription : {{ user.submittedAt|localizeddate('full', 'none', app.request.locale )|capitalize }}</p>
+                                <p class="card-text">Dernière connexion : {{ user.lastLogin|date('d/m/Y H:i') }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

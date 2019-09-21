@@ -15,3 +15,7 @@ tree_show:
   defaults:
     _locale: '%locale%'
 
+categories_list_sub_categories:
+  path: /{_locale}/get-sub-categories
+  controller: App\Controller\SelectAdCategoryController::listSubCategoriesOfCategory
+  methods: GET
