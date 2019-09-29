@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% import 'util/breadcrumb.twig' as breadcrumb %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block main %}
+
+    <div class="mb-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Breadcrumb -->
+                    <div class="breadcrumb-area pt-3">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb bg-white">
+                                <li class="breadcrumb-item"><a class="black-text" href="{{ path('index') }}">{{ 'layout.home'|trans }}</a></li>
+                                <li class="breadcrumb-item"><a class="black-text" href="{{ path('profile') }}">{{ user.username }}</a></li>
+                                <li class="breadcrumb-item active">Supprimer votre compte</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <!-- Breadcrumb End -->
+                    {% include 'user/nav-tabs.html.twig' with {active: 'delete'} %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div cass="row">
+        <div class="container">
+            <div class="tab-content" id="myTabContent">
+                <div aria-labelledby="delete-tab" class="tab-pane fade active show" id="delete" role="tabpanel">
+                    <div class="card shadow py-3 my-5">
+                        <div class="card-body">
+                            <h5 class="card-title text-warning">Supprimer votre compte</h5>
+                            <hr>
+                            <div class="card-text">
+                                <blockquote class="blockquote bq-warning">
+                                    <p class="mb-0"><small><span class="badge badge-danger">Attention!</span> Vous allez perdre toutes vos données et il vous sera plus possible de récupèrer votre compte.</small></p>
+                                </blockquote>
+                                <button class="btn btn-sm btn-danger font-weight-bold ml-0" type="submit"><i class="fa fa-trash"></i> Supprimer</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

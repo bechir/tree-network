@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+
+{% import 'util/breadcrumb.twig' as breadcrumb %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block main %}
+
+    <div class="mb-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Breadcrumb -->
+                    <div class="breadcrumb-area pt-3">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb bg-white">
+                                <li class="breadcrumb-item"><a class="black-text" href="{{ path('index') }}">{{ 'layout.home'|trans }}</a></li>
+                                <li class="breadcrumb-item"><a class="black-text" href="{{ path('profile') }}">{{ user.username }}</a></li>
+                                <li class="breadcrumb-item active">Gallerie</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <!-- Breadcrumb End -->
+                    {% include 'user/nav-tabs.html.twig' with {active: 'gallery'} %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div cass="row">
+        <div class="container">
+            <div class="tab-content" id="myTabContent">
+                <div aria-labelledby="delete-tab" class="tab-pane fade active show" id="delete" role="tabpanel">
+                    <div class="card shadow py-3 my-5">
+                        <div class="card-body">
+                            <h5 class="card-title text-muted"><i class="fa fa-download"></i> Téléchargements</h5>
+                            <hr>
+                            <div class="card-text">
+                                {{ form_start(form) }}
+                                    <div class="md-form">
+                                        {{ form_widget(form.gallery, {attr: {class: 'row'}}) }}
+
+                                        <div class="form-group">
+                                        <a class="mt-5 btn btn-info ml-0" href="#" id="add-images"><i class="fa fa-plus-circle btn-circle"></i></a>
+                                        </div>
+                                    </div>
+
+                                    <hr>
+                                    <button class="btn mt-5 btn-info ml-0" type="submit"><i class="fa fa-save"></i> Enregistrer</button>
+                                {{ form_end(form) }}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% if user.gallery is not empty %}
+
+    {% block javascripts %}
+        <script>
+            let _name = '';
+            let _img = '';
+            let _id = ''
+            let prototype = '';
+        
+            {% for image in user.gallery %}
+                _name = 'gallery_gallery_' + {{ (loop.index - 1) }} + '_imageFile';
+                _id = '#' + _name;
+                prototype = $(_id).parent();
+                _img = $(`<img class="img-thumbnail shadow border-0 p-0" src="{{ vich_uploader_asset(image, 'imageFile') }}">`);
+
+                appendDeleteImageLink(prototype);
+
+                _img.insertBefore(prototype.find('label'));
+                $('').replaceAll(prototype.find('label'));
+                prototype.addClass('col-sm-2 mb-3 h-50 transition')
+            {% endfor %}
+            
+            function appendDeleteImageLink(prototype) {
+                const deleteLink = $(`<button class="btn delete-item text-danger"><i class="fas fa-trash"></i></button>`);
+                const label = prototype.find('label');
+                deleteLink.insertBefore(label);
+            
+                deleteLink.on('click', function (e) {
+                    prototype.hide('normal', function () {
+                        prototype.remove();
+                    })
+                    e.preventDefault();
+                    return false;
+                }).hover(function () {
+                    prototype.addClass('bordered-red shadow');
+                }, function () {
+                    prototype.removeClass('bordered-red shadow');
+                })
+            }
+        </script>
+    {% endblock %}
+
+{% endif %}

@@ -8,7 +8,7 @@ browse:
 
 
 tree_show:
-  path: /{_locale}/tree/{username}
+  path: /{_locale}/u/{usernameCanonical}/tree
   controller: App\Controller\FamilyTreeController::show
   requirements:
     _locale: '%app_locales%'

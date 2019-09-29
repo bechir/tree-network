@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Form\EditProfileType;
 use App\Form\EmailsType;
 use App\Form\EditPasswordType;
+use App\Form\GalleryType;
 use App\Form\LinkType;
 use FOS\UserBundle\Model\UserManagerInterface;
 
@@ -40,6 +41,46 @@ class UserController extends AbstractController
         ]);
     }
 
+    public function galleryShow(User $user)
+    {
+        return $this->render('user/gallery.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_USER")
+     */
+    public function gallery(UserInterface $user = null)
+    {
+        return $this->render('user/gallery.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_USER")
+     */
+    public function galleryEdit(Request $request, EntityManagerInterface $em, UserInterface $user = null)
+    {
+        $form = $this->createForm(GalleryType::class, $user);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+
+            $this->addFlash('success', 'edit_success');
+
+            return $this->redirectToRoute('user_gallery');
+        }
+
+        return $this->render('user/gallery-edit.html.twig', [
+            'user' => $user,
+            'form' => $form->createView()
+        ]);
+    }
+
     /**
      * @IsGranted("ROLE_USER")
      */
@@ -58,6 +99,23 @@ class UserController extends AbstractController
         return $this->render('user/edit.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @IsGranted("ROLE_USER")
+     */
+    public function delete(Request $request, EntityManagerInterface $em, UserInterface $user = null)
+    {
+        if ($request->isMethod('POST')) {
+            $em->delete($user);
+            $em->flush();
+
+            $this->addFlash('success', 'user.delete_success');
+        }
+
+        return $this->render('user/delete.html.twig', [
+            'user' => $user
         ]);
     }
 

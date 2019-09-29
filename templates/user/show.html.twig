@@ -20,7 +20,11 @@
                                 <li class="breadcrumb-item active">{{ user.username }}</li>
                             </ol>
                         </nav>
-                        <h1 class="ml-3">Profil</h1>
+                    {% if app.user == user %}
+                        {% include 'user/nav-tabs.html.twig' with {active: 'profile'} %}
+                    {% else %}
+                        {% include 'user/public-nav-tabs.html.twig' with {user: user, active: 'profile'} %}
+                    {% endif %}
                     </div>
                     <!-- Breadcrumb End -->
                 </div>

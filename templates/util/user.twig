@@ -1,8 +1,9 @@
 {% macro card(user) %}
+    {% set profile_url = path('user_show', {usernameCanonical: user.usernameCanonical}) %}
     <div class="card mb-4">
         <div class="view overlay">
-            <img alt="Card image cap" class="card-img-top" src="{{ asset('img/users/default-avatar-profile.jpg') }}">
-            <a href="#!">
+            <img class="card-img-top" src="{{ user.avatar ? vich_uploader_asset(user.avatar, 'avatarFile') : asset('img/user/default-avatar-profile.jpg') }}">
+            <a href="{{ profile_url }}">
                 <div class="mask rgba-white-slight"></div>
             </a>
         </div>
@@ -26,7 +27,7 @@
                     <i class="fas fa-layer-group"></i>
                     4 générations</p>
             </div>
-            <a href="{{ path('user_show', {usernameCanonical: user.usernameCanonical}) }}"><button class="btn aqua-gradient btn-block" type="button">Détails</button></a>
+            <a href="{{ profile_url }}"><button class="btn aqua-gradient btn-block" type="button">Détails</button></a>
         </div>
     </div>
 {% endmacro %}

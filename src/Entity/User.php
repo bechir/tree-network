@@ -139,6 +139,11 @@ class User extends BaseUser implements EquatableInterface
      */
     private $inverses;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="user", orphanRemoval=true, cascade={"persist", "remove"})
+     */
+    private $gallery;
+
     const NUM_ITEMS = 15;
 
     public function __construct()
@@ -146,6 +151,7 @@ class User extends BaseUser implements EquatableInterface
         parent::__construct();
         $this->links = new ArrayCollection();
         $this->inverses = new ArrayCollection();
+        $this->gallery = new ArrayCollection();
     }
 
     /**
@@ -426,6 +432,37 @@ class User extends BaseUser implements EquatableInterface
             // set the owning side to null (unless already changed)
             if ($inverse->getInverse() === $this) {
                 $inverse->setInverse(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Image[]
+     */
+    public function getGallery(): Collection
+    {
+        return $this->gallery;
+    }
+
+    public function addGallery(Image $gallery): self
+    {
+        if (!$this->gallery->contains($gallery)) {
+            $this->gallery[] = $gallery;
+            $gallery->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGallery(Image $gallery): self
+    {
+        if ($this->gallery->contains($gallery)) {
+            $this->gallery->removeElement($gallery);
+            // set the owning side to null (unless already changed)
+            if ($gallery->getUser() === $this) {
+                $gallery->setUser(null);
             }
         }
 

@@ -21,17 +21,9 @@
                                 <li class="breadcrumb-item active">Modifier</li>
                             </ol>
                         </nav>
-                        <h1 class="ml-3">Profil</h1>
                     </div>
                     <!-- Breadcrumb End -->
-                    <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a aria-controls="profile" aria-selected="false" class="nav-link text-info" href="{{ path('profile') }}"><span class="fas fa-user"></span> Profil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a aria-controls="settings" aria-selected="false" class="nav-link text-info" href="{{ path('user_settings') }}"><span class="fas fa-cogs"></span> Paramètres</a>
-                        </li>
-                    </ul>
+                    {% include 'user/nav-tabs.html.twig' with {active: 'edit'} %}
                 </div>
             </div>
         </div>
@@ -48,7 +40,7 @@
                         <div class="col-sm-3 mr-5">
                             <div class="avatar text-center">
                                 <div class="img-preview">
-                                    <img class="img-circle img-150" src="{{ user.avatar ? vich_uploader_asset(user.avatar, 'avatarFile') : asset('img/users/randomdev.jpg') }}">
+                                    <img class="img-circle img-150" src="{{ user.avatar ? vich_uploader_asset(user.avatar, 'avatarFile') : asset('img/user/default-avatar-profile.jpg') }}">
                                 </div>
                                 {{ form_widget(form.avatar.avatarFile) }}
                                 <label for="edit_profile_avatar_avatarFile" class="btn-edit btn aqua-gradient">Modifier</label>

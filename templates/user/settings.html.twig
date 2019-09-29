@@ -21,17 +21,9 @@
                                 <li class="breadcrumb-item active">Paramètres</li>
                             </ol>
                         </nav>
-                        <h1 class="ml-3">Profil</h1>
                     </div>
                     <!-- Breadcrumb End -->
-                    <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a aria-controls="profile" aria-selected="false" class="nav-link text-info" href="{{ path('profile') }}"><span class="fas fa-user"></span> Profil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a aria-controls="settings" aria-selected="true" class="nav-link active" data-toggle="tab" href="#settings" id="settings-tab" role="tab"><span class="fas fa-cogs"></span> Paramètres</a>
-                        </li>
-                    </ul>
+                    {% include 'user/nav-tabs.html.twig' with {active: 'settings'} %}
                 </div>
             </div>
         </div>
@@ -131,6 +123,16 @@
                                 </select>
                             </div>
                             <div class="card-text"><button class="btn btn-sm btn-info font-weight-bold ml-0" type="submit">Enregistrer</button></div>
+                        </div>
+                    </div>
+
+                    <div class="card shadow py-3 my-5">
+                        <div class="card-body">
+                            <h5 class="card-title text-warning">Supprimer votre compte</h5>
+                            <hr>
+                            <div class="card-text">
+                                <a href="{{ path('user_delete') }}" class="btn btn-warning font-weight-bold ml-0"><i class="fa fa-trash"></i> Supprimer</a>
+                            </div>
                         </div>
                     </div>
 

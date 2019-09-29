@@ -1,5 +1,5 @@
 profile:
-  path: /{_locale}/user/profile
+  path: /{_locale}/u/profile
   controller: App\Controller\UserController::profile
   requirements:
     _locale: '%app_locales%'
@@ -7,7 +7,7 @@ profile:
     _locale: '%locale%'
 
 user_edit:
-  path: /{_locale}/user/edit
+  path: /{_locale}/u/edit
   controller: App\Controller\UserController::edit
   requirements:
     _locale: '%app_locales%'
@@ -15,24 +15,56 @@ user_edit:
     _locale: '%locale%'
 
 user_settings:
-  path: /{_locale}/user/settings
+  path: /{_locale}/u/settings
   controller: App\Controller\UserController::settings
   requirements:
     _locale: '%app_locales%'
   defaults:
     _locale: '%locale%'
 
-user_show:
-  path: /{_locale}/user/{usernameCanonical}
-  controller: App\Controller\UserController::show
+user_gallery:
+  path: /{_locale}/u/gallery
+  controller: App\Controller\UserController::gallery
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+user_gallery_edit:
+  path: /{_locale}/u/edit-gallery
+  controller: App\Controller\UserController::galleryEdit
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+user_delete:
+  path: /{_locale}/u/delete-account
+  controller: App\Controller\UserController::delete
   requirements:
     _locale: '%app_locales%'
   defaults:
     _locale: '%locale%'
 
 user_tree_show:
-  path: /{_locale}/my-tree
+  path: /{_locale}/u/my-tree
   controller: App\Controller\UserController::treeShow
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+user_show:
+  path: /{_locale}/u/{usernameCanonical}
+  controller: App\Controller\UserController::show
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+user_gallery_show:
+  path: /{_locale}/u/{usernameCanonical}/gallery
+  controller: App\Controller\UserController::galleryShow
   requirements:
     _locale: '%app_locales%'
   defaults:

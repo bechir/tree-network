@@ -1,3 +1,21 @@
+@font-face {
+    font-family: 'Mark-Extralight';
+    src: url('/font/Mark-Extralight.woff2') format('woff2');
+    src: url('/font/Mark-Extralight.woff') format('woff');
+    src: url('/font/Mark-Extralight.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Mark-Heavy';
+    src: url('/font/Mark-Heavy.woff2') format('woff2');
+    src: url('/font/Mark-Heavy.woff') format('woff');
+    src: url('/font/Mark-Heavy.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
 :root{
 	--primary-color: #2bbbad;
 	--second-color: #da6f28;
@@ -89,7 +107,8 @@ padding: 150px 0;
 }
 
 img.avatar {
-    width: 33px
+    width: 33px;
+    max-height: 35px
 }
 
 img.img-50{
@@ -98,6 +117,7 @@ img.img-50{
 
 img.img-100{
     width: 100px;
+    max-height: 133px;
 }
 
 img.img-150{
@@ -141,7 +161,12 @@ main.main-section {
 .navbar.navbar-dark form .md-form .form-control:focus{
     width: 290px !important;
     border-radius: 7px;
+    border-top-left-radius:0;
+    border-top-right-radius:0;
     padding: 5px 3px 5px 10px;
+    border-color: #fff !important;
+    outline: none!important;
+    box-shadow: none !important;
 }
 
 .navbar.navbar-dark form .md-form i{
@@ -364,4 +389,58 @@ background-color: #333333;
 
 input#edit_profile_avatar_avatarFile{
     display: none;
+}
+
+
+form div.transition{
+    animation: animateElement linear .3s;
+    animation-iteration-count: 1;
+    display: inline-block;
+    vertical-align: bottom;
+    width: 30%;
+    margin-right: 3px;
+    border: 1px solid transparent;
+    position:relative;
+} 
+@keyframes animateElement{
+    0% {
+        opacity:0;
+        transform:  translate(0px,20px);
+    }
+    50% {
+        opacity: .5;
+        transform:  translate(0px,10px);
+    }
+    100% {
+        opacity:1;
+        transform:  translate(0px,0px);
+    }
+}
+.file-label{
+    width: 100%;
+    line-height: 2.3em;
+    position: relative!important;
+    cursor: pointer!important;
+}
+input.file-input{
+    display:none;
+}
+form img.img-preview{
+    width: 100%;
+}
+
+.btn.delete-item.text-danger {
+    padding: 5px 13px;
+    box-shadow: 0 0 13px #ccc;
+    margin:0;
+    bottom: -4px;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.91);
+    line-height: 2.05em;
+    z-index: 1;
+}
+
+.bordered-red{
+    border-color: rgba(255, 60, 48, 0.71)!important;
+    border-radius: 3px;
 }
