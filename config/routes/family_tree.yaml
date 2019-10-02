@@ -6,6 +6,13 @@ browse:
   defaults:
     _locale: '%locale%'
 
+browse_paginated:
+  path: /{_locale}/browse/page/{page<[1-9]\d*>}
+  controller: App\Controller\FamilyTreeController::browse
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
 
 tree_show:
   path: /{_locale}/u/{usernameCanonical}/tree
@@ -15,7 +22,7 @@ tree_show:
   defaults:
     _locale: '%locale%'
 
-categories_list_sub_categories:
-  path: /{_locale}/get-sub-categories
-  controller: App\Controller\SelectAdCategoryController::listSubCategoriesOfCategory
+links_list_by_gender:
+  path: /{_locale}/get-links
+  controller: App\Controller\FamilyTreeController::listLinkNamesOfGender
   methods: GET

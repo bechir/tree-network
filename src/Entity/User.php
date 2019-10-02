@@ -144,7 +144,10 @@ class User extends BaseUser implements EquatableInterface
      */
     private $gallery;
 
-    const NUM_ITEMS = 15;
+    const NB_IMTEMS_HOME = 4;
+    CONST NB_IMTEMS_SIMILAR = 7;
+    const NB_ITEMS_LISTING = 12;
+    const NB_ITEMS_ADMIN_LISTING = 50;
 
     public function __construct()
     {

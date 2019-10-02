@@ -52,6 +52,7 @@ form:
   not_member: Pas de compte ?
   login_sign_up: Inscrivez vous
   remember_me: Se souvenir de moi
+  select: Séléctionnez
 
 login:
   title: Connectez vous
@@ -66,9 +67,6 @@ tree:
   list:
     title: Arbres généalogiques
 
-
-  show:
-
 profile:
   edit_success: Votre profil a été modifé avec succès!
   title: Mon profil
@@ -81,6 +79,8 @@ action:
   learn_more: "En savoir plus" # Learn more
 
 word:
+  prev: Precedant
+  next: Suivant
   male: Homme
   female: Femme
   father: Père

@@ -3,7 +3,7 @@
         <a aria-controls="profile" aria-selected="false" class="nav-link {% if active == 'profile' %}active{% else %}text-white{% endif %}" {% if active == 'profile' %}href="#profile" id="profile-tab" role="tab" {% else %} href="{{ path('profile') }}" {% endif %}><span class="fas fa-address-card"></span> Profil</a>
     </li>
     <li class="nav-item">
-        <a aria-controls="tree" aria-selected="false" class="nav-link {% if active == 'tree' %}active{% else %}text-white{% endif %}" {% if active == 'tree' %}href="#tree" id="tree-tab" role="tab" {% else %} href="{{ path('user_tree_show') }}" {% endif %}><span class="fas fa-tree"></span> Mon arbre</a>
+        <a aria-controls="tree" aria-selected="false" class="nav-link {% if active == 'my-tree' %}active{% else %}text-white{% endif %}" {% if active == 'tree' %}href="#tree" id="tree-tab" role="tab" {% else %} href="{{ path('user_tree_show') }}" {% endif %}><span class="fas fa-tree"></span> Mon arbre</a>
     </li>
     <li class="nav-item">
         <a aria-controls="gallery" aria-selected="false" class="nav-link {% if active == 'gallery' %}active{% else %}text-white{% endif %}" {% if active == 'gallery' %}href="#gallery" id="gallery-tab" role="tab" {% else %} href="{{ path('user_gallery') }}" {% endif %}><span class="fas fa-images"></span> Gallerie</a>

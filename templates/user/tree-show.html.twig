@@ -1,9 +1,14 @@
 {% extends "base.html.twig" %}
 
+{% import 'util/breadcrumb.twig' as breadcrumb %}
+
 {% block title %}
     {{ user.fullName }} - {{ 'layout.family_tree'|trans }}
 {% endblock title %}
 
+{% block stylesheets %}
+    <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
+{% endblock %}
 
 {% block main %}
     <div class="mb-3">
@@ -14,13 +19,14 @@
                     <div class="breadcrumb-area pt-3">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb bg-white">
-                                <li class="breadcrumb-item"><a class="black-text" href="{{ path('index' ) }}">{{ 'layout.home'|trans }}</a></li>
-                                <li class="breadcrumb-item"><a class="black-text" href="{{ path('browse') }}">{{ 'tree.list.title'|trans }}</a></li>
-                                <li class="breadcrumb-item active">{{ user.username }}</li>
+                                <li class="breadcrumb-item"><a class="black-text" href="{{ path('index') }}">{{ 'layout.home'|trans }}</a></li>
+                                <li class="breadcrumb-item"><a class="black-text" href="{{ path('profile') }}">{{ user.username }}</a></li>
+                                <li class="breadcrumb-item active">Mon arbre</li>
                             </ol>
                         </nav>
                     </div>
                     <!-- Breadcrumb End -->
+                    {% include 'user/nav-tabs.html.twig' with {active: 'my-tree'} %}
                 </div>
             </div>
         </div>
@@ -32,197 +38,156 @@
             <div class="card card-cascade narrower mt-5">
                 <!--Card image-->
                 <div class="view shadow rounded view-cascade gradient-card-header aqua-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
+                    <div class="ml-3">
+                        <button type="button" id="add-btn-link" data-toggle="modal" data-target="#addLinkModal" class="btn btn-outline-white btn-circle btn-sm px-2">
+                        <i class="fas fa-plus mt-0"></i>
+                        </button>
+                    </div>
+                    <div class="modal fade" id="addLinkModal" tabindex="-1" role="dialog" aria-labelledby="addLinkModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg cascading-modal" role="document">
+                            <!--Content-->
+                            <div class="modal-content">
+                                <!--Header-->
+                                <div class="modal-header light-blue darken-3 white-text">
+                                    <h4 class="title"><i class="fas fa-user-plus"></i>Ajouter un nouveau lien</h4>
+                                    <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <!--/.Header-->
+                                <!--Body-->
+                                <div class="modal-body mb-0">
+                                    {{ form_start(form) }}
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="md-form form-sm">
+                                                    {{ form_widget(form.inverse.firstName, {'attr': {'class': 'form-control'}}) }}
+                                                    {{ form_label(form.inverse.firstName) }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="md-form form-sm">
+                                                    {{ form_widget(form.inverse.lastName, {'attr': {'class': 'form-control'}}) }}
+                                                    {{ form_label(form.inverse.lastName) }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="md-form form-sm">
+                                                    {{ form_widget(form.inverse.description, {'attr': {'class': 'md-textarea w-100 mb-0'}}) }}
+                                                    {{ form_label(form.inverse.description) }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="mb-0">Sexe</label>
+                                                <div class="md-form form-group mt-0">
+                                                    {{ form_widget(form.inverse.gender, {'attr': {'class': 'browser custom-select px-0'}}) }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="mb-0">C'est votre</label>
+                                                <div class="md-form form-group mt-0">
+                                                    {{ form_widget(form.linkCategory, {'attr': {'class': 'browser disabled custom-select px-0'}}) }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mx-auto">
+                                                <div class="avatar text-center">
+                                                    <div class="img-preview">
+                                                        <img class="img-circle img-100 mx-auto" src="{{ asset('img/user/default-avatar-profile.jpg') }}">
+                                                    </div>
+                                                    <label class="btn-edit btn-sm btn aqua-gradient file-label">
+                                                        {{ form_widget(form.inverse.avatar.avatarFile, {attr: {class: 'file-input'}}) }}
+                                                        <i class="fa fa-camera"></i> Photo
+                                                    </label>
+                                                </div>
+                                            </DIV>
+                                        </div>
 
-                <div class="ml-3">
-                    <button type="button" id="add-btn-link" data-toggle="modal" data-target="#addLinkModal" class="btn btn-outline-white btn-circle btn-sm px-2">
-                    <i class="fas fa-plus mt-0"></i>
-                    </button>
-                </div>
-                <div class="modal fade" id="addLinkModal" tabindex="-1" role="dialog" aria-labelledby="addLinkModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg cascading-modal" role="document">
-                        <!--Content-->
-                        <div class="modal-content">
-                            <!--Header-->
-                            <div class="modal-header light-blue darken-3 white-text">
-                                <h4 class="title"><i class="fas fa-user-plus"></i>Ajouter un nouveau lien</h4>
-                                <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                                </button>
+                                        <div class="text-center mt-3">
+                                        <button class="btn btn-info mb-2 waves-effect waves-light">Ajouter <i class="fas fa-check-circle ml-1"></i></button>
+                                        </div>
+                                    {{ form_end(form) }}
+                                </div>
                             </div>
-                            <!--/.Header-->
-                            <!--Body-->
-                            <div class="modal-body mb-0">
-                                {{ form_start(form) }}
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="md-form form-sm">
-                                                {{ form_widget(form.inverse.firstName, {'attr': {'class': 'form-control'}}) }}
-                                                {{ form_label(form.inverse.firstName) }}
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="md-form form-sm">
-                                                {{ form_widget(form.inverse.lastName, {'attr': {'class': 'form-control'}}) }}
-                                                {{ form_label(form.inverse.lastName) }}
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="md-form form-sm">
-                                                {{ form_widget(form.inverse.description, {'attr': {'class': 'md-textarea w-100 mb-0'}}) }}
-                                                {{ form_label(form.inverse.description) }}
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="mb-0">Sexe</label>
-                                            <div class="md-form form-group mt-0">
-                                                {{ form_widget(form.inverse.gender, {'attr': {'class': 'browser custom-select px-0'}}) }}
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="mb-0">C'est votre</label>
-                                            <div class="md-form form-group mt-0">
-                                                {{ form_widget(form.linkCategory, {'attr': {'class': 'browser custom-select px-0'}}) }}
-                                            </div>
-                                        </div>
-                                        <select class="form-control" style="border:none" name="category" id="select_category">
-                                            <option value="">{{ 'form.select_category'|trans }}</option>
-                                            {% for category in categories() %}
-                                            <option value="{{ category.slug }}">{{ ('ad.category.' ~ category.slug)|trans }}</option>
-                                            {% endfor %}
-                                        </select>
-                                        <select class="form-control" name="sc" id="select_sub_category" style="display:none;">
-                                        </select>
-                                    </div>
-
-                                    <div class="text-center mt-1-half">
-                                    <button class="btn btn-info mb-2 waves-effect waves-light">Ajouter <i class="fas fa-check-circle ml-1"></i></button>
-                                    </div>
-                                {{ form_end(form) }}
-                            </div>
-                            <!--/.Body-->
                         </div>
-                        <!--/.Content-->
+                    </div>
+
+                    <a href="#" onclick="return false;" class="white-text mx-3">
+                    <i class="fas fa-tree"></i> Mon arbre généalogique</a>
+                    <div class="mr-3">
+                        <button type="button" class="btn btn-outline-white btn-circle btn-sm px-2">
+                        <i class="fas fa-pencil-alt mt-0"></i>
+                        </button>
+                        <button type="button" class="btn btn-outline-white btn-circle btn-sm px-2">
+                        <i class="far fa-trash-alt mt-0"></i>
+                        </button>
+                        <button type="button" class="btn btn-outline-white btn-circle btn-sm px-2">
+                        <i class="fas fa-info-circle mt-0"></i>
+                        </button>
                     </div>
                 </div>
 
-                <a href="#" onclick="return false;" class="white-text mx-3">
-                    <i class="fas fa-tree"></i> Arbre généalogique de {{ user.fullName }}</a>
-
-                <div class="mr-3">
-                    <button type="button" class="btn btn-outline-white btn-circle btn-sm px-2">
-                    <i class="fas fa-pencil-alt mt-0"></i>
-                    </button>
-                    <button type="button" class="btn btn-outline-white btn-circle btn-sm px-2">
-                    <i class="far fa-trash-alt mt-0"></i>
-                    </button>
-                    <button type="button" class="btn btn-outline-white btn-circle btn-sm px-2">
-                    <i class="fas fa-info-circle mt-0"></i>
-                    </button>
-                </div>
-
-                </div>
-                <!--/Card image-->
-
                 <div class="px-4">
-
-                <div class="table-wrapper">
-                    <!--Table-->
-                    <table class="table table-hover text-justify mb-0">
-
-                    <!--Table head-->
-                    <thead>
-                        <tr>
-                        <th>
-                            <a>Nom complet
-                            <i class="fas fa-sort ml-1"></i>
-                            </a>
-                        </th>
-                        <th>
-                            <a href="">Description
-                            <i class="fas fa-sort ml-1"></i>
-                            </a>
-                        </th>
-                        <th>
-                            <a href="">Type de lien
-                            <i class="fas fa-sort ml-1"></i>
-                            </a>
-                        </th>
-                        <th>
-                            <a href="">Photo
-                            <i class="fas fa-sort ml-1"></i>
-                            </a>
-                        </th>
-                        </tr>
-                    </thead>
-                    <!--Table head-->
-
-                    <!--Table body-->
-                    <tbody>
-                    {% for link in user.links %}
-                        <tr>
-                            <td>{{ link.inverse.fullName }}</td>
-                            <td>{{ link.inverse.description }}</td>
-                            <td>{{ link.linkCategory.inverse|trans }}</td>
-                            <td><img class="img-circle img-50" src="/img/users/default-avatar-profile.jpg"></td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                    <!--Table body-->
-                    </table>
-                    <!--Table-->
-                </div>
-
+                    <div class="table-wrapper">
+                        <table class="table table-hover table-striped text-justify mb-0">
+                            <thead class="bg-info text-white">
+                                <tr>
+                                    <th class="h6 rounded-left">Nom complet<i class="fas fa-sort ml-1"></i></th>
+                                    <th class="h6">Description<i class="fas fa-sort ml-1"></i></th>
+                                    <th class="h6">Type de lien<i class="fas fa-sort ml-1"></i></th>
+                                    <th class="h6 rounded-right">Photo<i class="fas fa-sort ml-1"></i></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for link in user.links %}
+                                <tr class="cursor-pointer">
+                                    <td>{{ link.inverse.fullName }}</td>
+                                    <td>{{ link.inverse.description }}</td>
+                                    <td>{{ link.linkCategory.name|trans }}</td>
+                                    <td><img class="img-circle img-50 img-h-50" src="{{ link.inverse.avatar ? vich_uploader_asset(link.inverse.avatar, 'avatarFile') : asset('img/user/default-avatar-profile.jpg') }}"></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-            <!-- Table with panel -->
         </div>
     </div>
 {% endblock main %}
 
 {% block javascripts %}
-    {{ parent() }}
     <script type="text/javascript">
 
-    $('#select_category').change(function () {
-         var categorySelector = $(this);
+    $('#link_inverse_gender').change(function () {
+         var genderSelector = $(this);
 
-         // Request the subCategories of the selected city.
-         $.ajax({
-             url: "{{ path('categories_list_sub_categories') }}",
-             type: "GET",
-             dataType: "JSON",
-             data: {
-                 category: categorySelector.val()
-             },
-             success: function (subCategories) {
-                 var subCategoriesSelect = $("#select_sub_category");
+         if(genderSelector.val() != null) {
+            $.ajax({
+                url: "{{ path('links_list_by_gender') }}",
+                type: "GET",
+                dataType: "JSON",
+                data: {
+                    genderId: genderSelector.val()
+                },
+                success: function (linkNames) {
+                    var linkNamesSelect = $("#link_linkCategory");
 
-                 subCategoriesSelect.show();
+                    linkNamesSelect.removeClass('disabled');
 
-                 console.log(subCategories);
+                    console.log(linkNames);
 
-                 // Remove current options
-                 subCategoriesSelect.html('');
-                 if(subCategories.length == 0) {
-                    subCategoriesSelect.addClass('hidden');
-                    subCategoriesSelect.removeClass('visible');
-                    $('#submit-sm').attr('disabled', true);
-                    $('#submit-sm').attr('title', '{{ 'form.select_category'|trans }}');
-                  }
-                else {
-                   subCategoriesSelect.addClass('visible');
-                   subCategoriesSelect.removeClass('hidden');
-                   $('#submit-sm').removeAttr('disabled');
+                    // Remove current options
+                    linkNamesSelect.html('');
+
+                    $.each(linkNames, function (key, value) {
+                        linkNamesSelect.append(`<option value="${key}">${value}</option>`);
+                    });
+                },
+                error: function (err) {
+                    alert("An error ocurred while loading data ...");
                 }
-
-                $.each(subCategories, function (key, subCateory) {
-                   subCategoriesSelect.append('<option value="' + subCateory.slug + '">' + subCateory.name + '</option>');
-                });
-             },
-             error: function (err) {
-                 alert("An error ocurred while loading data ...");
-             }
-         });
+            });
+         }
      });
     </script>
 {% endblock %}

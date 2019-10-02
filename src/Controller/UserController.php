@@ -152,7 +152,10 @@ class UserController extends AbstractController
         ]);
     }
 
-    public function treeShow(Request $request, UserInterface $user, EntityManagerInterface $em): Response
+    /**
+     * @IsGranted("ROLE_USER")
+     */
+    public function treeShow(Request $request, EntityManagerInterface $em, UserInterface $user = null): Response
     {
         if(null === $user) {
             return $this->createNotFoundException("Tree family can't be found. the username does not exists.");

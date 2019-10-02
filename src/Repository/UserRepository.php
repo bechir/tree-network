@@ -4,6 +4,9 @@ namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -19,30 +22,40 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
-    // /**
-    //  * @return User[] Returns an array of User objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findRecents()
     {
         return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
+            ->where('u.username is not null')
+            ->orderBy('u.submittedAt', 'DESC')
+            ->setMaxResults(User::NB_IMTEMS_HOME)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
-    public function findRecents()
+    public function getUsers(int $page = 1): Pagerfanta
     {
-        return $this->createQueryBuilder('u')
+        $qb = $this->createQueryBuilder('u')
+            ->where('u.username is not null')
             ->orderBy('u.submittedAt', 'DESC')
-            ->setMaxResults(4)
-            ->getQuery()
-            ->getResult()
         ;
+
+        return $this->createPaginator($qb->getQuery(), $page);
+    }
+
+    /**
+     * @return User[]
+     */
+    public function createPaginator(Query $query, int $page, $isAdmin = false): Pagerfanta
+    {
+        $paginator = new Pagerfanta(new DoctrineORMAdapter(($query)));
+        if($isAdmin) {
+            $paginator->setMaxPerPage(User::NB_ITEMS_ADMIN_LISTING);
+        }else {
+            $paginator->setMaxPerPage(User::NB_ITEMS_LISTING);
+        }
+        $paginator->setCurrentPage($page);
+
+        return $paginator;
     }
 }

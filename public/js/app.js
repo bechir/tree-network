@@ -41,7 +41,7 @@ $(document).ready(function() {
         observer.observe(r);
     });
 
-    const avatarInput = $('input#edit_profile_avatar_avatarFile');
+    const avatarInput = $('input[type="file"]');
     const img = `<img class="img-circle img-150" src="#">`;
 
     avatarInput.change(function(){

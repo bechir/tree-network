@@ -10,15 +10,28 @@
     {{ breadcrumb.level1('tree.list.title') }}
 
     <div class="container">
-        <!-- Card deck -->
         <div class="row browse">
-        {% for user in users %}
-            {{ user_card(user) }}
-        {% else %}
-            <div class="alert alert-info">
-                <p>Il n'y a acutellement aucun arbre.</p>
-        {% endfor %}
+            {% for user in users %}
+                {{ user_card(user) }}
+            {% else %}
+                <div class="alert alert-info">
+                    <p>Il n'y a acutellement aucun arbre.</p>
+            {% endfor %}
         </div>
+        {% if users.haveToPaginate %}
+            <div class="container shadow rounded mt-5 text-center">
+                <div class="pt-3 pb-2 d-inline-block">
+                    {{ pagerfanta(users, 'twitter_bootstrap4_translated',
+                        { routeName: 'browse_paginated',
+                            routeParams: app.request.query.all,
+                            prev_message: 'word.prev'|trans,
+                            next_message: 'word.next'|trans,
+                            page_template: '<li><a href="%href%" %rel%>%text%</a></li>'
+                        })
+                    }}
+                </div>
+            </div>
+        {% endif %}
     </div>
 </div>
 

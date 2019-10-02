@@ -117,7 +117,7 @@ img.img-50{
 
 img.img-100{
     width: 100px;
-    max-height: 133px;
+    height: 100px;
 }
 
 img.img-150{
@@ -387,7 +387,7 @@ background-color: #333333;
     font-size: small;
 }
 
-input#edit_profile_avatar_avatarFile{
+input[type="file"]{
     display: none;
 }
 
@@ -443,4 +443,12 @@ form img.img-preview{
 .bordered-red{
     border-color: rgba(255, 60, 48, 0.71)!important;
     border-radius: 3px;
+}
+
+.img-h-50{
+    height: 50px!important;
+}
+
+.cursor-pointer{
+    cursor: pointer;
 }

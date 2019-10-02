@@ -23,13 +23,7 @@ class LinkType extends AbstractType
             ->add('linkCategory', EntityType::class, [
                 'class' => LinkCategory::class,
                 'choice_label' => 'name',
-                'choice_translation_domain' => true,
-                'query_builder' => function(EntityRepository $er) use($user) {
-                    return $er->createQueryBuilder('l')
-                        ->where('l.gender = :gender')
-                        ->setParameter('gender', $user->getGender())
-                    ;
-                }
+                'choice_translation_domain' => true
             ])
             ->add('inverse', LinkedUserType::class)
         ;

@@ -37,7 +37,12 @@ class LinkedUserType extends AbstractType
             ->add('gender', EntityType::class, [
                 'class' => Gender::class,
                 'choice_label' => 'name',
-                'choice_translation_domain' => true
+                'choice_translation_domain' => true,
+                'required' => false,
+                'placeholder' => 'form.select'
+            ])
+            ->add('avatar', UserAvatarType::class, [
+                'required' => false,
             ])
         ;
     }
