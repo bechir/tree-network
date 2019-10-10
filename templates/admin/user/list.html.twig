@@ -21,7 +21,6 @@
                                 <th>Nom d'utilisateur</th>
                                 <th>Login</th>
                                 <th>Date d'inscription</th>
-                                <th>Type</th>
                                 <th>Statut</th>
                                 <th>Actions</th>
                             </tr>
@@ -37,15 +36,6 @@
                                         <a href="{{ path('admin_user_show', {user: user.id}) }}">{{ user.username }}</a></td>
                                     <td>
                                         {{ user.submittedAt|date('d M, Y') }}</td>
-                                    <td>
-                                        {% if user.isAdmin() %}
-                                            <label class="label label-info">Administrateur</label>
-                                        {% elseif user.isEmployer() %}
-                                            <label class="label label-primary">Recruteur</label>
-                                        {% else %}
-                                            <label class="label label-default">Candidat</label>
-                                        {% endif %}
-                                    </td>
                                     {# <td>
                                         {{ user.locale|upper }}
                                     </td> #}

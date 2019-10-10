@@ -9,6 +9,7 @@
 namespace App\Repository;
 
 use App\Entity\Link;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -25,32 +26,20 @@ class LinkRepository extends ServiceEntityRepository
         parent::__construct($registry, Link::class);
     }
 
-    // /**
-    //  * @return Link[] Returns an array of Link objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findRecentsByOwner(User $owner)
     {
         return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('l.id', 'ASC')
-            ->setMaxResults(10)
+            ->leftJoin('l.owner', 'o')
+                ->addSelect('o')
+            ->leftJoin('l.inverse', 'i')
+                ->addSelect('i')
+            ->leftJoin('l.linkCategory', 'c')
+                ->addSelect('c')
+            ->where('o = :owner')
+            ->setParameter('owner', $owner)
+            ->orderBy('i.submittedAt', 'DESC')
+            ->setMaxResults(User::NB_IMTEMS_RECENT_LINKS)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Link
-    {
-        return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

@@ -48,39 +48,26 @@
 
                     <div class="card shadow py-3 reveal-1">
                         <div class="card-body">
-                            <h5 class="card-title">Ses parents <a href="{{ path('user_tree_show') }}" class="btn btn-info rounded float-right">Voir toute la famille</a></h5>
+                            <h5 class="card-title">Ajouts récents <a href="{{ path('tree_show', {usernameCanonical: user.usernameCanonical}) }}" class="btn btn-info rounded float-right">Voir toute la famille</a></h5>
                             <hr>
                             <div class="row">
-                                <div class="col-md-6">
-                                    <div class="card shadow-sm">
-                                        <div class="card-body">
-                                            <div class="d-flex flex-row justify-content-between">
-                                                <div class="p-2 text-muted">
-                                                    Père<br>
-                                                    <a class="btn-link text-info" href="#">Issmaila Ibrahim Ba</a>
-                                                </div>
-                                                <div class="p-2">
-                                                    <img class="img-circle img-50 h-100" src="{{ asset('img/user/default-avatar-profile.jpg') }}">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card shadow-sm">
-                                        <div class="card-body">
-                                            <div class="d-flex flex-row justify-content-between">
-                                                <div class="p-2 text-muted">
-                                                    Mère<br>
-                                                    <a class="btn-link text-info" href="#">Aissata Yaya Sy</a>
-                                                </div>
-                                                <div class="p-2">
-                                                    <img class="img-circle img-50 h-100" src="{{ asset('img/user/default-avatar-profile.jpg') }}">
+                                {% for link in recents %}
+                                    <div class="col-md-6">
+                                        <div class="card shadow-sm">
+                                            <div class="card-body">
+                                                <div class="d-flex flex-row justify-content-between">
+                                                    <div class="p-2 text-muted">
+                                                        {{ link.linkCategory.name|trans }}<br>
+                                                        <a class="btn-link text-info" href="#">{{ link.inverse.fullname }}</a>
+                                                    </div>
+                                                    <div class="p-2">
+                                                        <img class="img-circle img-square-50" src="{{ link.inverse.avatar ? vich_uploader_asset(link.inverse.avatar, 'avatarFile') : asset('img/user/default-avatar-profile.jpg') }}">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>

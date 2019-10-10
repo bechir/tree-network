@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}À propos de {{ website.name }}{% endblock %}
+
 {% block main %}
 
 {# Team #}
@@ -8,9 +10,13 @@
   <!-- Section heading -->
   <h2 class="h1-responsive font-weight-bold text-center mb-5">À propos</h2>
   <!-- Section description -->
-  <p class="grey-text text-justify w-responsive mx-auto mb-5">Lorem ipsum dolor sit amet, consectetur
-    adipisicing elit. Fugit, error amet numquam iure provident voluptate esse quasi, veritatis totam voluptas
-    nostrum quisquam eum porro a pariatur veniam.</p>
+  <p class="grey-text text-justify w-responsive mx-auto mb-5">
+    {{ website.name }} est une application web responsive, vous permettant de gérer facilement VOTRE arbre généalogique et retrouver rapidement votre famille.
+  </p>
+  <p class="grey-text text-justify w-responsive mx-auto mb-5">
+    {{ website.name }} est aussi un lieu de rencontre et de partage d'informations (photos, vidéos, etc.).<br>
+    Vous pouvez aussi communiquer instantannément avec vos connaissances situées aux 4 coins du monde!
+  </p>
 </section>
 <!-- Section: Team v.4 -->
 

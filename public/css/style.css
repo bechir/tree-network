@@ -190,13 +190,29 @@ main.main-section {
     background-position: right;
     color: #fff
 }
-.navbar-collapse{
-    overflow: visible!important;
-}
+
+
 .navbar .dropdown-menu {
     left: -200px;
 }
 
+@media (min-width: 767px) {
+    .navbar-expand-md .navbar-collapse.visible-sm{
+        display: none!important;
+    }
+}
+
+button.navbar-toggler.user-menu,
+button.navbar-toggler.navigation{
+    position: absolute;
+    top: 11px;
+}
+button.navbar-toggler.user-menu{
+    right: 15%;
+}
+button.navbar-toggler.navigation{
+    right: 0;
+}
 
 .call-to-action-bg {
     background: url(/img/bg/cta-2-bg.jpg) no-repeat center;
@@ -353,40 +369,6 @@ background-color: #333333;
     transition-delay: .3s;
 }
 
-.browse.row{
-    display: flex;
-    flex-flow: row wrap;
-    margin: auto;
-    justify-content: space-between;
-}
-
-@media (min-width: 576px) {
-    .browse.row .card {
-        -ms-flex: 0 0 49%;
-        flex: 0 0 49%;
-        max-width: 49%;
-    }
-}
-@media (min-width: 768px) {
-    .browse.row .card {
-        -ms-flex: 0 0 32%;
-        flex: 0 0 32%;
-        max-width: 32%;
-    }
-}
-@media (min-width: 1200px) {
-    .browse.row .card {
-        -ms-flex: 0 0 24%;
-        flex: 0 0 24%;
-        max-width: 24%;
-    }
-}
-
-.browse .card-img-top {
-    width: 125px;
-    margin: auto;
-}
-
 .browse .bottom-text{
     font-size: small;
 }
@@ -463,4 +445,31 @@ form img.img-preview{
 
 .metric .number .f-2rem {
     font-size: 2rem !important;
+}
+
+.user .card-img-top{
+    width: 95px;
+    height: 95px;
+}
+.user h5.card-title {
+    font-size: 1rem;
+    font-weight: 400;
+}
+.user .card-text {
+    font-size: .85rem;
+}
+
+.h-35px{
+    height: 35px;
+}
+
+@media (min-width: 768px) {
+    .px-lg-5{
+        margin-left: 3rem!important;
+        margin-right: 3rem!important;
+    }
+}
+.img-square-50{
+    width: 50px;
+    height: 50px;
 }

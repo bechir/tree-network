@@ -1,11 +1,11 @@
 <ul class="nav nav-tabs nav-justified nav nav-tabs nav-justified aqua-gradient shadow rounded mb-5" id="myTab" role="tablist">
-    <li class="nav-item">
+    <li class="px-0 col-sm-4 waves-effect waves-light">
         <a aria-controls="profile" aria-selected="false" class="nav-link {% if active == 'profile' %}active{% else %}text-white{% endif %}" {% if active == 'profile' %}href="#profile" id="profile-tab" role="tab" {% else %} href="{{ path('user_show', {usernameCanonical: user.usernameCanonical}) }}" {% endif %}><span class="fas fa-address-card"></span> Profil</a>
     </li>
-    <li class="nav-item">
+    <li class="px-0 col-sm-4 waves-effect waves-light">
         <a aria-controls="tree" aria-selected="false" class="nav-link {% if active == 'tree' %}active{% else %}text-white{% endif %}" {% if active == 'tree' %}href="#tree" id="tree-tab" role="tab" {% else %} href="{{ path('tree_show', {usernameCanonical: user.usernameCanonical}) }}" {% endif %}><span class="fas fa-tree"></span> Arbre</a>
     </li>
-    <li class="nav-item">
+    <li class="px-0 col-sm-4 waves-effect waves-light">
         <a aria-controls="gallery" aria-selected="false" class="nav-link {% if active == 'gallery' %}active{% else %}text-white{% endif %}" {% if active == 'gallery' %}href="#gallery" id="gallery-tab" role="tab" {% else %} href="{{ path('user_gallery_show', {usernameCanonical: user.usernameCanonical}) }}" {% endif %}><span class="fas fa-images"></span> Gallerie</a>
     </li>
 </ul>

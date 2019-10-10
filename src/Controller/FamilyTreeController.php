@@ -49,6 +49,10 @@ class FamilyTreeController extends AbstractController
         if ($gender) {
             $linkCategories = $em->getRepository(LinkCategory::class)->findByGender($gender);
 
+            $linkCategories = array_filter($linkCategories, function(LinkCategory $link){
+                return $link->getName() != $link->getInverse();
+            });
+
             foreach ($linkCategories as $linkCategory) {
                 $names['' . $linkCategory->getId() . ''] = $translator->trans($linkCategory->getName());
             }

@@ -115,13 +115,7 @@
                     <i class="fas fa-tree"></i> Mon arbre généalogique</a>
                     <div class="mr-3">
                         <button type="button" class="btn btn-outline-white btn-circle btn-sm px-2">
-                        <i class="fas fa-pencil-alt mt-0"></i>
-                        </button>
-                        <button type="button" class="btn btn-outline-white btn-circle btn-sm px-2">
-                        <i class="far fa-trash-alt mt-0"></i>
-                        </button>
-                        <button type="button" class="btn btn-outline-white btn-circle btn-sm px-2">
-                        <i class="fas fa-info-circle mt-0"></i>
+                            <i class="far fa-trash-alt mt-0"></i>
                         </button>
                     </div>
                 </div>
@@ -134,7 +128,8 @@
                                     <th class="h6 rounded-left">Nom complet<i class="fas fa-sort ml-1"></i></th>
                                     <th class="h6">Description<i class="fas fa-sort ml-1"></i></th>
                                     <th class="h6">Type de lien<i class="fas fa-sort ml-1"></i></th>
-                                    <th class="h6 rounded-right">Photo<i class="fas fa-sort ml-1"></i></th>
+                                    <th class="h6">Photo<i class="fas fa-sort ml-1"></i></th>
+                                    <th class="h6 rounded-right">Actions<i class="fas fa-sort ml-1"></i></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -144,6 +139,10 @@
                                     <td>{{ link.inverse.description }}</td>
                                     <td>{{ link.linkCategory.name|trans }}</td>
                                     <td><img class="img-circle img-50 img-h-50" src="{{ link.inverse.avatar ? vich_uploader_asset(link.inverse.avatar, 'avatarFile') : asset('img/user/default-avatar-profile.jpg') }}"></td>
+                                    <td>
+                                        <span class=""><i class="fa fa-pencil-alt"></i></span>&nbsp;&nbsp;&nbsp;
+                                        <span class=""><i class="fa fa-trash text-danger"></i></span>
+                                    </td>
                                 </tr>
                             {% endfor %}
                             </tbody>

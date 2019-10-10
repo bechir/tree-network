@@ -8,11 +8,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Contact;
+use App\Form\ContactType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Entity\Contact;
-use App\Form\ContactType;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class DefaultController extends AbstractController
@@ -36,14 +37,14 @@ class DefaultController extends AbstractController
         return $this->render('default/privacy.html.twig');
     }
 
-    public function contact(Request $request, \Swift_Mailer $mailer, ContainerInterface $container): Response
+    public function contact(Request $request, EntityManagerInterface $em, \Swift_Mailer $mailer, ContainerInterface $container): Response
     {
-        $form = $this->createForm(ContactType::class);
+        $contact = new Contact();
+        $form = $this->createForm(ContactType::class, $contact);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $contact = $form->getData();
 
             $message = (new \Swift_Message($container->getParameter('website.name') . ' - [Contact]'))
                 ->setFrom($contact->getEmail())
@@ -65,6 +66,9 @@ class DefaultController extends AbstractController
                     'text/plain'
                 );
             $mailer->send($message);
+
+            $em->persist($contact);
+            $em->flush();
 
             $this->addFlash('success', 'contact.message_sent');
 

@@ -10,16 +10,13 @@ html, body, header, #intro-section {
     html, body, header, #intro-section {
         height: 100vh;
     }
+    #welcome {
+        margin-top: 3rem;
+    }
 }
 
 .top-nav-collapse {
     background-color: #563e91 !important;
-}
-
-@media (max-width: 991px) {
-    .navbar:not(.top-nav-collapse) {
-        background: #563e91 !important;
-    }
 }
 
 .about-icon-style h2{

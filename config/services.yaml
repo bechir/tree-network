@@ -9,7 +9,7 @@ parameters:
     locale: fr
     website:
         name: "Tree Network"
-        email: 'bechiirr71@gmail.com'
+        email: 'contact@tree-network.com'
         phoneNumber: '+221 78 374 26 71'
         authors: "rand0mdev"
     website.name: 'Tree Network'

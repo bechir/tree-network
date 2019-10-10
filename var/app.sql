@@ -7,7 +7,7 @@
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
- SET NAMES utf8mb4 ;
+ SET NAMES utf8;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,7 +21,7 @@
 
 DROP TABLE IF EXISTS `app_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8;
 CREATE TABLE `app_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `avatar_id` int(11) DEFAULT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE `app_user` (
   CONSTRAINT `FK_88BDF3E9708A0E0` FOREIGN KEY (`gender_id`) REFERENCES `gender` (`id`),
   CONSTRAINT `FK_88BDF3E986383B10` FOREIGN KEY (`avatar_id`) REFERENCES `avatar` (`id`),
   CONSTRAINT `FK_88BDF3E9E559DFD1` FOREIGN KEY (`locale_id`) REFERENCES `locale` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,7 +63,7 @@ CREATE TABLE `app_user` (
 
 LOCK TABLES `app_user` WRITE;
 /*!40000 ALTER TABLE `app_user` DISABLE KEYS */;
-INSERT INTO `app_user` VALUES (1,1,NULL,3,1,NULL,'2001-01-01 03:52:24',NULL,NULL,'a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}','37825091','Ba','Bechir','1999-12-30','I\'m a fullstack web developer. Co-Founder and CEO of Rimotor','Medina Gounass','2019-09-10 09:47:46','bechir07@outlook.fr','bechiirr71@gmail.com','bechiirr71@gmail.com','randomdev','randomdev','$2y$13$lBWT3YkR5E.MozMCqRXgRu1SR8K2Hq7szZ8iYfHT0bX8ofF649C92'),(2,2,NULL,3,1,NULL,'2019-09-28 06:47:20',NULL,NULL,'a:0:{}',NULL,'Soumaré','Diafra','1997-12-31','À la recherche d\'une belle fille à marier...','Nouakchott','2019-09-22 21:11:44',NULL,'thediaff@gmail.com','thediaff@gmail.com','thediaff','thediaff','$2y$13$Mj9gB9QhE84fubGP6m/XbetTNsXm2sSQA.5XrQOmw3bBs8E6LYTg.'),(3,NULL,NULL,NULL,1,NULL,'2019-09-28 01:43:17',NULL,NULL,'a:0:{}',NULL,NULL,NULL,NULL,NULL,NULL,'2019-09-28 01:43:12',NULL,'zaenma@gmail.com','zaenma@gmail.com','zaenma','zaenma','$2y$13$NDFOOdaCJT7ENoEhTjss9.NiMHpg1c7iHZOtqvSeRidK9KNKsjZ4W'),(4,NULL,NULL,NULL,1,NULL,'2019-09-28 01:45:30',NULL,NULL,'a:0:{}',NULL,NULL,NULL,NULL,NULL,NULL,'2019-09-28 01:45:29',NULL,'djeinagaye@gmail.com','djeinagaye@gmail.com','djeina','djeina','$2y$13$srR3Wjb28.vfhbcTN9G5D.F5tjqAX7oBeTspqV2Hj77/qU2g17pWm'),(9,5,NULL,3,0,NULL,NULL,NULL,NULL,'a:0:{}',NULL,'Issmaila','Ba',NULL,NULL,NULL,'2019-09-29 05:00:40',NULL,NULL,NULL,NULL,NULL,NULL),(10,NULL,NULL,4,0,NULL,NULL,NULL,NULL,'a:0:{}',NULL,'Aissata','Sy',NULL,NULL,NULL,'2019-09-29 05:01:06',NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `app_user` VALUES (1,1,NULL,3,1,NULL,'2019-10-09 22:35:47',NULL,NULL,'a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}','37825091','Ba','Bechir','1999-12-30','I\'m a fullstack web developer. Co-Founder and CEO of Rimotor','Medina Gounass','2019-09-10 09:47:46','bechir07@outlook.fr','bechiirr71@gmail.com','bechiirr71@gmail.com','randomdev','randomdev','$2y$13$ABWnWNpOns4COMZzN9RqtubXboww3.zLquTxCIRZim2bw.htGcREW'),(2,2,NULL,3,1,NULL,'2019-10-09 20:39:07',NULL,NULL,'a:0:{}',NULL,'Soumaré','Diafra','1997-12-31','À la recherche d\'une belle fille à marier...','Nouakchott','2019-09-22 21:11:44',NULL,'thediaff@gmail.com','thediaff@gmail.com','thediaff','thediaff','$2y$13$Mj9gB9QhE84fubGP6m/XbetTNsXm2sSQA.5XrQOmw3bBs8E6LYTg.'),(3,NULL,NULL,NULL,0,NULL,'2019-10-09 20:40:09',NULL,NULL,'a:0:{}',NULL,NULL,NULL,NULL,NULL,NULL,'2019-09-28 01:43:12',NULL,'zaenma@gmail.com','zaenma@gmail.com','zaenma','zaenma','$2y$13$NDFOOdaCJT7ENoEhTjss9.NiMHpg1c7iHZOtqvSeRidK9KNKsjZ4W'),(13,NULL,NULL,4,0,NULL,NULL,NULL,NULL,'a:0:{}',NULL,'Ba','Bebe',NULL,NULL,NULL,'2019-10-09 23:30:52',NULL,NULL,NULL,NULL,NULL,NULL),(14,NULL,NULL,3,0,NULL,NULL,NULL,NULL,'a:0:{}',NULL,'Ba','Iboun',NULL,NULL,NULL,'2019-10-09 23:31:20',NULL,NULL,NULL,NULL,NULL,NULL),(15,6,NULL,4,0,NULL,NULL,NULL,NULL,'a:0:{}',NULL,'Sy','Ramata',NULL,NULL,NULL,'2019-10-09 23:32:47',NULL,NULL,NULL,NULL,NULL,NULL),(16,7,NULL,3,0,NULL,NULL,NULL,NULL,'a:0:{}',NULL,'Ngaidé','Abass',NULL,NULL,NULL,'2019-10-09 23:33:48',NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `app_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -73,13 +73,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `avatar`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8;
 CREATE TABLE `avatar` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `src` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -88,7 +88,7 @@ CREATE TABLE `avatar` (
 
 LOCK TABLES `avatar` WRITE;
 /*!40000 ALTER TABLE `avatar` DISABLE KEYS */;
-INSERT INTO `avatar` VALUES (1,'21e099b291b52931de8f5cc6dbd2ea3369b36eac.jpg','2019-09-27 17:41:24'),(2,'1644ef14fc826a19f0b12023f08009193e851bda.jpg','2019-09-28 06:49:26'),(5,'c839b2a54d322669cb08f3965652c10538a46a44.jpg','2019-09-29 05:00:40');
+INSERT INTO `avatar` VALUES (1,'ea328d480d1165d056766e5fa97f27fcc1df42a2.jpg','2019-10-09 22:38:19'),(2,'1644ef14fc826a19f0b12023f08009193e851bda.jpg','2019-09-28 06:49:26'),(5,'c839b2a54d322669cb08f3965652c10538a46a44.jpg','2019-09-29 05:00:40'),(6,'a66bef4c6da07ab3ed203fe7d727ef3ed4987cb8.jpg','2019-10-09 23:32:47'),(7,'995eb698c26a5fc13dd86cffa9b740aec5937f98.jpg','2019-10-09 23:33:48');
 /*!40000 ALTER TABLE `avatar` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,7 +98,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `birth_place`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8;
 CREATE TABLE `birth_place` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -123,7 +123,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `city`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8;
 CREATE TABLE `city` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `country_id` int(11) NOT NULL,
@@ -149,15 +149,16 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `contact`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8;
 CREATE TABLE `contact` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fullname` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `subject` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `message` tinytext COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -166,6 +167,7 @@ CREATE TABLE `contact` (
 
 LOCK TABLES `contact` WRITE;
 /*!40000 ALTER TABLE `contact` DISABLE KEYS */;
+INSERT INTO `contact` VALUES (1,'Bechir Ba','bechir07@outlook.fr','Test','This is a test message.','2019-10-09 20:12:49');
 /*!40000 ALTER TABLE `contact` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -175,7 +177,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `country`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8;
 CREATE TABLE `country` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
@@ -199,7 +201,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `gender`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8;
 CREATE TABLE `gender` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -223,7 +225,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `image`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8;
 CREATE TABLE `image` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -251,7 +253,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `language`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8;
 CREATE TABLE `language` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -275,7 +277,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `link`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8;
 CREATE TABLE `link` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `link_category_id` int(11) NOT NULL,
@@ -288,7 +290,7 @@ CREATE TABLE `link` (
   CONSTRAINT `FK_36AC99F17E3C61F9` FOREIGN KEY (`owner_id`) REFERENCES `app_user` (`id`),
   CONSTRAINT `FK_36AC99F18408CB69` FOREIGN KEY (`inverse_id`) REFERENCES `app_user` (`id`),
   CONSTRAINT `FK_36AC99F1DFC611B1` FOREIGN KEY (`link_category_id`) REFERENCES `link_category` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -297,7 +299,7 @@ CREATE TABLE `link` (
 
 LOCK TABLES `link` WRITE;
 /*!40000 ALTER TABLE `link` DISABLE KEYS */;
-INSERT INTO `link` VALUES (5,30,9,1),(6,27,1,9),(7,43,10,1),(8,40,1,10);
+INSERT INTO `link` VALUES (9,105,13,1),(10,122,1,13),(11,90,14,1),(12,89,1,14),(13,110,15,1),(14,123,1,15),(15,103,16,1),(16,102,1,16);
 /*!40000 ALTER TABLE `link` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -307,7 +309,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `link_category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8;
 CREATE TABLE `link_category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `gender_id` int(11) NOT NULL,
@@ -316,7 +318,7 @@ CREATE TABLE `link_category` (
   PRIMARY KEY (`id`),
   KEY `IDX_CBE67908708A0E0` (`gender_id`),
   CONSTRAINT `FK_CBE67908708A0E0` FOREIGN KEY (`gender_id`) REFERENCES `gender` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -325,7 +327,7 @@ CREATE TABLE `link_category` (
 
 LOCK TABLES `link_category` WRITE;
 /*!40000 ALTER TABLE `link_category` DISABLE KEYS */;
-INSERT INTO `link_category` VALUES (27,3,'word.father','word.son'),(28,3,'word.brother','word.inv_brother'),(29,3,'word.uncle','word.nephew'),(30,3,'word.son','word.inv_son'),(31,3,'word.husband','word.wife'),(32,3,'word.grand_father','word.inv_grand_father'),(33,3,'word.stepfather','word.stepchild'),(34,3,'word.stepchild','word.stepfather'),(35,3,'word.half_brother','word.half_brother'),(36,3,'word.brother_in_law','word.inv_brother_in_law'),(37,3,'word.friend','word.inv_friend'),(38,3,'word.cousin','word.inv_cousin'),(39,3,'word.nephew','word.uncle'),(40,4,'word.mother','word.daughter'),(41,4,'word.sister','word.sister'),(42,4,'word.aunt','word.niece'),(43,4,'word.daughter','word.mother'),(44,4,'word.wife','word.husband'),(45,4,'word.grand_mother','word.inv_grand_monther'),(46,4,'word.stepmother','word.stepdaughter'),(47,4,'word.stepdaughter','word.stepmother'),(48,4,'word.half_sister','word.half_sister'),(49,4,'word.sister_in_law','word.inv_sister_in_law'),(50,4,'word.m_friend','word.m_friend'),(51,4,'word.m_cousin','word.m_cousin'),(52,4,'word.niece','word.aunt');
+INSERT INTO `link_category` VALUES (88,3,'word.father','word.son'),(89,3,'word.brother','word.inv_brother'),(90,3,'word.inv_brother','word.inv_brother'),(91,3,'word.uncle','word.nephew'),(92,3,'word.son','word.inv_son'),(93,3,'word.inv_son','word.inv_son'),(94,3,'word.husband','word.wife'),(95,3,'word.grand_father','word.inv_grand_father'),(96,3,'word.inv_grand_father','word.inv_grand_father'),(97,3,'word.stepfather','word.stepchild'),(98,3,'word.stepchild','word.stepfather'),(99,3,'word.half_brother','word.half_brother'),(100,3,'word.brother_in_law','word.inv_brother_in_law'),(101,3,'word.inv_brother_in_law','word.inv_brother_in_law'),(102,3,'word.friend','word.inv_friend'),(103,3,'word.inv_friend','word.inv_friend'),(104,3,'word.cousin','word.inv_cousin'),(105,3,'word.inv_cousin','word.inv_cousin'),(106,3,'word.nephew','word.uncle'),(107,4,'word.mother','word.daughter'),(108,4,'word.sister','word.inv_sister'),(109,4,'word.inv_sister','word.inv_sister'),(110,4,'word.aunt','word.niece'),(111,4,'word.daughter','word.mother'),(112,4,'word.wife','word.husband'),(113,4,'word.grand_mother','word.inv_grand_monther'),(114,4,'word.inv_grand_monther','word.inv_grand_monther'),(115,4,'word.stepmother','word.stepdaughter'),(116,4,'word.stepdaughter','word.stepmother'),(117,4,'word.half_sister','word.half_sister'),(118,4,'word.half_sister','word.half_sister'),(119,4,'word.sister_in_law','word.inv_sister_in_law'),(120,4,'word.inv_sister_in_law','word.inv_sister_in_law'),(121,4,'word.m_friend','word.inv_friend'),(122,4,'word.m_cousin','word.inv_cousin'),(123,4,'word.niece','word.aunt');
 /*!40000 ALTER TABLE `link_category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -335,7 +337,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `locale`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8;
 CREATE TABLE `locale` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
@@ -358,7 +360,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `migration_versions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8;
 CREATE TABLE `migration_versions` (
   `version` varchar(14) COLLATE utf8_unicode_ci NOT NULL,
   `executed_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
@@ -374,6 +376,34 @@ LOCK TABLES `migration_versions` WRITE;
 /*!40000 ALTER TABLE `migration_versions` DISABLE KEYS */;
 /*!40000 ALTER TABLE `migration_versions` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `newsletter`
+--
+
+DROP TABLE IF EXISTS `newsletter`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8;
+CREATE TABLE `newsletter` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` datetime NOT NULL,
+  `registration_url` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `locale` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `newsletter`
+--
+
+LOCK TABLES `newsletter` WRITE;
+/*!40000 ALTER TABLE `newsletter` DISABLE KEYS */;
+INSERT INTO `newsletter` VALUES (1,'bechiirr71@gmail.com','2019-10-09 20:34:46','user_settings',NULL,NULL),(2,'thediaff@gmail.com','2019-10-09 20:39:18','user_settings',NULL,NULL),(3,'djeinagaye@gmail.com','2019-10-09 20:39:45','user_settings',NULL,NULL),(4,'zaenma@gmail.com','2019-10-09 20:40:15','user_settings',NULL,NULL);
+/*!40000 ALTER TABLE `newsletter` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -384,4 +414,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-08 21:31:38
+-- Dump completed on 2019-10-10  0:53:36

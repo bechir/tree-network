@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ContactRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Contact
 {
@@ -41,6 +42,11 @@ class Contact
      * @ORM\Column(type="text", length=255)
      */
     private $message;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
 
     const NUM_ITEMS = 15;
 
@@ -95,5 +101,18 @@ class Contact
         $this->message = $message;
 
         return $this;
+    }
+
+    public function getCreatedAt(): ? \DateTime
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function createdAt()
+    {
+        $this->createdAt = new \DateTime();
     }
 }

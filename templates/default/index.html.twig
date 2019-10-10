@@ -4,6 +4,10 @@
     <link href="{{ asset('css/index.css') }}" rel="stylesheet">
 {% endblock %}
 
+{% block title %}
+  {{ parent() }} | Gèrez facilement votre arbre généalogique
+{% endblock %}
+
 {% block after_nav %}
   <!-- Full Page Intro -->
   <div id="intro-section" class="view">
@@ -14,14 +18,14 @@
       <div class="container px-md-3 px-sm-0">
 
         <!--Grid row-->
-        <div class="row reveal">
+        <div class="row">
 
           <!--Grid column-->
           <div class="col-md-12 mb-4 white-text text-center">
 
-            <h3 class="display-3 font-weight-bold white-text mb-0 pt-md-5 pt-5 reveal-1">{{ website.name }}</h3>
-            <hr class="hr-light my-4 w-75 reveal-2">
-            <h4 class="subtext-header mt-2 mb-4 reveal-3">Bienvenue sur {{ website.name }}, ici vous retrouverez rapidement vos ancêtres!</h4>
+            <h3 class="display-3 font-weight-bold white-text mb-0 pt-md-5 pt-5 ">{{ website.name }}</h3>
+            <hr class="hr-light my-4 w-75">
+            <h4 class="subtext-header mt-2 mb-4">Bienvenue sur {{ website.name }}, ici vous retrouverez rapidement vos ancêtres!</h4>
             <a href="{#{ path('browse') }#}#section1" class="btn btn-rounded btn-outline-white wow fadeInUp" data-wow-delay="1.33s">
               <i class="fas fa-code-branch"></i> Voir les arbres
             </a>

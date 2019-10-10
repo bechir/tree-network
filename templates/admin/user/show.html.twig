@@ -33,21 +33,6 @@
                 <h4><i class="fa fa-star"></i> Super Admin</h4>
               </div>
             </div>
-          {% elseif user.isAdmin() %}
-            <div class="profile-stat">
-              <div class="row">
-                <h4>Administrateur</h4>
-              </div>
-            </div>
-          {% elseif user.isEmployer() %}
-            <div class="profile-stat">
-              <div class="row">
-                <h4>Recruteur</h4>
-                <div class="col-md-12 stat-item">
-                  <span><a class="text-white" href="{{ path('admin_company_show', {company: user.company.id}) }}">{{ user.company }}</a></span>
-                </div>
-              </div>
-            </div>
           {% endif %}
         </div>
         <!-- END PROFILE HEADER -->
@@ -60,14 +45,8 @@
               <li>Login <span>{{ user.username }}</span></li>
               <li>Date d'inscription <span>{{ user.submittedAt|date('d M, Y') }}</span></li>
               <li>Email <span>{{ user.email }}</span></li>
-              {% if user.haveCompany() %}
-                <li>Entreprise <span><a href="{{ path('admin_company_show', {company: user.company.id}) }}">{{ user.company }}</a></span></li>
-              {% endif %}
             </ul>
           </div>
-            {% if user.haveResume() %}
-              <a href="{{ path('resume_show', {slug: user.resume.slug}) }}" target="_blank" class="btn btn-default btn-block my-3">Afficher le CV <span class="fa fa-external-link"></span></a>
-            {% endif %}
           <div class="profile-info px-0 text-center">
             <hr>
             <div class="text-center">
@@ -79,7 +58,7 @@
                 </div>
               {% endif %}
               {% if app.user == user %}
-                <a href="{{ path('user_profile_edit') }}" target="_blank" class="btn btn-default btn-block my-3"><span class="lnr lnr-pencil"></span> Modifier mon profil</a>
+                <a href="{{ path('user_edit') }}" target="_blank" class="btn btn-default btn-block my-3"><span class="lnr lnr-pencil"></span> Modifier mon profil</a>
               {% endif %}
             </div>
           </div>

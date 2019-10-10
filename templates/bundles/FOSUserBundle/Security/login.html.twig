@@ -8,46 +8,50 @@
 {% endblock %}
 
 {% block main %}
-<div class="login-form">
-    <form action="{{ path("fos_user_security_check") }}" method="post">
-        <h1 class="text-center mb-5">{{ 'login.title'|trans }}</h1>
-        {% if error %}
-            <div class="alert alert-danger">
-                {{ error.messageKey|trans(error.messageData, 'security') }}
-            </div>
-        {% endif %}
+<div class="login-form section-margin">
+    <div class="row mx-auto">
+        <div class="col-md-6 mx-auto">
+            <form class="mx-auto" action="{{ path("fos_user_security_check") }}" method="post">
+                <h1 class="text-center mb-5">{{ 'login.title'|trans }}</h1>
+                {% if error %}
+                    <div class="alert alert-danger">
+                        {{ error.messageKey|trans(error.messageData, 'security') }}
+                    </div>
+                {% endif %}
 
-        <div class="md-form md-outline">
-            <i class="fas fa-envelope prefix"></i>
-            <input name="_username" class="form-control" id="username" value="{{ last_username }}" required type="text">
-            <label for="username">{{ 'form.username_email'|trans }}</label>
+                <div class="md-form md-outline">
+                    <i class="fas fa-envelope prefix"></i>
+                    <input name="_username" class="form-control" id="username" value="{{ last_username }}" required type="text">
+                    <label for="username">{{ 'form.username_email'|trans }}</label>
+                </div>
+
+                <div class="md-form md-outline">
+                    <i class="fas fa-lock prefix"></i>
+                    <input name="_password" class="form-control" id="password" type="password">
+                    <label for="password">{{ 'form.password'|trans }}</label>
+                </div>
+
+                <div class="custom-control custom-checkbox my-1 mr-sm-2">
+                    <input name="_remember_me" type="checkbox" class="custom-control-input" id="remember_me" checked>
+                    <label class="custom-control-label" for="remember_me">{{ 'form.remember_me'|trans }}</label>
+                </div>
+
+                {% if csrf_token %}
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+                {% endif %}
+                <button type="submit" class="btn submit aqua-gradient mt-5"><i class="fas fa-sign-in-alt mr-1"></i>{{ 'form.sign_in'|trans }}</button>
+
+                <div class="py-3 mt-3 text-center">
+                <p class="font-small text-info d-flex justify-content-start">{{ 'form.not_member'|trans }} <a href="{{ path('fos_user_registration_register') }}" class="ml-2 btn-link text-info">
+                    {{ 'form.login_sign_up'|trans }}</a></p>
+                </div>
+
+                <div>
+                    <a class="f-w-400 btn-link text-info" href="{{ path('fos_user_resetting_request') }}">{{ 'form.forgot_password'|trans }}</a>
+                </div>
+            </form>
         </div>
-
-        <div class="md-form md-outline">
-            <i class="fas fa-lock prefix"></i>
-            <input name="_password" class="form-control" id="password" type="password">
-            <label for="password">{{ 'form.password'|trans }}</label>
-        </div>
-
-        <div class="custom-control custom-checkbox my-1 mr-sm-2">
-            <input name="_remember_me" type="checkbox" class="custom-control-input" id="remember_me">
-            <label class="custom-control-label" for="remember_me">{{ 'form.remember_me'|trans }}</label>
-        </div>
-
-        {% if csrf_token %}
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
-        {% endif %}
-        <button type="submit" class="btn submit aqua-gradient mt-5"><i class="fas fa-sign-in-alt mr-1"></i>{{ 'form.sign_in'|trans }}</button>
-
-        <div class="py-3 mt-3 text-center">
-          <p class="font-small text-info d-flex justify-content-start">{{ 'form.not_member'|trans }} <a href="{{ path('fos_user_registration_register') }}" class="ml-2 btn-link text-info">
-              {{ 'form.login_sign_up'|trans }}</a></p>
-        </div>
-
-        <div class="bottom-text">
-            <a class="f-w-400 btn-link text-info" href="{{ path('fos_user_resetting_request') }}">{{ 'form.forgot_password'|trans }}</a>
-        </div>
-    </form>
+    </div>
 </div>
 {% endblock %}
 

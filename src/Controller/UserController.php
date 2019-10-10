@@ -14,6 +14,7 @@ use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -24,6 +25,8 @@ use App\Form\EditPasswordType;
 use App\Form\GalleryType;
 use App\Form\LinkType;
 use FOS\UserBundle\Model\UserManagerInterface;
+use FOS\UserBundle\Event\UserEvent;
+use FOS\UserBundle\FOSUserEvents;
 
 /**
  * Controller that manage user.
@@ -40,10 +43,13 @@ class UserController extends AbstractController
         ]);
     }
 
-    public function show(User $user)
+    public function show(User $user, EntityManagerInterface $em)
     {
+        $recents = $em->getRepository(Link::class)->findRecentsByOwner($user);
+
         return $this->render('user/show.html.twig', [
             'user' => $user,
+            'recents' => $recents
         ]);
     }
 
@@ -95,7 +101,7 @@ class UserController extends AbstractController
     /**
      * @IsGranted("ROLE_USER")
      */
-    public function edit(Request $request, EntityManagerInterface $em, UserInterface $user = null)
+    public function edit(Request $request, EntityManagerInterface $em, EventDispatcherInterface $eventDispatcher, UserInterface $user = null)
     {
         $form = $this->createForm(EditProfileType::class, $user);
         $form->handleRequest($request);
@@ -104,7 +110,8 @@ class UserController extends AbstractController
             $em->persist($user);
             $em->flush();
 
-            $this->addFlash('success', 'profile.edit_success');
+            $event = new UserEvent($user, $request);
+            $eventDispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_COMPLETED, $event);
         }
 
         return $this->render('user/edit.html.twig', [
@@ -182,6 +189,7 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $link->setOwner($user);
+
             $user->addLink($link);
             $linkCategory = $em->getRepository(LinkCategory::class)
                 ->findOneBy(
@@ -210,44 +218,5 @@ class UserController extends AbstractController
             'user' => $user,
             'form' => $form->createView(),
         ]);
-    }
-
-    /**
-     * Returns a JSON string with the neighborhoods of the City with the providen id.
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
-     */
-    public function linkCategoriesList(Request $request)
-    {
-        // Get Entity manager and repository
-        $em = $this->getDoctrine()->getManager();
-        $categoriesRepository = $em->getRepository(ProductSubCategory::class);
-
-        // Search the neighborhoods that belongs to the city with the given id as GET parameter "cityid"
-        $categories = $categoriesRepository->createQueryBuilder('q')
-            ->leftJoin('q.parentCategory', 'p')
-              ->addSelect('p')
-            ->where('p.slug = :slug')
-            ->setParameter('slug', $request->query->get('category'))
-            ->getQuery()
-            ->getResult();
-
-        // Serialize into an array the data that we need, in this case only name and id
-        // Note: you can use a serializer as well, for explanation purposes, we'll do it manually
-        $responseArray = [];
-        foreach ($categories as $category) {
-            $responseArray[] = [
-                'slug' => $category->getSlug(),
-                'name' => $category->getName(),
-            ];
-        }
-
-        // Return array with structure of the neighborhoods of the providen city id
-        return new JsonResponse($responseArray);
-
-        // e.g
-        // [{"id":"3","name":"Treasure Island"},{"id":"4","name":"Presidio of San Francisco"}]
     }
 }
