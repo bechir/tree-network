@@ -112,13 +112,6 @@ class User extends BaseUser implements EquatableInterface
     private $submittedAt;
 
     /**
-     * @var Locale
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Locale")
-     */
-    private $locale;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Gender")
      */
     private $gender;
@@ -269,18 +262,6 @@ class User extends BaseUser implements EquatableInterface
         return $this->submittedAt;
     }
 
-    public function getLocale()
-    {
-        return $this->locale;
-    }
-
-    public function setLocale(?Locale $locale): self
-    {
-        $this->locale = $locale;
-
-        return $this;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -300,7 +281,6 @@ class User extends BaseUser implements EquatableInterface
             $this->password,
             $this->roles,
             $this->avatar,
-            $this->locale,
         ]);
     }
 
@@ -323,7 +303,6 @@ class User extends BaseUser implements EquatableInterface
             $this->password,
             $this->roles,
             $this->avatar,
-            $this->locale
         ] = unserialize($serialized);
     }
 
