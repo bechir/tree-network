@@ -26,6 +26,7 @@ layout:
   useful_links: Liens utiles
   search: Rechercher...
 
+contact.message_set: 'Votre message a été envoyé. Merci!'
 
 form:
   firstName: Prénoms

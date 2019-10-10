@@ -17,7 +17,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Form\EditProfileType;
 use App\Form\EmailsType;
@@ -49,7 +48,7 @@ class UserController extends AbstractController
 
         return $this->render('user/show.html.twig', [
             'user' => $user,
-            'recents' => $recents
+            'recents' => $recents,
         ]);
     }
 

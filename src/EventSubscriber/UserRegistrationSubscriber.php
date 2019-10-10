@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of the Tree Network application.
+ *
+ * (c) Bechir Ba <bechiirr71@gmail.com>
+ */
+
 namespace App\EventSubscriber;
 
 use App\Entity\Newsletter;
@@ -12,16 +18,16 @@ class UserRegistrationSubscriber implements EventSubscriberInterface
     {
         $user = $event->getUser();
 
-        if(filter_var($user->getEmail(), FILTER_VALIDATE_EMAIL)) {
+        if (filter_var($user->getEmail(), FILTER_VALIDATE_EMAIL)) {
             $email = $user->getEmail();
             $isSubscribed = $this->em->getRepository(Newsletter::class)->findOneByEmail($email);
 
-            if(!$isSubscribed) {
+            if (!$isSubscribed) {
                 $newsletter = (new Newsletter())
                     ->setEmail($user->getEmail())
                     ->setRegistrationUrl('user_settings')
                     ->setLocale($user->getLocale());
-                
+
                 $this->em->persist($newsletter);
                 $this->em->flush();
             }

@@ -15,7 +15,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class LinkCategoryFixtures extends Fixture implements FixtureGroupInterface , DependentFixtureInterface
+class LinkCategoryFixtures extends Fixture implements FixtureGroupInterface, DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {

@@ -2,6 +2,8 @@
 
 {% import 'util/breadcrumb.twig' as breadcrumb %}
 
+{% block title %}{{ user.fullname }} - Gallerie{% endblock %}
+
 {% block stylesheets %}
     <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
 {% endblock %}

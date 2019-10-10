@@ -45,7 +45,6 @@ class DefaultController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $message = (new \Swift_Message($container->getParameter('website.name') . ' - [Contact]'))
                 ->setFrom($contact->getEmail())
                 ->setTo($container->getParameter('website.email'))
