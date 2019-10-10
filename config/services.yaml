@@ -13,7 +13,7 @@ parameters:
         phoneNumber: '+221 78 374 26 71'
         authors: "rand0mdev"
     website.name: 'Tree Network'
-    website.email: 'bechiirr71@gmail.com'
+    website.email: 'contact@tree-network.com'
     uploads_dir: '%kernel.project_dir%/public/img/uploads'
     uploads_prefix: '/img/uploads'
 
