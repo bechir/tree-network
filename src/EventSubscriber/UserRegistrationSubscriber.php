@@ -9,11 +9,19 @@
 namespace App\EventSubscriber;
 
 use App\Entity\Newsletter;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 
 class UserRegistrationSubscriber implements EventSubscriberInterface
 {
+    private $em;
+
+    public function __construct(EntityManagerInterface $em)
+    {
+        $this->em = $em;
+    }
+
     public function onFosUserRegistrationCompleted(FilterUserResponseEvent $event)
     {
         $user = $event->getUser();
@@ -25,8 +33,7 @@ class UserRegistrationSubscriber implements EventSubscriberInterface
             if (!$isSubscribed) {
                 $newsletter = (new Newsletter())
                     ->setEmail($user->getEmail())
-                    ->setRegistrationUrl('user_settings')
-                    ->setLocale($user->getLocale());
+                    ->setRegistrationUrl('register');
 
                 $this->em->persist($newsletter);
                 $this->em->flush();

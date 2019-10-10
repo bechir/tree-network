@@ -35,10 +35,13 @@ class UserController extends AbstractController
     /**
      * @IsGranted("ROLE_USER")
      */
-    public function profile(UserInterface $user = null)
+    public function profile(EntityManagerInterface $em, UserInterface $user = null)
     {
+        $recents = $em->getRepository(Link::class)->findRecentsByOwner($user);
+
         return $this->render('user/profile.html.twig', [
             'user' => $user,
+            'recents' => $recents,
         ]);
     }
 
@@ -59,9 +62,16 @@ class UserController extends AbstractController
         ]);
     }
 
-    public function search(Request $request): Response
+    public function search(Request $request, EntityManagerInterface $em): Response
     {
-        return $this->render('common/search-result.html.twig');
+        $terms = $request->query->get('terms');
+        $users = [];
+        if($terms) {
+            $users = $em->getRepository(User::class)->findBySearchTerms($terms);
+        }
+        return $this->render('common/search-result.html.twig', [
+            'users' => $users
+        ]);
     }
 
     /**

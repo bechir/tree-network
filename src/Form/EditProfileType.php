@@ -44,6 +44,7 @@ class EditProfileType extends AbstractType
                 'choice_label' => 'name',
                 'required' => false,
                 'choice_translation_domain' => true,
+                'placeholder' => 'Sexe'
             ])
             ->add('bornAt', TextType::class, [
                 'required' => false,

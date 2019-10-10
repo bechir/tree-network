@@ -69,6 +69,21 @@ class UserRepository extends ServiceEntityRepository
                 ->getResult();
     }
 
+    public function findBySearchTerms(string $terms)
+    {
+        return $this->createQueryBuilder('u')
+            ->orWhere('u.username like :terms')
+            ->orWhere('u.firstName like :terms')
+            ->orWhere('u.lastName like :terms')
+            ->orWhere('u.description like :terms')
+            ->orWhere("CONCAT(u.firstName, ' ', u.lastName) like :terms")
+            ->orWhere("CONCAT(u.lastName, ' ', u.firstName) like :terms")
+            ->andWhere('u.username is not null')
+            ->setParameter('terms', '%'.$terms.'%')
+            ->getQuery()
+            ->getResult();
+    }
+
     /**
      * @return User[]
      */

@@ -12,7 +12,7 @@
                 <h5 class="card-title text-center">{{ user.fullName }}</h5>
                 {% set desc = 'Pas de description.' %}
                 {% if user.description %}
-                    {% set desc = user.description ~ 'edjweof heowdqwdqw' %}
+                    {% set desc = user.description %}
                     {% if desc|length > 60 %}
                         {% set desc = desc[:60] ~ '...' %}
                     {% endif %}

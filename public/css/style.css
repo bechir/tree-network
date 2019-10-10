@@ -1,21 +1,3 @@
-@font-face {
-    font-family: 'Mark-Extralight';
-    src: url('/font/Mark-Extralight.woff2') format('woff2');
-    src: url('/font/Mark-Extralight.woff') format('woff');
-    src: url('/font/Mark-Extralight.ttf') format('truetype');
-    font-weight: 200;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Mark-Heavy';
-    src: url('/font/Mark-Heavy.woff2') format('woff2');
-    src: url('/font/Mark-Heavy.woff') format('woff');
-    src: url('/font/Mark-Heavy.ttf') format('truetype');
-    font-weight: 900;
-    font-style: normal;
-}
-
 :root{
 	--primary-color: #2bbbad;
 	--second-color: #da6f28;
@@ -155,21 +137,17 @@ main.main-section {
     top: -4px
 }
 .navbar.navbar-dark form .md-form .form-control{
-    width: 133px !important;
-    transition: width .5s !important;
-}
-.navbar.navbar-dark form .md-form .form-control:focus{
     width: 290px !important;
     border-radius: 0;
     padding: 5px 3px 5px 10px;
     border-color: #fff !important;
     outline: none!important;
     box-shadow: none !important;
+    transition: width .5s !important;
 }
 
 .navbar.navbar-dark form .form-resuslts {
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
+    border-radius: 3px;
     transition: height .5s;
 }
 
@@ -472,4 +450,26 @@ form img.img-preview{
 .img-square-50{
     width: 50px;
     height: 50px;
+}
+
+.img-33{
+    width: 33px;
+    height: 33px;
+}
+
+.activated {
+	background-color: #fff;
+	padding:100px;
+	padding-bottom:115px;
+	border-radius: 4px;
+}
+
+.activated i {
+	font-size: 72px;
+	color: #00a651;
+	margin-bottom: 18px;
+}
+.activated h2 {
+	font-weight: 700;
+	margin: 0 0 4px;
 }

@@ -25,7 +25,6 @@ DROP TABLE IF EXISTS `app_user`;
 CREATE TABLE `app_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `avatar_id` int(11) DEFAULT NULL,
-  `locale_id` int(11) DEFAULT NULL,
   `gender_id` int(11) DEFAULT NULL,
   `enabled` tinyint(1) NOT NULL,
   `salt` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -49,11 +48,9 @@ CREATE TABLE `app_user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_88BDF3E9C05FB297` (`confirmation_token`),
   UNIQUE KEY `UNIQ_88BDF3E986383B10` (`avatar_id`),
-  KEY `IDX_88BDF3E9E559DFD1` (`locale_id`),
   KEY `IDX_88BDF3E9708A0E0` (`gender_id`),
   CONSTRAINT `FK_88BDF3E9708A0E0` FOREIGN KEY (`gender_id`) REFERENCES `gender` (`id`),
-  CONSTRAINT `FK_88BDF3E986383B10` FOREIGN KEY (`avatar_id`) REFERENCES `avatar` (`id`),
-  CONSTRAINT `FK_88BDF3E9E559DFD1` FOREIGN KEY (`locale_id`) REFERENCES `locale` (`id`)
+  CONSTRAINT `FK_88BDF3E986383B10` FOREIGN KEY (`avatar_id`) REFERENCES `avatar` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -63,7 +60,7 @@ CREATE TABLE `app_user` (
 
 LOCK TABLES `app_user` WRITE;
 /*!40000 ALTER TABLE `app_user` DISABLE KEYS */;
-INSERT INTO `app_user` VALUES (1,1,NULL,3,1,NULL,'2019-10-09 22:35:47',NULL,NULL,'a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}','37825091','Ba','Bechir','1999-12-30','I\'m a fullstack web developer. Co-Founder and CEO of Rimotor','Medina Gounass','2019-09-10 09:47:46','bechir07@outlook.fr','bechiirr71@gmail.com','bechiirr71@gmail.com','randomdev','randomdev','$2y$13$ABWnWNpOns4COMZzN9RqtubXboww3.zLquTxCIRZim2bw.htGcREW'),(2,2,NULL,3,1,NULL,'2019-10-09 20:39:07',NULL,NULL,'a:0:{}',NULL,'Soumaré','Diafra','1997-12-31','À la recherche d\'une belle fille à marier...','Nouakchott','2019-09-22 21:11:44',NULL,'thediaff@gmail.com','thediaff@gmail.com','thediaff','thediaff','$2y$13$Mj9gB9QhE84fubGP6m/XbetTNsXm2sSQA.5XrQOmw3bBs8E6LYTg.'),(3,NULL,NULL,NULL,0,NULL,'2019-10-09 20:40:09',NULL,NULL,'a:0:{}',NULL,NULL,NULL,NULL,NULL,NULL,'2019-09-28 01:43:12',NULL,'zaenma@gmail.com','zaenma@gmail.com','zaenma','zaenma','$2y$13$NDFOOdaCJT7ENoEhTjss9.NiMHpg1c7iHZOtqvSeRidK9KNKsjZ4W'),(13,NULL,NULL,4,0,NULL,NULL,NULL,NULL,'a:0:{}',NULL,'Ba','Bebe',NULL,NULL,NULL,'2019-10-09 23:30:52',NULL,NULL,NULL,NULL,NULL,NULL),(14,NULL,NULL,3,0,NULL,NULL,NULL,NULL,'a:0:{}',NULL,'Ba','Iboun',NULL,NULL,NULL,'2019-10-09 23:31:20',NULL,NULL,NULL,NULL,NULL,NULL),(15,6,NULL,4,0,NULL,NULL,NULL,NULL,'a:0:{}',NULL,'Sy','Ramata',NULL,NULL,NULL,'2019-10-09 23:32:47',NULL,NULL,NULL,NULL,NULL,NULL),(16,7,NULL,3,0,NULL,NULL,NULL,NULL,'a:0:{}',NULL,'Ngaidé','Abass',NULL,NULL,NULL,'2019-10-09 23:33:48',NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `app_user` VALUES (1,1,3,1,NULL,'2019-10-10 00:59:36',NULL,NULL,'a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}','37825091','Ba','Bechir','1999-12-30','I\'m a fullstack web developer. Co-Founder and CEO of Rimotor','Medina Gounass','2019-09-10 09:47:46','bechir07@outlook.fr','bechiirr71@gmail.com','bechiirr71@gmail.com','randomdev','randomdev','$2y$13$ABWnWNpOns4COMZzN9RqtubXboww3.zLquTxCIRZim2bw.htGcREW'),(2,2,3,1,NULL,'2019-10-09 20:39:07',NULL,NULL,'a:0:{}',NULL,'Soumaré','Diafra','1997-12-31','À la recherche d\'une belle fille à marier...','Nouakchott','2019-09-22 21:11:44',NULL,'thediaff@gmail.com','thediaff@gmail.com','thediaff','thediaff','$2y$13$Mj9gB9QhE84fubGP6m/XbetTNsXm2sSQA.5XrQOmw3bBs8E6LYTg.'),(3,NULL,NULL,0,NULL,'2019-10-09 20:40:09',NULL,NULL,'a:0:{}',NULL,NULL,NULL,NULL,NULL,NULL,'2019-09-28 01:43:12',NULL,'zaenma@gmail.com','zaenma@gmail.com','zaenma','zaenma','$2y$13$NDFOOdaCJT7ENoEhTjss9.NiMHpg1c7iHZOtqvSeRidK9KNKsjZ4W'),(13,NULL,4,0,NULL,NULL,NULL,NULL,'a:0:{}',NULL,'Ba','Bebe',NULL,NULL,NULL,'2019-10-09 23:30:52',NULL,NULL,NULL,NULL,NULL,NULL),(14,NULL,3,0,NULL,NULL,NULL,NULL,'a:0:{}',NULL,'Ba','Iboun',NULL,NULL,NULL,'2019-10-09 23:31:20',NULL,NULL,NULL,NULL,NULL,NULL),(15,6,4,0,NULL,NULL,NULL,NULL,'a:0:{}',NULL,'Sy','Ramata',NULL,NULL,NULL,'2019-10-09 23:32:47',NULL,NULL,NULL,NULL,NULL,NULL),(16,7,3,0,NULL,NULL,NULL,NULL,'a:0:{}',NULL,'Ngaidé','Abass',NULL,NULL,NULL,'2019-10-09 23:33:48',NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `app_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -414,4 +411,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-10  0:53:36
+-- Dump completed on 2019-10-10  2:16:15

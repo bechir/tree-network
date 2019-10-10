@@ -14,14 +14,6 @@ $(document).ready(function() {
         $('#navbarSupportedContent-332').collapse('hide');
     });
 
-    $( ".datepicker" ).datepicker( $.datepicker.regional[ "fr" ] );
-    $( ".datepicker" ).datepicker({
-        changeMonth: true,
-        changeYear: true,
-        showAnim: 'slideDown',
-        maxDate: '-12Y'
-    });
-
     let modalId = $('#image-gallery');    
     loadGallery(true, 'a.thumbnail');
 
@@ -128,28 +120,38 @@ $(document).ready(function() {
     //
     const formResuslts = $('#form-resuslts');
     const searchInput = $('input#search-user');
-    const closeBtn = $('#form-resuslts .close');
+    let currentRequest = null;
 
-    closeBtn.click(function(e){
+    $(document).on('click', function(){
         formResuslts.fadeOut();
-        e.preventDefault();
     });
+
+    formResuslts.click(function(e){
+        e.stopPropagation();
+    })
+
     searchInput.on('keyup', function(){
         let value = searchInput.val();
         
         if(value.length >= 3) {
-            $.ajax({
+            currentRequest = $.ajax({
                 type: "GET",
                 dataType: "html",
                 url: searchInput.data('url'),
                 data: `terms=${value}`,
+
+                beforeSend: function(){
+                    if(currentRequest) {
+                        currentRequest.abort();
+                    }
+                },
   
                 success: function(data) {
                     formResuslts.html(data);
                 },
   
                 error: function(data) {
-                    console.error(data)
+                    console.log(data)
                 }
             });
 

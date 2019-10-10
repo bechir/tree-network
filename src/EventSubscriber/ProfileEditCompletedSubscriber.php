@@ -33,8 +33,7 @@ class ProfileEditCompletedSubscriber implements EventSubscriberInterface
             if (!$isSubscribed) {
                 $newsletter = (new Newsletter())
                     ->setEmail($user->getEmail())
-                    ->setRegistrationUrl('user_settings')
-                    ->setLocale($user->getLocale());
+                    ->setRegistrationUrl('user_settings');
 
                 $this->em->persist($newsletter);
                 $this->em->flush();

@@ -6,9 +6,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <link rel="stylesheet" href="{{ asset('css/fontawesome-v5.8.2.css') }}">
-        <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/jquery-ui-1.12.1.min.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" rel="stylesheet">
         <link href="{{ asset('css/mdb.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/style.css') }}" rel="stylesheet">
         <meta name="description" content="{{ website.name }} est une application web responsive, vous permettant de gérer facilement VOTRE arbre généalogique et retrouver rapidement votre famille.">
@@ -79,7 +80,7 @@
                                     <input class="form-control" data-url="{{ path('user_search') }}" type="text" id="search-user" name="terms" placeholder="{{ 'layout.search'|trans }}" aria-label="Search" autocomplete="off">
                                     <i class="fas fa-search"></i>
 
-                                    <div id="form-resuslts" class="form-resuslts shadow position-absolute bg-white ml-2 w-100">
+                                    <div id="form-resuslts" class="form-resuslts shadow position-absolute bg-white w-100">
                                     </div>
                                 </div>
                             </form>
@@ -218,11 +219,12 @@
         {% endblock %}
         {% include 'common/flash_messages.twig' %}
         <script type="text/javascript" src="{{ asset('/js/addons/intersection-observer.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script type="text/javascript" src="{{ asset('js/popper.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
         <script type="text/javascript" src="{{ asset('js/mdb.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/jquery-ui-1.12.1.min.js') }}"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
         {% block javascripts %}{% endblock %}
     </body>

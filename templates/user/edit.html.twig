@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Modifier mon profil{% endblock %}
+
 {% import 'util/breadcrumb.twig' as breadcrumb %}
 
 {% block stylesheets %}
@@ -89,7 +91,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="md-form form-group">
-                                        {{ form_widget(form.bornAt, {'attr': {'class': 'form-control datepicker'}}) }}
+                                        {{ form_widget(form.bornAt, {'attr': {'class': 'form-control pickdate', 'data-provide': 'datepicker', 'data-date-end-date': "-1d", 'data-date-autoclose': 'true', 'data-date-language': 'fr_FR'}}) }}
                                         {{ form_label(form.bornAt) }}
                                     </div>
                                 </div>
@@ -101,7 +103,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="md-form form-group">
-                                        {{ form_widget(form.gender, {'attr': {'class': 'browser custom-select px-0'}}) }}
+                                        {{ form_widget(form.gender, {'attr': {'class': 'browser custom-select px-0', placeholder: 'Sexe'}}) }}
                                     </div>
                                 </div>
                             </div>

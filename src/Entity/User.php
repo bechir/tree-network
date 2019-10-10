@@ -226,7 +226,7 @@ class User extends BaseUser implements EquatableInterface
         return $this->bornAt;
     }
 
-    public function setBornAt(\DateTimeInterface $bornAt): self
+    public function setBornAt(? \DateTimeInterface $bornAt): self
     {
         $this->bornAt = $bornAt;
 

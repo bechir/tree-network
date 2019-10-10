@@ -1,5 +1,7 @@
 {% extends "@FOSUser/layout.html.twig" %}
 
+{% block title %}Compte activé!{% endblock %}
+
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
@@ -7,16 +9,18 @@
     <div class="container">
         <div class="main-title mb-60">
             <div class="row">
-                <div class="col-md-8 col-offset-md-2">
-                    <div class="shadow rounded px-5 py-5">
+                <div class="col-md-7 mx-auto">
+                    <div class="shadow rounded px-5 py-5 activated text-center">
                         <div class="card-text">
+                            <i class="fa fa-check-circle text-success"></i>
+							<h2 class="text-success">Compte activé!</h2>
                             {{ 'registration.confirmed'|trans({'%username%': user.username}) }}
                         </div>
-                        <div class="card-footer">
-                            {% if targetUrl %}
-                            <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
-                            {% endif %}
-                        </div>
+                        {% if targetUrl %}
+                            <p><a class="mt-3 btn aqua-gradient" href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
+                        {% else %}
+                            <a class="mt-3 btn aqua-gradient" href="{{ path('user_edit') }}"><span class="fa fa-user-edit fa-sm"></span> Modifier mon profil</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
