@@ -1,9 +1,10 @@
 jQuery(function ($) {
-    const snackbar = $("#snackbar");
-    snackbar.addClass("show");
+    const alerts = $(".alert.alert-dismissable");
+    alerts.addClass('show');
+
     setTimeout(function() {
-        snackbar.removeClass("show");
-    }, 7000);
+        alerts.removeClass('show');
+    }, 9000);
 
     let imagefile = $('input[type="file"]');
     let $img = $('<img id="img-preview" src="#"> class="img-responsive"');

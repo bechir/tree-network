@@ -106,7 +106,13 @@ word:
   grand_mother: "Grande mère"
   m_friend: "Amie"
   stepdaughter: "Belle fille"
-  stepmother: Belle mère
+  stepmother: "Belle mère"
   half_sister: "Démi soeur"
   m_cousin: Cousine
   niece: "Nièce"
+
+
+ROLE_USER: Utilisateur
+ROLE_ADMIN: Administeur Surveillant
+ROLE_MODERATOR: Moderateur
+ROLE_SUPER_ADMIN: Accès Global

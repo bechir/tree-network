@@ -14,7 +14,7 @@
         <div class="profile-header">
           <div class="overlay {% if user.enabled %}bg-success-2{% else %}bg-warning-2{% endif %}"></div>
           <div class="profile-main">
-            <h3 class="name"><i class="fa fa-copyright"></i> {{ user.fullname }}</h3>
+            <h3 class="name">{{ user.fullname }}</h3>
             <div class="user-state">
               {% if user.enabled %}
                   <span class="lnr lnr-checkmark-circle"></span> Activé
@@ -27,13 +27,12 @@
               {% endif %}
             </div>
           </div>
-          {% if user.hasRole('ROLE_SUPER_ADMIN') %}
             <div class="profile-stat">
               <div class="row">
-                <h4><i class="fa fa-star"></i> Super Admin</h4>
+                <h4>{% if user.isSuperAdmin() %}<i class="fa fa-star"></i>{% endif %}
+                 {{ user.masterRole|trans }}</h4>
               </div>
             </div>
-          {% endif %}
         </div>
         <!-- END PROFILE HEADER -->
         <!-- PROFILE DETAIL -->
@@ -50,7 +49,7 @@
           <div class="profile-info px-0 text-center">
             <hr>
             <div class="text-center">
-              {% if not user.hasRole('ROLE_SUPER_ADMIN') %}
+              {% if not user.hasRole('ROLE_SUPER_ADMIN') and is_granted('ROLE_MODERATOR') %}
                 <div class="btn-group">
                     <a href="#" class="btn btn-warning m-1 px-4 my-3 {% if not user.enabled %}hidden{% endif %}" id="disable-user"><span class="lnr lnr-circle-minus"></span> Désactiver</a>
                     <a href="#" class="btn btn-info m-1 px-4 my-3 {% if user.enabled %}hidden{% endif %}" id="enable-user"><span class="lnr lnr-checkmark-circle"></span> Activer</a>
@@ -62,7 +61,7 @@
               {% endif %}
             </div>
           </div>
-          {% if not user.hasRole('ROLE_ADMIN') %}
+          {% if not user.hasRole('ROLE_SUPER_ADMIN') and is_granted('ROLE_MODERATOR') %}
               <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel">
                   <div class="modal-dialog" role="document">
                       <div class="modal-content">
@@ -94,60 +93,62 @@
   </div>
 {% endblock %}
 
-{% block javascript %}
-  {{ parent() }}
+{% if not user.hasRole('ROLE_SUPER_ADMIN') and is_granted('ROLE_MODERATOR') %}
+  {% block javascript %}
+    {{ parent() }}
 
-  <script>
-    // Disable user when we click on the disable user button
-    $("#disable-user").on('click', function(e){
-      button = $(this)
-      $.ajax({
-        type: "POST",
-        dataType: "json",
-        url: "{{ path('admin_security_user_disable') }}",
-        data: "id=" + {{ user.id }},
+    <script>
+      // Disable user when we click on the disable user button
+      $("#disable-user").on('click', function(e){
+        button = $(this)
+        $.ajax({
+          type: "POST",
+          dataType: "json",
+          url: "{{ path('admin_security_user_disable') }}",
+          data: "id=" + {{ user.id }},
 
-        success: function(data) {
-          console.log('user disabled')
-          button.addClass('hidden')
-          $("#enable-user").removeClass('hidden')
-          $('.overlay').removeClass('bg-success-2').addClass('bg-warning-2')
-          $(".profile-main .user-state").html(`<span class="lnr lnr-cross-circle"></span> Desactivé`);
-        },
+          success: function(data) {
+            console.log('user disabled')
+            button.addClass('hidden')
+            $("#enable-user").removeClass('hidden')
+            $('.overlay').removeClass('bg-success-2').addClass('bg-warning-2')
+            $(".profile-main .user-state").html(`<span class="lnr lnr-cross-circle"></span> Desactivé`);
+          },
 
-        error: function(data) {
-          console.error(data)
-          alert('Une erruer est survenue au niveau du serveur.')
-        }
-      })
-      e.preventDefault();
-    });
+          error: function(data) {
+            console.error(data)
+            alert('Une erruer est survenue au niveau du serveur.')
+          }
+        })
+        e.preventDefault();
+      });
 
-    // Enable user when we click on the enable user button
-    $("#enable-user").on('click', function(e){
-      button = $(this)
-      $.ajax({
-        type: "POST",
-        dataType: "json",
-        url: "{{ path('admin_security_user_enable') }}",
-        data: "id=" + {{ user.id }},
+      // Enable user when we click on the enable user button
+      $("#enable-user").on('click', function(e){
+        button = $(this)
+        $.ajax({
+          type: "POST",
+          dataType: "json",
+          url: "{{ path('admin_security_user_enable') }}",
+          data: "id=" + {{ user.id }},
 
-        success: function(data) {
-          console.log('user enabled')
-          button.addClass('hidden')
-          $("#disable-user").removeClass('hidden')
-          $('.overlay').removeClass('bg-warning-2').addClass('bg-success-2')
-          $(".profile-main .user-state").html(`<span class="lnr lnr-checkmark-circle"></span> Activé`);
-        },
+          success: function(data) {
+            console.log('user enabled')
+            button.addClass('hidden')
+            $("#disable-user").removeClass('hidden')
+            $('.overlay').removeClass('bg-warning-2').addClass('bg-success-2')
+            $(".profile-main .user-state").html(`<span class="lnr lnr-checkmark-circle"></span> Activé`);
+          },
 
-        error: function(data) {
-          console.error(data)
-          alert('Une erruer est survenue au niveau du serveur.')
-        }
-      })
-      e.preventDefault();
-    });
-  </script>
+          error: function(data) {
+            console.error(data)
+            alert('Une erruer est survenue au niveau du serveur.')
+          }
+        })
+        e.preventDefault();
+      });
+    </script>
 
 
-{% endblock %}
+  {% endblock %}
+{% endif %}

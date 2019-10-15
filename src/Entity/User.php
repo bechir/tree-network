@@ -143,6 +143,11 @@ class User extends BaseUser implements EquatableInterface
      */
     private $gallery;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isAdmin;
+
     const NB_IMTEMS_HOME = 4;
     const NB_IMTEMS_RECENT_LINKS = 2;
     const NB_ITEMS_LISTING = 12;
@@ -151,6 +156,7 @@ class User extends BaseUser implements EquatableInterface
     public function __construct()
     {
         parent::__construct();
+        $this->isAdmin = false;
         $this->links = new ArrayCollection();
         $this->inverses = new ArrayCollection();
         $this->gallery = new ArrayCollection();
@@ -456,5 +462,44 @@ class User extends BaseUser implements EquatableInterface
         }
 
         return $this;
+    }
+
+    public function getMasterRole(): ?string
+    {
+        $roles = [
+            'ROLE_SUPER_ADMIN',
+            'ROLE_MODERATOR',
+            'ROLE_ADMIN',
+            'ROLE_USER',
+        ];
+        
+        foreach ($roles as $role) {
+            if($this->hasRole($role))
+                return $role;
+        }
+    }
+
+    public function getIsAdmin(): ?bool
+    {
+        return $this->isAdmin;
+    }
+
+    public function setIsAdmin(?bool $isAdmin): self
+    {
+        $this->isAdmin = $isAdmin;
+
+        return $this;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function updateAdmin()
+    {
+        if($this->hasRole('ROLE_ADMIN')) {
+            $this->isAdmin = true;
+        } else {
+            $this->isAdmin = false;
+        }
     }
 }
