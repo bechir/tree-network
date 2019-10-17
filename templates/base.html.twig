@@ -197,27 +197,27 @@
                                 <i class="fas fa-home mr-3"></i>
                                 Sanar, Saint-Louis &mdash; Sénégal</p>
                         </div>
-                        {# <li class="nav-item dropdown">
-                            <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink-4">
-                                <i class="fas fa-language"></i>
-                                {{ ('app.locale.' ~ request_locale)|trans }}
-                            </a>
-                            <div aria-labelledby="navbarDropdownMenuLink-4" class="dropdown-menu dropdown-menu-right dropdown-info">
-                                {% for l in locales() %}
-                                    {% if l.code != request_locale %}
-                                        <a class="dropdown-item" href="{{ path(
-                                                        app.request.get('_route', 'index'),
-                                                        app.request.get('_route_params', [])|merge({_locale: l.code})) }}">
-                                            {% if l.name is empty %}
-                                                {{ ('app.locale.' ~ l.code)|trans|capitalize }}
-                                            {% else %}
-                                                {{ l.name|capitalize }}
-                                            {% endif %}
-                                        </a>
-                                    {% endif %}
-                                {% endfor %}
-                            </div>
-                        </li> #}
+                    </div>
+                    <div class="row mt-3">
+                        <div class="mx-auto">
+                            <i class="fas fa-language fa-lg"></i>
+                            <ul class="d-inline-block list-unstyled">
+                            {% for l in locales() %}
+                                {% if l.code != request_locale %}
+                                    <li class="d-inline-block"><a class="d-block px-1 btn-link text-info" href="{{ path(
+                                                    app.request.get('_route', 'index'),
+                                                    app.request.get('_route_params', [])|merge({_locale: l.code})) }}">
+                                        {% if l.name is empty %}
+                                            {{ ('app.locale.' ~ l.code)|trans|capitalize }}
+                                        {% else %}
+                                            {{ l.name|capitalize }}
+                                        {% endif %}
+                                    </a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div class="footer-copyright text-center py-3">
