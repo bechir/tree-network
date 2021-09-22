@@ -1,0 +1,32 @@
+.main-section{
+    min-height: 0;
+    margin-top: 0 !important;
+}
+html, body, header, #intro-section {
+    height: 100%;
+}
+
+@media (max-width: 740px) {
+    html, body, header, #intro-section {
+        height: 100vh;
+    }
+    #welcome {
+        margin-top: 3rem;
+    }
+}
+
+.top-nav-collapse {
+    background-color: #563e91 !important;
+}
+
+.about-icon-style h2{
+    color: #333;
+    font-size: 1.5rem;
+}
+
+.about-icon-style .app-title-border {
+    width: 20%;
+    height: 1px;
+    display: block;
+    background-color: #607d8b;
+}

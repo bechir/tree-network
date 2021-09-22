@@ -1,0 +1,57 @@
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: bcrypt
+        App\Entity\User:
+            algorithm: auto
+
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
+        ROLE_MODERATOR: ROLE_ADMIN
+        ROLE_SUPER_ADMIN: [ROLE_MODERATOR, ROLE_ALLOWED_TO_SWITCH]
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username_email
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            pattern: ^/
+            anonymous: true
+            remember_me:
+                secret:   '%kernel.secret%'
+                lifetime: 2592000 # 1 month in seconds
+
+            form_login:
+                login_path: fos_user_security_login
+                check_path: fos_user_security_check
+                provider: fos_userbundle
+                csrf_token_generator: security.csrf.token_manager
+                remember_me: true
+                use_referer: true
+                default_target_path: profile
+            logout:
+              path: fos_user_security_logout
+
+            # activate different ways to authenticate
+
+            # http_basic: true
+            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+
+            # form_login: true
+            # https://symfony.com/doc/current/security/form_login_setup.html
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        - { path: /fr/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/(%locale%)/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/(%locale%)/resetting, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        # - { path: ^/(%locale%)/%app.submit_establishment_route%, roles: IS_AUTHENTICATED_REMEMBERED }

@@ -1,0 +1,28 @@
+<IfModule mod_rewrite.c>
+    Options -MultiViews
+    RewriteEngine On
+
+    # Enable Rewrite Engine
+    # ------------------------------
+    RewriteEngine On
+    RewriteBase /
+
+    # Redirect index.php Requests
+    # ------------------------------
+    RewriteCond %{THE_REQUEST} ^GET.*index\.php [NC]
+    RewriteCond %{THE_REQUEST} !/system/.*
+    RewriteRule (.*?)index\.php/*(.*) /$1$2 [R=301,L]
+
+    # Standard ExpressionEngine Rewrite
+    # ------------------------------
+    RewriteCond $1 !\.(css|js|gif|jpe?g|png) [NC]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ /index.php/$1 [L]
+</IfModule>
+
+<IfModule !mod_rewrite.c>
+    <IfModule mod_alias.c>
+        RedirectMatch 302 ^/$ /index.php/
+    </IfModule>
+</IfModule>

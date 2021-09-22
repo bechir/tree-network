@@ -1,0 +1,14 @@
+<h4>Résultats de recherche:</h4><hr>
+<ul class="list-unstyled">
+    {% for user in users %}
+        <li class="mt-3 {% if not loop.last %}border-bottom{% endif %}">
+            <a class="d-block py-1 my-2 mx-2 text-info btn-link" href="#">
+                <img class="img-50 img-circle" src="{{ user.avatar ? vich_uploader_asset(user.avatar, 'avatarFile') : asset('img/user/default-avatar-profile.jpg') }}">
+                {{ user.fullname }} ({{ user.email ? : user.username }})
+            </a><label class="label label-default">{{ user.masterRole|trans }}</label>
+            <a href="#" data-user-id="{{ user.id }}" class="add-user-btn float-right btn btn-success py-0 px-2 mt-4"><i class="fa fa-plus-circle"></i> Ajouter</a>
+        </li>
+    {% else %}
+        <li class="mx-3 my-3">Aucun utilisateur trouvé.</li>
+    {% endfor %}
+</ul>

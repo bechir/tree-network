@@ -1,0 +1,71 @@
+{% extends "base.html.twig" %}
+
+{% import 'util/breadcrumb.twig' as breadcrumb %}
+
+{% block title %}
+    {{ user.fullName }} - {{ 'layout.family_tree'|trans }}
+{% endblock title %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block main %}
+    <div class="mb-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Breadcrumb -->
+                    <div class="breadcrumb-area pt-3">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb bg-white">
+                                <li class="breadcrumb-item"><a class="black-text" href="{{ path('index') }}">{{ 'layout.home'|trans }}</a></li>
+                                <li class="breadcrumb-item"><a class="black-text" href="{{ path('profile') }}">{{ user.username }}</a></li>
+                                <li class="breadcrumb-item active">Arbre généalogique</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <!-- Breadcrumb End -->
+                    {% include 'user/public-nav-tabs.html.twig' with {active: 'tree'} %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div cass="row">
+        <div class="container padding-bottom-100">
+            <div class="card card-cascade narrower mt-5">
+                <div class="view shadow rounded view-cascade gradient-card-header aqua-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
+                    <a href="#" onclick="return false;" class="white-text mx-3">
+                        <i class="fas fa-tree"></i> Arbre généalogique de {{ user.fullName }}
+                    </a>
+                </div>
+
+                <div class="px-4">
+                    <div class="table-wrapper">
+                        <table class="table table-hover table-striped text-justify mb-0">
+                            <thead class="bg-info text-white">
+                                <tr>
+                                    <th class="h6 rounded-left">Nom complet<i class="fas fa-sort ml-1"></i></th>
+                                    <th class="h6">Description<i class="fas fa-sort ml-1"></i></th>
+                                    <th class="h6">Type de lien<i class="fas fa-sort ml-1"></i></th>
+                                    <th class="h6 rounded-right">Photo<i class="fas fa-sort ml-1"></i></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for link in user.links %}
+                                <tr class="cursor-pointer">
+                                    <td>{{ link.inverse.fullName }}</td>
+                                    <td>{{ link.inverse.description }}</td>
+                                    <td>{{ link.linkCategory.name|trans }}</td>
+                                    <td><img class="img-circle img-50 img-h-50" src="{{ link.inverse.avatar ? vich_uploader_asset(link.inverse.avatar, 'avatarFile') : asset('img/user/default-avatar-profile.jpg') }}"></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock main %}

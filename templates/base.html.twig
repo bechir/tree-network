@@ -1,0 +1,240 @@
+{% set request_locale = app.request.attributes.get('_locale') %}
+{% set _route = app.request.attributes.get('_route') %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" rel="stylesheet">
+        <link href="{{ asset('css/mdb.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+        <meta name="description" content="{{ website.name }} est une application web responsive, vous permettant de gérer facilement VOTRE arbre généalogique et retrouver rapidement votre famille.">
+        {% block stylesheets %}{% endblock %}
+
+        <title>{% block title %}{{ website.name }}{% endblock %}</title>
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+        {# {% for l in locales() %}
+            {% if l.code != request_locale %}
+            <link rel="alternate" hreflang="{{ l.code }}" href="{{ url(app.request.get('_route', 'homepage'), app.request.get('_route_params', [])|merge({_locale: l.code})) }}" />
+            {% endif %}
+            <link rel="alternate" hreflang="fr" href="{{ url(app.request.get('_route', 'homepage'), app.request.get('_route_params', [])|merge({_locale: 'fr'})) }}" />
+        {% endfor %} #}
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-149777457-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-149777457-1');
+        </script>
+    </head>
+    <body>
+        {% block body %}
+            <header>
+                <nav class="mb-1 navbar navbar-expand-md fixed-top navbar-dark aqua-gradient">
+                    <a class="navbar-brand mr-4 ml-1" href="{{ path('index') }}">
+                        {# <img src="{{ asset('img/tree-network-2.png') }}" id="logo" alt="tree network logo"> #}
+                        <i class="fas fa-code-branch f-16"></i> Tree network |
+                    </a>
+                    <button aria-controls="navbarSupportedContent-332" aria-expanded="false" aria-label="Toggle user menu" class="navbar-toggler user-menu" data-target="#navbarSupportedContent-332" data-toggle="collapse" type="button">
+                        <img class="avatar rounded-circle z-depth-0" src="{{ app.user and app.user.avatar ? vich_uploader_asset(app.user.avatar, 'avatarFile') : asset('img/user/default-avatar-profile.jpg') }}">
+                    </button>
+                    <div class="collapse navbar-collapse visible-sm" id="navbarSupportedContent-332">
+                        <ul class="navbar-nav mr-auto">
+                            {% if is_granted('ROLE_USER') %}
+                                <li class="nav-item"><a class="nav-link" href="{{ path('profile') }}"><i class="fas fa-id-card"></i> {{ 'layout.profile'|trans }}</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ path('user_tree_show') }}"><i class="fas fa-code-branch"></i> {{ 'layout.family_tree'|trans }}</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ path('user_settings') }}"><i class="fas fa-cog"></i> {{ 'layout.settings'|trans }}</a></li>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <li class="nav-item"><a class="nav-link" href="{{ path('admin_index') }}"><i class="fas fa-user-secret"></i> {{ 'layout.admin'|trans }}</a></li>
+                                {% endif %}
+                                <li class="nav-item"><a class="nav-link" href="{{ path('fos_user_security_logout') }}"><i class="fas fa-sign-out-alt"></i> {{ 'layout.logout'|trans }}</a></li>
+                            {% else %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in-alt"></i> {{ 'layout.login'|trans }}</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('fos_user_registration_register') }}"><i class="fa fa-user-plus"></i> {{ 'layout.register'|trans }}</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <button aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navigation" data-target="#navbarSupportedContent-333" data-toggle="collapse" type="button">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item {% if _route == 'browse' %}active{% endif %}">
+                                <a class="nav-link" href="{{ path('browse') }}">{{ 'layout.browse'|trans }}</a>
+                            </li>
+                            {# <li class="nav-item dropdown {% if _route in ['about', 'help_faq', 'contact'] %}active{% endif %}">
+                                <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink-333">
+                                    <i class="fas fa-question-circle"></i> {{ 'layout.help'|trans }}
+                                </a>
+                                <div aria-labelledby="navbarDropdownMenuLink-333" class="dropdown-menu dropdown-default">
+                                    <a class="dropdown-item" href="{{ path('about') }}">{{ 'layout.about'|trans }}</a>
+                                    <a class="dropdown-item" href="{{ path('help_faq') }}">{{ 'layout.help_faq'|trans }}</a>
+                                    <a class="dropdown-item" href="{{ path('contact') }}">{{ 'layout.contact_us'|trans }}</a>
+                                </div>
+                            </li> #}
+                        </ul>
+                        <ul class="navbar-nav ml-auto nav-flex-icons">
+                            <form class="form-inline mr-5" method="GET">
+                                <div class="md-form my-0">
+                                    <input class="form-control" data-url="{{ path('user_search') }}" type="text" id="search-user" name="terms" placeholder="{{ 'layout.search'|trans }}" aria-label="Search" autocomplete="off">
+                                    <i class="fas fa-search"></i>
+
+                                    <div id="form-resuslts" class="form-resuslts shadow position-absolute bg-white w-100">
+                                    </div>
+                                </div>
+                            </form>
+                            {% if is_granted('ROLE_USER') %}
+                                {# <li class="nav-item {% if _route == 'messages' %}active{% endif %}">
+                                    <a class="nav-link waves-effect waves-light">1
+                                        <i class="fas fa-envelope"></i>
+                                    </a>
+                                </li> #}
+                                <li class="nav-item avatar dropdown d-none d-md-block d-lg-block d-xl-block">
+                                    <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink-555">
+                                        <img class="avatar rounded-circle z-depth-0" src="{{ app.user.avatar ? vich_uploader_asset(app.user.avatar, 'avatarFile') : asset('img/user/default-avatar-profile.jpg') }}">
+                                    </a>
+                                    <div aria-labelledby="navbarDropdownMenuLink-55" class="dropdown-menu dropdown-menu-lg-right dropdown-secondary">
+                                        <a class="dropdown-item" href="{{ path('profile') }}"><i class="fas fa-id-card"></i> {{ 'layout.profile'|trans }}</a>
+                                        <a class="dropdown-item" href="{{ path('user_tree_show') }}"><i class="fas fa-code-branch"></i> {{ 'layout.family_tree'|trans }}</a>
+                                        <a class="dropdown-item" href="{{ path('user_settings') }}"><i class="fas fa-cog"></i> {{ 'layout.settings'|trans }}</a>
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            <a class="dropdown-item" href="{{ path('admin_index') }}"><i class="fas fa-user-secret"></i> {{ 'layout.admin'|trans }}</a>
+                                        {% endif %}
+                                        <a class="dropdown-item" href="{{ path('fos_user_security_logout') }}"><i class="fas fa-sign-out-alt"></i> {{ 'layout.logout'|trans }}</a>
+                                    </div>
+                                </li>
+                            {% else %}
+                                <li class="nav-item d-none d-md-block d-lg-block d-xl-block {% if _route == 'fos_user_security_login' %}active{% endif %}">
+                                    <a id="navbar-static-login" href="{{ path('fos_user_security_login') }}" class="btn bg-primary btn-rounded btn-sm text-white">
+                                        {{ 'layout.login'|trans }}
+                                        <i class="fas fa-sign-in-alt ml-2"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </nav>
+                {% block after_nav %}{% endblock %}
+            </header>
+
+            <main class="main-section">
+                {% block main %}{% endblock %}
+            </main>
+
+            <footer class="page-footer font-small unique-color-dark pos-absolute">
+                <div class="default-color">
+                    <div class="container">
+                        <div class="row py-4 d-flex align-items-center">
+                            <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+                                <h6 class="mb-0">{{ 'layout.join_socials'|trans }}</h6>
+                            </div>
+                            <div class="col-md-6 col-lg-7 text-center text-md-right">
+                                <a class="fb-ic">
+                                    <i class="fab fa-facebook-f white-text mr-4"></i>
+                                </a>
+                                <a class="tw-ic">
+                                    <i class="fab fa-twitter white-text mr-4"></i>
+                                </a>
+                                <a class="gplus-ic">
+                                    <i class="fab fa-google-plus-g white-text mr-4"></i>
+                                </a>
+                                <a class="li-ic">
+                                    <i class="fab fa-linkedin-in white-text mr-4"></i>
+                                </a>
+                                <a class="ins-ic">
+                                    <i class="fab fa-instagram white-text"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container text-center text-md-left mt-5">
+                    <div class="row mt-3">
+                        <div class="col-md-4 col-lg-4 col-xl-3 mx-auto mb-4">
+                            <h6 class="text-uppercase font-weight-bold">{{ website.name }}</h6>
+                            <hr class="default-color accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                            <p>{{ website.name }} est une application web responsive, vous permettant de gérer facilement <strong>VOTRE</strong> arbre généalogique et retrouver rapidement votre famille.</p>
+                        </div>
+                        <div class="col-md-4 col-lg-4 col-xl-3 mx-auto mb-4">
+                            <h6 class="text-uppercase font-weight-bold">{{ 'layout.useful_links'|trans }}</h6>
+                            <hr class="indigo accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                            <p>
+                                <a href="{{ path('about') }}">{{ 'layout.about'|trans }}</a>
+                            </p>
+                            <p>
+                                <a href="{{ path('help_faq') }}">{{ 'layout.help_faq'|trans }}</a>
+                            </p>
+                            <p>
+                                <a href="{{ path('terms_conditions') }}">{{ 'layout.terms_conditions'|trans }}</a>
+                            </p>
+                            <p>
+                                <a href="{{ path('privacy') }}">{{ 'layout.privacy'|trans }}</a>
+                            </p>
+                        </div>
+                        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                            <h6 class="text-uppercase font-weight-bold">Contact</h6>
+                            <hr class="default-color accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                            <p>
+                                <a href="{{ path('contact') }}">{{ 'layout.contact_us'|trans }}</a>
+                            </p>
+                            <p>
+                                <i class="fas fa-phone mr-3"></i>
+                                {{ website.phoneNumber }}</p>
+                            <p>
+                                <i class="fas fa-envelope mr-3"></i>
+                                {{ website.email }}</p>
+                            <p>
+                                <i class="fas fa-home mr-3"></i>
+                                Sanar, Saint-Louis &mdash; Sénégal</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="mx-auto">
+                            <i class="fas fa-language fa-lg"></i>
+                            <ul class="d-inline-block list-unstyled">
+                            {% for l in locales() %}
+                                {% if l.code != request_locale %}
+                                    <li class="d-inline-block"><a class="d-block px-1 btn-link text-info" href="{{ path(
+                                                    app.request.get('_route', 'index'),
+                                                    app.request.get('_route_params', [])|merge({_locale: l.code})) }}">
+                                        {% if l.name is empty %}
+                                            {{ ('app.locale.' ~ l.code)|trans|capitalize }}
+                                        {% else %}
+                                            {{ l.name|capitalize }}
+                                        {% endif %}
+                                    </a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-copyright text-center py-3">
+                    <span class="ml-5 float-left">&copy; 2019 Copyright<a href="/"> {{ website.name }}.com</a></span>
+                    <span class="mr-5 float-right">&mdash; Made with <i class="fas fa-heart text-danger"></i> by <a href="https://github.com/rand0mdev" target="_blank">rand0mdev</a></span>
+                </div>
+            </footer>
+        {% endblock %}
+        {% include 'common/flash_messages.twig' %}
+        <script type="text/javascript" src="{{ asset('/js/addons/intersection-observer.js') }}"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script type="text/javascript" src="{{ asset('js/popper.min.js') }}"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+        <script type="text/javascript" src="{{ asset('js/mdb.min.js') }}"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

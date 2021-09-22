@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/index.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+  {{ parent() }} | Gèrez facilement votre arbre généalogique
+{% endblock %}
+
+{% block after_nav %}
+  <!-- Full Page Intro -->
+  <div id="intro-section" class="view">
+    <!-- Mask & flexbox options-->
+    <div class="mask aqua-gradient d-flex justify-content-center align-items-center">
+
+      <!-- Content -->
+      <div class="container px-md-3 px-sm-0">
+
+        <!--Grid row-->
+        <div class="row">
+
+          <!--Grid column-->
+          <div class="col-md-12 mb-4 white-text text-center">
+
+            <h3 class="display-3 font-weight-bold white-text mb-0 pt-md-5 pt-5 ">{{ website.name }}</h3>
+            <hr class="hr-light my-4 w-75">
+            <h4 class="subtext-header mt-2 mb-4">Bienvenue sur {{ website.name }}, ici vous retrouverez rapidement vos ancêtres!</h4>
+            <a href="{#{ path('browse') }#}#section1" class="btn btn-rounded btn-outline-white wow fadeInUp" data-wow-delay="1.33s">
+              <i class="fas fa-code-branch"></i> Voir les arbres
+            </a>
+
+          </div>
+          <!--Grid column-->
+
+        </div>
+        <!--Grid row-->
+
+      </div>
+      <!-- Content -->
+
+    </div>
+    <!-- Mask & flexbox options-->
+
+  </div>
+  <!-- Full Page Intro -->
+
+{% endblock %}
+
+{% block main %}
+<div class="container" id="section1">
+    <div class="my-4 my-md-5 overflow-hidden reveal-1">
+        <div class="text-center mb-5">
+            <h3 class="text-aqua-gradient d-inline-bloc">
+                <span class="mx-4">À propos de {{ website.name }}</span>
+            </h3>
+        </div>
+        <div class="row reveal-2">
+            <div class="col-12 col-md-6 mb-4 mb-md-0">
+                <div class="about-icon-style">
+                    <h2 class="mt-3 mb-2"><span class="fas fa-tree"></span> Retrouvez votre famille</h2>
+                    <span class="app-title-border"></span>
+                    <div class="mt-3">
+                    Il n'a jamais était aussi simple de visualiser l'arbre généalogique de sa famille. Avec {{ website.name }}, vous pouvez remonter jusqu'à plusieurs générations! <a class="btn-link text-info" href="{{ path('fos_user_security_login') }}">Connectez-vous</a> et ajoutez votre arbre.
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 mb-4 mb-md-0">
+                <div class="about-icon-style">
+                    <h2 class="mt-3 mb-2"><span class="fas fa-share-alt"></span> Partagez votre arbre</h2>
+                    <span class="app-title-border"></span>
+                    <div class="fables-forth-text-color mt-3">
+                    Vous voulez faire connaître votre famille? Pas de problèmes! <a class="btn-link text-info" href="{{ path('fos_user_registration_register') }}">Inscrivez-vous</a>, si ce n'est déjà fait, et puis commencer par partager votre arbre généalogique au monde entier!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{# Recents add #}
+{{ render(controller('App\\Controller\\RenderedController::recents')) }}
+
+{% include 'common/call-to-action.html.twig' %}
+
+{% endblock %}

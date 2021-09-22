@@ -1,0 +1,32 @@
+{% extends 'admin/base.html.twig' %}
+
+{% if active is not defined %}
+    {% set active = 'settings' %}
+{% endif %}
+
+{% block left_sidebar %}
+
+{% include 'admin/common/left-sidebar.twig' with { active: active } %}
+
+{% endblock %}
+
+{% block main %}
+    <div class="panel panel-headline panel-primary">
+        <div class="panel-heading">
+            <h4 class="my-0"><span class="lnr lnr-cog fa-lg"></span> Paramètres</h4>
+        </div>
+        <div class="panel-body">
+            <ul class="nav nav-tabs">
+                <li role="presentation" {% if active == 'banner-ad' %}class="active"{% endif %}><a href="{{ path('admin_settings_banner_ad') }}"><span class="lnr lnr-layers fa-lg"></span> Bannière publicitaire</a></li>
+                <li role="presentation" {% if active == 'emails' %}class="active"{% endif %}><a href="{{ path('admin_settings_emails') }}"><span class="lnr lnr-envelope fa-lg"></span> Envoie d'e-mails</a></li>
+                <li role="presentation" {% if active == 'admin-users' %}class="active"{% endif %}><a href="{{ path('admin_settings_admin_users') }}"><span class="lnr lnr-users fa-lg"></span> Administrateurs</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active px-0" id="{{ active }}" role="tabpanel" aria-labelledby="{{ active }}-tab">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon profil - {{ user.fullname }}{% endblock %}
+
+{% import 'util/breadcrumb.twig' as breadcrumb %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block main %}
+
+    <div class="mb-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Breadcrumb -->
+                    <div class="breadcrumb-area pt-3">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb bg-white">
+                                <li class="breadcrumb-item"><a class="black-text" href="{{ path('index' ) }}">{{ 'layout.home'|trans }}</a></li>
+                                <li class="breadcrumb-item active">{{ user.username }}</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <!-- Breadcrumb End -->
+                    {% if app.user == user %}
+                        {% include 'user/nav-tabs.html.twig' with {active: 'profile'} %}
+                    {% else %}
+                        {% include 'user/public-nav-tabs.html.twig' with {user: user, active: 'profile'} %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div cass="row">
+        <div class="container">
+            <div class="tab-content" id="myTabContent">
+                <div aria-labelledby="profile-tab" class="tab-pane fade active show" id="profile" role="tabpanel">
+                    <a class="btn btn btn-outline-info rounded ml-0 wow bounceIn" href="{{ path('user_edit') }}"><i class="fas fa-user-edit mr-1"></i> Modifier</a>
+                    <div class="text-white d-flex h-100 mask aqua-gradient-rgba rounded shadow my-5 row mx-0">
+                        <div class="p-3 col-sm-12 col-md-10">
+                            <h3 class="card-title">{{ user.username }}</h3>
+                            <p class="lead mb-0">{{ user.email }}</p>
+                        </div>
+                        <div class="py-1 mx-auto text-center pr-3 col-sm-12 col-md-2">
+                            <img class="img-circle img-100" src="{{ user.avatar ? vich_uploader_asset(user.avatar, 'avatarFile') : asset('img/user/default-avatar-profile.jpg') }}">
+                        </div>
+                    </div>
+
+                    <div class="card shadow py-3 reveal-1">
+                        <div class="card-body">
+                            <h5 class="card-title">Ajouts récents <a href="{{ path('tree_show', {usernameCanonical: user.usernameCanonical}) }}" class="btn btn-info rounded float-right">Voir toute la famille</a></h5>
+                            <hr>
+                            <div class="row">
+                                {% for link in recents %}
+                                    <div class="col-md-6">
+                                        <div class="card shadow-sm">
+                                            <div class="card-body">
+                                                <div class="d-flex flex-row justify-content-between">
+                                                    <div class="p-2 text-muted">
+                                                        {{ link.linkCategory.name|trans }}<br>
+                                                        <a class="btn-link text-info" href="#">{{ link.inverse.fullname }}</a>
+                                                    </div>
+                                                    <div class="p-2">
+                                                        <img class="img-circle img-square-50" src="{{ link.inverse.avatar ? vich_uploader_asset(link.inverse.avatar, 'avatarFile') : asset('img/user/default-avatar-profile.jpg') }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <p class="ml-3 text-muted">Votre arbe est vide pour le moment.</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="card shadow py-3 mt-5">
+                        <div class="card-body">
+                            <h5 class="card-title reveal-1">À propos de moi</h5>
+                            <hr>
+                            <div class="reveal-2">
+                                <p class="card-subtitle my-2 text-muted">{{ user.fullName }} &mdash; {{ user.username }}</p>
+                                <p class="card-text"><i class="fas fa-calendar-alt"></i> Date de naissance: {{ user.bornAt ? user.bornAt|localizeddate('full', 'none', app.request.locale)|capitalize : 'N/A' }}</p>
+                                <p class="card-text"><i class="fas fa-map-marked-alt"></i> Lieu de naissance: {{ user.birthPlace ? : 'N/A' }}</p>
+                                <hr>
+                                <div class="card-subtitle text-muted font-italic">
+                                    {{ user.description }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card shadow py-3 my-5">
+                        <div class="card-body">
+                            <h5 class="card-title reveal-1">Informations sur le compte</h5>
+                            <hr>
+                            <div class="reveal-2">
+                                <p class="card-text">Date d'inscription : {{ user.submittedAt|localizeddate('full', 'none', app.request.locale )|capitalize }}</p>
+                                <p class="card-text">Dernière connexion : {{ user.lastLogin|time_diff }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

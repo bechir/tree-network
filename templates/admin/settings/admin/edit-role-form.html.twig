@@ -1,0 +1,16 @@
+<form method="GET" action="{{ path('admin_settings_edit_user_role') }}">
+    <div class="form-row">
+        <label>Selectionnez un rôle</label>
+        <select id="edit_user_role_roles" name="role" class="custom-select input-lg">
+            <option value="1">{{ 'ROLE_ADMIN'|trans }}</option>
+            <option value="2">{{ 'ROLE_MODERATOR'|trans }}</option>
+            <option value="3">{{ 'ROLE_SUPER_ADMIN'|trans }}</option>
+        </select>
+        <input type="hidden" name="userId" value="{{ user.id }}">
+    </div>
+    <hr>
+    <button type="submit" class="btn btn-success btn-lg">
+        <i class="fa fa-check-circle"></i>
+        Mettre à jour
+    </button>
+</form>

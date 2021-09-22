@@ -1,0 +1,113 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contactez-nous &mdash; {{ website.name }}{% endblock %}
+
+{% block main %}
+
+{# From component #}
+<div class="container padding-top-60">
+<h2 class="h1-responsive font-weight-bold text-center mb-5">Contactez nous</h2>
+  <!-- Section description -->
+  <p class="grey-text text-center w-responsive mx-auto mb-5">
+    Vous souhaitez nos services, poser une question ou simplement nous dire bonjour? Nous sommes toujours à votre service. N'hésitez pas à nous appeler ou à remplir ce formulaire.
+  </p>
+    <p class="grey-text text-center w-responsive mx-auto mb-5">
+    S'il s'agit d'une erreur que vous voulez nous signaler, pensez à metre "[Erreur] ..." sur l'ojet du mesage.
+  </p>
+{# From section #}
+<!-- Section: Contact v.3 -->
+<section class="contact-section my-5">
+  <!-- Form with header -->
+  {{ form_start(form) }}
+  <div class="card">
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-lg-8">
+        <div class="card-body form">
+          <!-- Header -->
+          <h3 class="mt-4"><i class="fas fa-envelope pr-2"></i>Ecrivez nous:</h3>
+
+          <!-- Grid row -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="md-form mb-0">
+                {{ form_widget(form.fullname, {'attr': {'class': 'form-control'}}) }}
+                {{ form_label(form.fullname) }}
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="md-form mb-0">
+                {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                {{ form_label(form.email) }}
+              </div>
+            </div>
+          </div>
+          <!-- Grid row -->
+
+          <!-- Grid row -->
+          <div class="row">
+            <div class="col-md-12">
+              <div class="md-form mb-0">
+                {{ form_widget(form.subject, {'attr': {'class': 'form-control'}}) }}
+                {{ form_label(form.subject) }}
+              </div>
+            </div>
+          </div>
+          <!-- Grid row -->
+
+          <!-- Grid row -->
+          <div class="row">
+            <div class="col-md-12">
+              <div class="md-form mb-0">
+                {{ form_widget(form.message, {'attr': {'class': 'form-control md-textarea', 'rows': '3'}}) }}
+                {{ form_label(form.message) }}
+                <button type="submit" class="btn btn-lg aqua-gradient rounded border-none text-white">
+                  <i class="far fa-paper-plane"></i> Envoyer
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Grid row -->
+        </div>
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-lg-4">
+        <div class="card-body contact text-center h-100">
+          <h3 class="my-4 pb-2">Informations de contact</h3>
+          <ul class="text-lg-left list-unstyled ml-4">
+            <li><p><i class="fas fa-phone pr-2"></i>{{ website.phoneNumber }}</p></li>
+            <li><p><i class="fas fa-envelope pr-2"></i>{{ website.email }}</p></li>
+            <li><p><i class="fas fa-map-marker-alt pr-2"></i>Sanar, Saint-Louis &mdash; Sénégal</p></li>
+          </ul>
+          <hr class="hr-light my-4">
+          <ul class="list-inline text-center list-unstyled">
+            <li class="list-inline-item">
+              <a class="p-2 fa-lg tw-ic"><i class="fab fa-twitter"></i></a>
+            </li>
+            <li class="list-inline-item">
+              <a class="p-2 fa-lg li-ic"><i class="fab fa-linkedin-in"> </i></a>
+            </li>
+            <li class="list-inline-item">
+              <a class="p-2 fa-lg ins-ic"><i class="fab fa-instagram"> </i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Form with header -->
+  {{ form_end(form) }}
+
+</section>
+<!-- Section: Contact v.3 -->
+</div>
+{% endblock %}

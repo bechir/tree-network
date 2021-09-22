@@ -1,0 +1,28 @@
+browse:
+  path: /{_locale}/browse
+  controller: App\Controller\FamilyTreeController::browse
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+browse_paginated:
+  path: /{_locale}/browse/page/{page<[1-9]\d*>}
+  controller: App\Controller\FamilyTreeController::browse
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+tree_show:
+  path: /{_locale}/u/{usernameCanonical}/tree
+  controller: App\Controller\FamilyTreeController::show
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+links_list_by_gender:
+  path: /{_locale}/get-links
+  controller: App\Controller\FamilyTreeController::listLinkNamesOfGender
+  methods: GET

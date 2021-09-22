@@ -1,0 +1,17 @@
+vich_uploader:
+  db_driver: orm
+
+  mappings:
+    user:
+      uri_prefix: '%uploads_prefix%/user'
+      upload_destination: '%uploads_dir%/user'
+      namer: vich_uploader.namer_hash
+      delete_on_remove: true
+      delete_on_update: true
+
+    gallery:
+      uri_prefix: '%uploads_prefix%/gallery'
+      upload_destination: '%uploads_dir%/gallery'
+      namer: vich_uploader.namer_hash
+      delete_on_remove: true
+      delete_on_update: true

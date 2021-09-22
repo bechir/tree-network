@@ -1,0 +1,9 @@
+{% block gallery_widget %}
+    <div id="row__name__">
+        {{ form_widget(form.ddimageFile) }}
+    </div>
+{% endblock %}
+
+{% block image_widget %}
+    {{ form_widget(form.imageFile, {attr: {class: 'file-input'}}) }}
+{% endblock %}

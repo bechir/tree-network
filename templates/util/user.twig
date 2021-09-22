@@ -1,0 +1,32 @@
+{% macro card(user) %}
+    {% set profile_url = path('user_show', {usernameCanonical: user.usernameCanonical}) %}
+    <div class="col-md-6 col-lg-4 col-xl-3 mb-4 user px-2">
+        <div class="card">
+            <div class="view overlay">
+                <img class="card-img-top img-circle mx-auto mt-2" src="{{ user.avatar ? vich_uploader_asset(user.avatar, 'avatarFile') : asset('img/user/default-avatar-profile.jpg') }}">
+                <a href="{{ profile_url }}">
+                    <div class="mask rgba-white-slight"></div>
+                </a>
+            </div>
+            <div class="card-body px-2">
+                <h5 class="card-title text-center">{{ user.fullName }}</h5>
+                {% set desc = 'Pas de description.' %}
+                {% if user.description %}
+                    {% set desc = user.description %}
+                    {% if desc|length > 60 %}
+                        {% set desc = desc[:60] ~ '...' %}
+                    {% endif %}
+                    
+                {% endif %}
+                <p class="card-text text-center h-35px">{{ desc }}</p>
+                <div class="bottom-text">
+                    <hr>
+                    <span class="d-block mb-2">
+                        <i class="far fa-users"></i>
+                        {{ user.links|length }} membre·s renseigné·s</span>
+                </div>
+                <a href="{{ profile_url }}"><button class="btn aqua-gradient btn-block py-2" type="button">Détails</button></a>
+            </div>
+        </div>
+    </div>
+{% endmacro %}

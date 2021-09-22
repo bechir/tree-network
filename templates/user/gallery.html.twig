@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% import 'util/breadcrumb.twig' as breadcrumb %}
+
+{% block title %}{{ user.fullname }} - Gallerie{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block main %}
+
+    <div class="mb-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Breadcrumb -->
+                    <div class="breadcrumb-area pt-3">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb bg-white">
+                                <li class="breadcrumb-item"><a class="black-text" href="{{ path('index') }}">{{ 'layout.home'|trans }}</a></li>
+                                <li class="breadcrumb-item"><a class="black-text" href="{{ path('profile') }}">{{ user.username }}</a></li>
+                                <li class="breadcrumb-item active">Gallerie</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <!-- Breadcrumb End -->
+                    {% if app.user == user %}
+                        {% include 'user/nav-tabs.html.twig' with {active: 'gallery'} %}
+                    {% else %}
+                        {% include 'user/public-nav-tabs.html.twig' with {user: user, active: 'gallery'} %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div cass="row">
+        <div class="container">
+            <div class="tab-content" id="myTabContent">
+                <div aria-labelledby="delete-tab" class="tab-pane fade active show" id="delete" role="tabpanel">
+                    <div class="card shadow pb-3 mb-5">
+                        <div class="card-body">
+                            <h5 class="card-title text-muted h6"><i class="fa fa-download"></i> Téléchargements</h5>
+                            <hr>
+                            <div class="row">
+                                {% for img in user.gallery %}
+                                    {% set img_url = vich_uploader_asset(img, 'imageFile') %}
+                                    <div class="col-sm-2 mb-3 thumb">
+                                        <a class="thumbnail" href="#" data-image-id="{{ img.id }}" data-toggle="modal" data-title="Image {{ loop.index }}" data-image="{{ img_url }}" data-target="#image-gallery">
+                                            <img class="img-thumbnail shadow border-0 p-0" src="{{ img_url }}" alt="Image {{ loop.index }}">
+                                        </a>
+                                    </div>
+                                    {% if loop.index == 1 %}
+                                        <div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg mt-1">
+                                                <div class="modal-content">
+                                                    <div class="modal-header my-0 py-0">
+                                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body py-0">
+                                                        <img id="image-gallery-image" class="img-responsive w-100" src="">
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn aqua-gradient float-left" id="show-previous-image"><i class="fa fa-arrow-left"></i>
+                                                        </button>
+
+                                                        <button type="button" id="show-next-image" class="btn aqua-gradient float-right"><i class="fa fa-arrow-right"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                    
+                                {% else %}
+                                    <blockquote class="blockquote bq-default">
+                                        <p class="mb-0"><small>Pas de photos.</small></p>
+                                    </blockquote>
+                                {% endfor %}
+                            </div>
+                            {% if app.user == user %}
+                                <div class="mt-5 mb-0">
+                                    <p class="mt-1">
+                                        <a class="btn btn-info ml-0 waves-effect waves-light" href="{{ path('user_gallery_edit') }}">Modifier</a>
+                                    </p>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

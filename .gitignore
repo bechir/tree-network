@@ -1,0 +1,20 @@
+
+###> symfony/framework-bundle ###
+/.env.prod
+/.env.local
+/.env.local.php
+/.env.*.local
+/var/cache/
+/var/log/
+/vendor/
+/tree_network/
+###< symfony/framework-bundle ###
+
+###> symfony/phpunit-bridge ###
+.phpunit
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+###> symfony/web-server-bundle ###
+/.web-server-pid
+###< symfony/web-server-bundle ###

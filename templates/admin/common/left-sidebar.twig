@@ -1,0 +1,58 @@
+{% set in_settings = ['banner-ad', 'emails', 'admin-users'] %}
+
+<!-- LEFT SIDEBAR -->
+<div id="sidebar-nav" class="sidebar">
+    <div class="sidebar-scroll">
+        <nav>
+            <ul class="nav">
+                <li><a href="{{ path('admin_index') }}" {% if active == 'index' %} class="active" {% endif %}>
+                    <i class="lnr lnr-home"></i> <span>Tableau de bord</span></a>
+                </li>
+                <li><a href="{{ path('admin_users') }}" {% if active == 'users' %} class="active" {% endif %}>
+                    <i class="lnr lnr-users"></i> <span>Utilisateurs</span></a>
+                </li>
+                {# <li><a href="{{ path('admin_user_create') }}" {% if active == 'new-user' %} class="active" {% endif %}>
+                    <i class="lnr lnr-plus-circle"></i> <span>Ajouter un utilisateur</span></a>
+                </li> #}
+                <li>
+                    <a href="{{ path('admin_inbox') }}" {% if active == 'inbox' %} class="active" {% endif %}>
+                        <i class="lnr lnr-inbox"></i>
+                        <span>Boîte de réception
+                            <span class="badge mt-1">
+                                {{ render(controller('App\\Controller\\Admin\\InboxController::getMessagesCount')) }}
+                            </span>
+                        </span>
+                    </a>
+                </li>
+                <li><a href="{{ path('admin_newsletter_index') }}" {% if active == 'newsletter' %} class="active" {% endif %}>
+                    <i class="lnr lnr-envelope"></i> <span>Newsletter</span></a>
+                </li>
+                <li><a href="{{ path('admin_stats') }}" {% if active == 'stats' %} class="active" {% endif %}>
+                    <i class="lnr lnr-chart-bars"></i> <span>Statistiques</span></a>
+                </li>
+                {# <li><a href="{{ path('admin_settings') }}" {% if active == 'settings' %}class="active"{% endif %}><i class="lnr lnr-cog"></i> <span>Paramètres</span></a></li> #}
+                <li>
+                    <a {% if active in in_settings %}class="active" aria-expanded="true"{% else %}class="collapsed"{% endif %} data-toggle="collapse" href="#settings">
+                        <i class="lnr lnr-cog"></i>
+                        <span>Paramètres</span>
+                        <i class="icon-submenu lnr lnr-chevron-left"></i>
+                    </a>
+                    <div class="collapse{% if active in in_settings %} in{% endif %}" id="settings">
+                        <ul class="nav">
+                            <li><a href="{{ path('admin_settings_banner_ad') }}" {% if active == 'banner-ad' %} class="active" {% endif %}>
+                                <span><i class="lnr lnr-layers fa-lg"></i> Bannière publicitaire</span></a>
+                            </li>
+                            <li><a href="{{ path('admin_settings_emails') }}" {% if active == 'emails' %} class="active" {% endif %}>
+                                <span><i class="lnr lnr-envelope fa-lg"></i> Envoie d'e-mails</span></a>
+                            </li>
+                            <li><a href="{{ path('admin_settings_admin_users') }}" {% if active == 'admin-users' %} class="active" {% endif %}>
+                                <span><i class="lnr lnr-users fa-lg"></i> Administrateurs</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<!-- END LEFT SIDEBAR -->

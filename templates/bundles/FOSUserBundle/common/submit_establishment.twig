@@ -1,0 +1,21 @@
+<!-- Intro section start -->
+<div class="intro-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                <img src="{{ asset('img/logos/logo.png') }}" alt="white-logo">
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                <div class="intro-text">
+                    <h3>{{ 'establishment.submit_banner.title'|trans }}</h3>
+                    <p class="">{{ 'establishment.submit_banner.body'|trans }}</p>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
+                <a href="{{ path('submit_estab') }}" class="btn btn-md btn-theme hidden-xs hidden-sm">{{ 'establishment.submit_banner.action'|trans }}</a>
+                <a href="{{ path('submit_estab') }}" class="btn btn-sm btn-theme hidden-md hidden-lg">{{ 'establishment.submit_banner.action'|trans }}</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- intro section end -->

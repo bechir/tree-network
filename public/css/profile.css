@@ -1,0 +1,24 @@
+@media (min-width: 700px) {
+    .profile-tabs-container{
+        margin: 0 7% !important;
+    }
+}
+
+
+.rounded{
+	border-radius: 3px !important;
+}
+
+.nav-justified .nav-item:last-child{
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+.nav-justified .nav-item:first-child{
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.nav-tabs .nav-link{
+    border: none;
+	border-radius:0;
+}

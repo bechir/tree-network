@@ -1,0 +1,53 @@
+{% extends 'admin/base.html.twig' %}
+{% block left_sidebar %}
+    {% include 'admin/common/left-sidebar.twig' with { active: 'newsletter' } %}
+{% endblock %}
+
+{% block main %}
+<h3 class="page-title text-info"><span class="lnr lnr-envelope"></span> Newsletter</h3>
+<div class="row">
+    <div class="col-md-12">
+
+
+<div class="panel">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-plus"></i> Créer un nouveau message</h3>
+    </div>
+    <div class="panel-body">
+        {{ form_start(form) }}
+            <div class="form-row">
+                <div class="col mb-5">
+                    {{ form_widget(form.subject, {'attr': {'class': 'form-control input-lg'}}) }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col mb-5">
+                    {{ form_widget(form.message, {'attr': {'class': 'ckeditor'}}) }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="mt-3 text-center mb-5">
+                    <label class="fancy-checkbox">
+                        <input type="checkbox" checked disabled>
+                        <span>Envoyer à tous les abonnés</span>
+                    </label>
+                </div>
+            </div>
+            <div class="mt-3">
+                <button class="btn btn-primary btn-lg"><i class="fa fa-send-o"></i> Envoyer</button>
+            </div>
+        {{ form_end(form) }}
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('js/ckeditor/adapters/jquery.js') }}"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('textarea.ckeditor').ckeditor();
+        });
+    </script>
+{% endblock %}

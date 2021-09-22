@@ -1,0 +1,24 @@
+<h1 class="text-center">Une nouvelle réservation a eu lieu a l'établissement {{ hotel.name }}</h1>
+<p>Nom: {{ user.firstname }}</p>
+<p>Prénom: {{ user.lastname }}</p>
+<p>Adresse E-mail: {{ user.email }}</p>
+<p>Pays: {{ user.country }}</p>
+<p>Numéro de téléphone: {{ user.phoneNumber }}</p>
+<p>Date d'arrivée: {{ user.dates.checkIn|date('d/m/Y') }}</p>
+<p>Date de départ:
+    {% if user.dates.checkOut is not null %}
+        {{ user.dates.checkOut|date('d/m/Y') }}
+    {% else %}
+        Inconnue
+    {% endif %}
+</p>
+{% if user.message is not empty %}
+<p>Message:</p>
+{{ user.message }}
+{% endif %}
+
+{% if user.checkInHours is not empty %}
+<p>Heure d'arrivée: {{ user.checkInHours }}</p>
+{% endif %}
+
+<h3><a href="http://localhost:8080">Envoyer un message de confirmation</a></h3>

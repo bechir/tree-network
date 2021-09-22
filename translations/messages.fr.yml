@@ -1,0 +1,118 @@
+app:
+  locale:
+    plr: Pulaar
+    wlf: Wolof
+    fr: Français
+    en: English
+    ar: العربية
+
+layout:
+  about: À propos
+  admin: Administration
+  home: Accueil # Home
+  contact_us: — Page de contact # Contact-us
+  help_faq: Aide / FAQ # Help / FAQ
+  help: Aide # Help
+  terms_conditions: Conditions générales d'utilisations
+  privacy: Politique de confidentialié
+  browse: Parcourir les arbres # Browse
+  profile: Profil # Profile
+  settings:  Paramètres # Settings
+  family_tree:  Arbre généalogique # Family tree
+  logout:  Déconnexion # Logout
+  login: Connexion # Sign up
+  register: Inscription # Sign in
+  join_socials: Retrouvez-nous sur les réseaux sociaux!
+  useful_links: Liens utiles
+  search: Rechercher...
+
+contact.message_sent: 'Votre message a été envoyé. Merci!'
+
+form:
+  firstName: Prénoms
+  lastName: Nom
+  phoneNumber: Numéro de téléphone
+  bornAt: Date de naissance
+  second_email: Seconde adresse email
+  birthPlace:  Lieu de naissance
+  description: Description
+  username: Nom d'utilisateur
+  email: Adresse email
+  fullname: Nom complet
+  subject: Sujet
+  message: Votre message
+  do_signup: S'inscrire
+  password: Mot de passe
+  current_password: Mot de passe acutel
+  new_password: Nouveau mot de passe
+  confirm_password: Confirmez le mot de passe
+  username_email: Nom d'utilisateur ou email
+  sign_in: Se connecter
+  forgot_password: Mot de passe oublié?
+  already_member: Déjà membre ? # Already a member?
+  not_member: Pas de compte ?
+  login_sign_up: Inscrivez vous
+  remember_me: Se souvenir de moi
+  select: Séléctionnez
+
+login:
+  title: Connectez vous
+
+register:
+  title: Créer un compte
+  h1: Inscription
+  sign_up_now: "Inscrivez-vous maintenant!" # Sign up right now!
+
+
+tree:
+  list:
+    title: Arbres généalogiques
+
+profile:
+  edit_success: Votre profil a été modifé avec succès!
+  title: Mon profil
+
+setting:
+  email_added: L'adresse email a été ajoutée.
+  password_edited: Votre mot de passe a été modifé.
+
+action:
+  learn_more: "En savoir plus" # Learn more
+
+word:
+  prev: Precedant
+  next: Suivant
+  male: Homme
+  female: Femme
+  father: Père
+  brother: Frère
+  uncle: Oncle
+  son: Fils
+  husband: Mari
+  grand_father: Grand père
+  stepfather: Beau père
+  stepchild: Beau fils
+  half_brother: Démi frère
+  brother_in_law: Beau frère
+  friend: Ami
+  cousin: Cousin
+  nephew: Neveau
+  mother: "Mère"
+  sister: "Soeur"
+  aunt: Tante
+  sister_in_law: "Belle soeur"
+  daughter: Fille
+  wife: "Épouse"
+  grand_mother: "Grande mère"
+  m_friend: "Amie"
+  stepdaughter: "Belle fille"
+  stepmother: "Belle mère"
+  half_sister: "Démi soeur"
+  m_cousin: Cousine
+  niece: "Nièce"
+
+
+ROLE_USER: Utilisateur
+ROLE_ADMIN: Administeur Surveillant
+ROLE_MODERATOR: Moderateur
+ROLE_SUPER_ADMIN: Accès Global

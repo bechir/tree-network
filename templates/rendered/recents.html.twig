@@ -1,0 +1,11 @@
+{% from 'util/user.twig' import card as user_card %}
+
+<div class="section-margin mx-5 px-0 px-md-5">
+    <h3 class="text-center reveal-1"><i class="fas fa-history fa-xs"></i> Ajouts récents<a class="btn btn-sm btn-info rounded float-right" href="{{ path('browse') }}">Voir tous les arbres <i class="fas fa-arrow-right"></i></a></h3>
+    <hr>
+    <div class="row browse reveal-2">
+        {% for user in users %}
+            {{ user_card(user) }}
+        {% endfor %}
+    </div>
+</div>

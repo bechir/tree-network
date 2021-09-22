@@ -1,0 +1,121 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier mon profil{% endblock %}
+
+{% import 'util/breadcrumb.twig' as breadcrumb %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block main %}
+
+    <div class="mb-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Breadcrumb -->
+                    <div class="breadcrumb-area pt-3">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb bg-white">
+                                <li class="breadcrumb-item"><a class="black-text" href="{{ path('index') }}">{{ 'layout.home'|trans }}</a></li>
+                                <li class="breadcrumb-item"><a class="black-text" href="{{ path('profile') }}">{{ app.user.username }}</a></li>
+                                <li class="breadcrumb-item active">Modifier</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <!-- Breadcrumb End -->
+                    {% include 'user/nav-tabs.html.twig' with {active: 'edit'} %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div cass="row">
+        {{ form_start(form) }}
+        <div class="container mb-5">
+            <div class="card shadow py-3">
+                <div class="card-body">
+                    <h5 class="card-title">Modifier mes informations</h5>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3 mr-5">
+                            <div class="avatar text-center">
+                                <div class="img-preview">
+                                    <img class="img-circle img-150" src="{{ user.avatar ? vich_uploader_asset(user.avatar, 'avatarFile') : asset('img/user/default-avatar-profile.jpg') }}">
+                                </div>
+                                {{ form_widget(form.avatar.avatarFile) }}
+                                <label for="edit_profile_avatar_avatarFile" class="btn-edit btn aqua-gradient">Modifier</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="md-form form-lg">
+                                {{ form_widget(form.username, {'attr': {'class': 'form-control form-control-lg'}}) }}
+                                <label for="inputLGEx">Nom d'utilisateur</label>
+                            </div>
+                            
+                            <h6 class="help-block">Description
+                            <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Une petite description qui apparaîtra dans les résultats de recherche.">
+                                <i class="fas fa-info-circle text-info"></i>
+                            </span>
+                            </h6>
+                            <div class="md-form md-outline">
+                                {{ form_widget(form.description, {'attr': {'class': 'md-textarea form-control', 'rows': '3'}}) }}
+                                <label for="form75">Description</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-5">
+                        <div class="container mx-5">
+                            <h5 class="card-subtitle text-muted">À propos de moi</h5>
+                            {# <hr> #}
+                             <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="md-form form-group">
+                                        {{ form_widget(form.firstName, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_label(form.firstName) }}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="md-form form-group">
+                                        {{ form_widget(form.lastName, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_label(form.lastName) }}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="md-form form-group">
+                                        {{ form_widget(form.phoneNumber, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_label(form.phoneNumber) }}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="md-form form-group">
+                                        {{ form_widget(form.bornAt, {'attr': {'class': 'form-control pickdate', 'data-provide': 'datepicker', 'data-date-end-date': "-1d", 'data-date-autoclose': 'true', 'data-date-language': 'fr_FR'}}) }}
+                                        {{ form_label(form.bornAt) }}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="md-form form-group">
+                                        {{ form_widget(form.birthPlace, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_label(form.birthPlace) }}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="md-form form-group">
+                                        {{ form_widget(form.gender, {'attr': {'class': 'browser custom-select px-0', placeholder: 'Sexe'}}) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-text mt-5 text-center">
+                        <button type="submit" class="btn aqua-gradient"><i class="fas fa-save"></i> Enregistrer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'emails/base.twig' %}
+
+{% block base_url %}
+<base href="{{ url('homepage') }}" target="_blank">
+{% endblock %}
+
+{% block header %}
+<h1>{{ 'emails.registration.title'|trans({'%name%': website.name}) }}</h1>
+{% endblock %}
+
+{% block main %}
+<h2>{{ 'emails.registration.body'|trans({'%username%': user.name, '%name%': website.name}) }}</h2>
+<p>{{ 'emails.registration.login'|trans({'%link%': url('security_login')})|raw }}</p>
+{% endblock %}
+
+{% block footer %}
+<h3>{{ 'emails.thanks'|trans }}</h3>
+<h4>{{ 'emails.sender'|trans({'%name%': website.name}) }}</h4>
+{% endblock %}

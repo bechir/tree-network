@@ -1,0 +1,30 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" xmlns="http://www.w3.org/1999/html"/>
+    {% block base_url %}
+      <base href="{{ url('homepage') }}" target="_blank"/>
+    {% endblock %}
+    {% block title %}
+      <title>{{ website.name }}</title>
+    {% endblock %}
+    {% block styles %}
+    <style type="text/css">
+    </style>
+    {% endblock %}
+</head>
+<body>
+  {% block header %}
+  <header>
+  </header>
+  {% endblock %}
+
+  {% block main %}
+
+  {% endblock %}
+
+  {% block footer %}
+  <footer>
+  </footer>
+  {% endblock %}
+</body>
+</html>

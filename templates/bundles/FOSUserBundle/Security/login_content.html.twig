@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ 'user.sign_in_to_account'|trans }}{% endblock %}
+
+{% block body %}
+<!-- Content area start -->
+<div class="contact-bg overview-bgi">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Form content box start -->
+                <div class="form-content-box">
+                    <!-- logo -->
+                    <a href="{{ path('homepage') }}" class="clearfix alpha-logo">
+                      <span class="last">{{ website.name }}</span>
+                    </a>
+                    <!-- details -->
+                    <div class="details">
+                        <h3>{{ 'user.sign_in_to_account'|trans }}</h3>
+                        <!-- Form start -->
+                        <form action="{{ path('security_login') }}" method="POST">
+                          {% if error %}
+                          <div class="alert alert-danger">
+                              {{ error.messageKey|trans(error.messageData, 'security') }}
+                          </div>
+                          {% endif %}
+                          <form action="{{ path("fos_user_security_check") }}" method="post">
+                              {% if csrf_token %}
+                                  <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                              {% endif %}
+
+                              <div class="form-group">
+                                <label for="username">{{ 'security.login.username'|trans }}</label>
+                                <input type="text" id="username" class="input-text" name="_username" value="{{ last_username }}" required="required" autocomplete="username" />
+                              </div>
+                              <label for="password">{{ 'security.login.password'|trans }}</label>
+                              <input type="password" id="password" name="_password" required="required" autocomplete="current-password" />
+
+                              <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                              <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+
+                              <div class="checkbox">
+                                <div class="ez-checkbox pull-left">
+                                  <label>
+                                    <input type="checkbox" name="_remember_me" class="ez-hide">
+                                    {{ 'user.remember_me'|trans }}
+                                  </label>
+                                </div>
+                                <a href="{{ path('security_reset') }}" class="link-not-important pull-right">{{ 'user.forgot_password'|trans }}</a>
+                                <div class="clearfix"></div>
+                              </div>
+                              <div class="mb-0">
+                                <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+                              </div>
+                            </form>
+                        <!-- Form end -->
+                    </div>
+                    <!-- Footer -->
+                    <div class="footer">
+                      <a class="pull-left" href="{{ path('homepage') }}"><span>Retourner &agrave; l'accueil</span></a>
+                        <span>
+                            {{ 'user.dont_have_account'|trans({"%link%": path('security_register')})|raw }}
+                        </span>
+                    </div>
+                </div>
+                <!-- Form content box end -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Content area end -->
+{% endblock %}

@@ -1,0 +1,31 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% extends 'base.html.twig' %}
+{% block title %}
+    Réinitialisez votre mot de passe
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/login.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block main %}
+<div class="login-form section-margin">
+    <div class="row mx-auto">
+        <div class="col-md-6 mx-auto">
+            <form class="mx-auto" action="{{ path("fos_user_resetting_send_email") }}" method="post">
+                <h1 class="text-center mb-5">Réinitialisez votre mot de passe</h1>
+
+                <div class="md-form md-outline">
+                    <i class="fas fa-envelope prefix"></i>
+                    <label for="username">{{ 'resetting.request.username'|trans }}</label>
+                    <input type="text" class="form-control" id="username" name="username" required="required" />
+                </div>
+
+                <button type="submit" class="btn submit aqua-gradient mt-5"><i class="fas fa-send mr-1"></i>{{ 'resetting.request.submit'|trans }}</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

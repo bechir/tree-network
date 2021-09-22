@@ -1,0 +1,42 @@
+<div class="input-group my-3">
+    <span class="input-group-addon">
+        <i class="lnr lnr-user fa-lg"></i>
+    </span>
+    {{ form_widget(form.fullname, {'attr': {'placeholder': 'Nom et prénom', 'class': 'form-control input-lg'}}) }}
+</div>
+<div class="input-group my-3">
+    <span class="input-group-addon">
+        <i class="lnr lnr-user fa-lg"></i>
+    </span>
+    {{ form_widget(form.username, {'attr': {'placeholder': 'Login', 'class': 'form-control input-lg'}}) }}
+</div>
+<div class="input-group mb-3">
+    <span class="input-group-addon">
+        <i class="lnr lnr-map-marker fa-lg"></i>
+    </span>
+    {{ form_widget(form.address, {'attr': {'class': 'form-control input-lg'}}) }}
+</div>
+<div class="input-group mb-3">
+    <span class="input-group-addon">
+        <i class="lnr lnr-home fa-lg"></i>
+    </span>
+    {{ form_widget(form.room, {'attr': {'placeholder': 'Numéro de chambre', 'class': 'form-control input-lg'}}) }}
+</div>
+<div class="input-group mb-3">
+    <span class="input-group-addon">
+        <i class="lnr lnr-apartment fa-lg"></i>
+    </span>
+    {{ form_widget(form.ufr, {'attr': {'class': 'form-control input-lg'}}) }}
+</div>
+<div class="input-group mb-3">
+    <span class="input-group-addon">
+        <i class="lnr lnr-graduation-hat fa-lg"></i>
+    </span>
+    {{ form_widget(form.level, {'attr': {'class': 'form-control input-lg'}}) }}
+</div>
+<div class="input-group mb-3">
+    <span class="input-group-addon">
+        <i class="lnr lnr-briefcase fa-lg"></i>
+    </span>
+    {{ form_widget(form.post, {'attr': {'class': 'form-control input-lg'}}) }}
+</div>

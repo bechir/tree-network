@@ -1,0 +1,48 @@
+index:
+   path: /{_locale}
+   controller: App\Controller\DefaultController::index
+   requirements:
+    _locale: '%app_locales%'
+   defaults:
+    _locale: '%locale%'
+
+about:
+  path: /{_locale}/about-us
+  controller: App\Controller\DefaultController::about
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+contact:
+  path: /{_locale}/contact
+  controller: App\Controller\DefaultController::contact
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+  methods: [GET, POST]
+
+help_faq:
+  path: /{_locale}/help-faq
+  controller: App\Controller\DefaultController::helpFAQ
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+terms_conditions:
+  path: /{_locale}/terms-conditions
+  controller: App\Controller\DefaultController::termsCondtions
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'
+
+privacy:
+  path: /{_locale}/privacy-policy
+  controller: App\Controller\DefaultController::privacy
+  requirements:
+    _locale: '%app_locales%'
+  defaults:
+    _locale: '%locale%'

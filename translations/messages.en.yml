@@ -1,0 +1,23 @@
+app:
+  locale:
+    fr: Français
+    en: English
+    ar: العربية
+
+layout:
+  about: About
+  home: Home
+  contact_us: Contact-us
+  help_faq: Help / FAQ
+  terms_conditions: Term conditions
+  privacy: Privacy policies
+  help: Help
+  browse: Browse
+  profile: Profile
+  settings: Settings
+  family_tree: Family tree
+  logout: Logout
+  login: Sign up
+  register: Sign in
+  join_socials: Get connected with us on social networks!
+  useful_links: Useful links

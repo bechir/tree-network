@@ -1,0 +1,16 @@
+{% block flash_messages %}
+
+<div id="snackbar">
+  {% for type, messages in app.session.flashbag.all() %}
+    {% for message in messages %}
+      <div class="alert alert-{{ type }}" role="alert">
+          {% if is_granted('ROLE_USER') %}
+          <p>{{ message|trans({'%username%': app.user.username})|raw }}</p>
+          {% else %}
+          <p>{{ message|trans }}</p>
+          {% endif %}
+      </div>
+    {% endfor %}
+  {% endfor %}
+</div>
+{% endblock %}

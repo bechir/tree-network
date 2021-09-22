@@ -1,0 +1,215 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block left_sidebar %}
+
+{% include 'admin/common/left-sidebar.twig' with { active: 'inbox' } %}
+
+{% endblock %}
+
+{% block main %}
+<h3 class="page-title">Boîte de réception
+<br><span class="font-15">Vous avez <strong>{{ count }} messages</strong></span>
+</h3>
+<div class="row">
+    <div class="col-md-12">
+        <!-- PANEL WITH FOOTER -->
+        <div class="panel" id="panel-scrolling-dem">
+            <div class="panel-heading">
+                <h3 class="panel-title">Liste des message envoyés depuis la page de contact</h3>
+                <div class="right">
+                    <button class="btn-toggle-collapse" type="button">
+                        <i class="lnr lnr-chevron-up"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <ul class="list-unstyled message-list">
+                    {% for item in inbox %}
+                    <li>
+                        <label class="control-inline fancy-checkbox">
+						    <input type="checkbox"><span></span>
+						</label>
+                        <a href="#" class="open-message" data-toggle="modal" data-target="#showMessageModal" data-message-subject="{{ item.subject }}" data-message-id="{{ item.id }}">
+                            <p>
+                                <span class="title">{{ item.fullname }}</span>
+                                <span class="short-description">{{ item.subject }}</span>
+                                <span class="date">{{ item.createdAt|localizeddate('full', 'none', app.request.locale )|capitalize }}</span>
+                            </p>
+                        </a>
+                        <div class="controls">
+                            <a href="#" data-toggle="modal" data-target="#replyModal" data-recipient="{{ item.fullname }}">
+                                <i class="fa fa-reply"></i>
+                            </a>
+                            <a href="#"><i class="fa fa-trash trash"></i></a>
+                        </div>
+
+                    </li>
+                    {% else %}
+                        <p>Vous n'avez aucun message</p>
+                    {% endfor %}
+                </ul>
+
+                <div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="replyModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="replyModalLabel">Nouveau message</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="reply-form">
+                                <div class="form-group">
+                                    <label for="subject" class="control-label">Sujet:</label>
+                                    <input type="text" class="form-control input-lg" id="subject">
+                                </div>
+                                <div class="form-group">
+                                    <label for="message-text" class="control-label">Message:</label>
+                                    <textarea class="form-control input-lg" id="message-text" style="min-height:144px;"></textarea>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default btn-lg float-left" data-dismiss="modal">Annuler</button>
+                            <button type="submit" id="btn-send-message" class="btn btn-primary btn-lg" disabled="disabled" title="Fonctionnalité non prise en charge">
+                                <span class="fa fa-send"></span> Envoyer
+                            </button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="showMessageModal" tabindex="-1" role="dialog" aria-labelledby="showMessageModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="showMessageModalLabel"></h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="loading">
+                                    <img class="loading-img" src="{{ asset('images/white-loader.svg') }}" alt="Loading...">
+                                </div>
+                                <div class="content">
+                                    <div class="row sender">
+                                        <div class="icon col-sm-1"><span class="lnr lnr-user fa-lg"></span></div>
+                                        <div class="sender-info pl-4"></div>
+                                    </div>
+                                    <div class="contact-datetime my-3 font-12">
+                                        <span class="lnr lnr-clock fa-sm"></span>
+                                        <span class="contact-datetime-value"></span>
+                                    </div>
+                                    <div class="contact-message my-5 pr-3 text-justify">
+                                        <p class="font-15"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default btn-lg float-left" data-dismiss="modal">Fermer</button>
+                                <button type="button" id="btn-reply" class="btn btn-primary btn-lg">
+                                    <span class="fa fa-reply"></span> Répondre
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                 <!-- Page navigation start -->
+                  <nav aria-label="Page navigation">
+                      <ul class="pagination">
+                      {% if inbox.haveToPaginate %}
+                          {{ pagerfanta(
+                                    inbox,
+                                    'twitter_bootstrap3_translated',
+                                    { routeName: 'admin_inbox_paginated',
+                                          routeParams: app.request.query.all,
+                                          prev_message: 'Précédant',
+                                          next_message: 'Suivant',
+                                          page_template: '<li><a href="%href%" %rel%>%text%</a></li>'
+                                    }
+                               )
+                          }}
+                      {% else %}
+                            <li><button type="button" class="btn btn-default disabled">1</button> </li>
+                      {% endif %}
+                      </ul>
+                  </nav>
+                  <!-- Page navigation end -->
+            </div>
+        </div>
+        <!-- END PANEL WITH FOOTER -->
+    </div>
+</div>
+{% endblock %}
+
+
+{% block javascript %}
+    {{ parent() }}
+    
+    <script>
+        $('#replyModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var recipient = button.data('recipient')
+            var modal = $(this)
+            
+            modal.find('.modal-title').text(replyTitle(recipient))
+            modal.find('.modal-body #subject').val(replySubject())
+        })
+
+        $('#showMessageModal').on('show.bs.modal', function (event) {
+            // Show the loading screen
+            $("#showMessageModal .loading").show();
+
+            var target = $(event.relatedTarget)
+            var messageId = target.data('message-id')
+            var messageSubject = target.data('message-subject')
+            var modal = $(this)
+            var username = ''
+
+            modal.find('.modal-title').replaceWith(messageSubject)
+
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "{{ path('admin_inbox_message_show') }}",
+                data: 'id=' + messageId,
+                success: function(data) {
+                    console.log('success')
+
+                    username = data.username
+                    
+                    $("#showMessageModal .loading").hide();
+                    
+                    modal.find('.sender-info').html(
+                        `<strong>${username}</strong> <span class="text-under-line">${data.email}</span>`
+                    )
+                    modal.find('.contact-message p').text(data.message)
+                    modal.find('.contact-datetime-value').text(data.datetime)
+                },
+
+                error: function(data) {
+                    $("#showMessageModal .loading").hide();
+                    console.log('error')
+                }
+            });
+
+            $("#btn-reply").click(function(){
+                $("#showMessageModal").modal('hide')
+
+                var modal = $('#replyModal')
+                modal.modal('show')
+                modal.find('.modal-title').replaceWith(replyTitle(username))
+                modal.find('.modal-body #subject').val(replySubject())
+            });
+        })
+
+
+        function replySubject(){
+            return `Réponse de <{{ website.email }}>`
+        }
+
+        function replyTitle(recipient) {
+            return 'Répondre à  ' + recipient
+        }
+    </script>
+
+{% endblock %}
